@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
 	<title>mmTeacher</title>
 	<?php require_once "meta_view.php" ?>
 </head>
