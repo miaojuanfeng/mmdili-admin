@@ -20,7 +20,7 @@
 						<div class="file-dir"><?=$k?></div>
 					</div>
 					<div class="task-act">
-						<a href="<?=base_url('home/exec/'.'{'.$k.'}')?>">Exec</a>
+						<a href="<?=base_url('home/exec/'.'{'.urlencode($k).'}')?>">Exec</a>
 					</div>
 					<div class="clearfix"></div>
 				</div>
