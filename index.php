@@ -9,6 +9,7 @@
 	<script src="assets/js/app.js"></script>
 	<script src="assets/js/headerCtrl.js"></script>
 	<script src="assets/js/contentCtrl.js"></script>
+	<script src="assets/js/contentServ.js"></script>
 </head>
 <body ng-app="mmAdmin">
 	<div ui-view="sidebar"></div>

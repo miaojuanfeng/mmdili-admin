@@ -32,4 +32,5 @@ class Task{
 	}
 }
 
+header('Access-Control-Allow-Origin: *');
 echo json_encode(Task::file_list('C:\MJF\web\upload\data'));
