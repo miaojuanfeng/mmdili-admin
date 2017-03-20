@@ -22,7 +22,7 @@ class Home extends CI_Controller {
     {
     	parent::__construct();
     	$this->load->helper('url');
-    	$this->load->model('Home');
+    	$this->load->model('home_model');
     }
 
 	public function index()
