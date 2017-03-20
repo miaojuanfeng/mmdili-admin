@@ -14,7 +14,7 @@ class Task{
 			{
 				while (FALSE !== ($file = readdir($handle))) 
 				{
-					if( in_array($file, $this->except_dir) ) continue 1;
+					if( in_array($file, self::except_dir) ) continue 1;
 					$real_path = str_replace(DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $path.DIRECTORY_SEPARATOR.$file);
 					if(is_file($real_path)){
 						$result[] = $real_path;
