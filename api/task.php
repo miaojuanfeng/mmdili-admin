@@ -1,6 +1,6 @@
 <?php
 class Task{
-	private $except_dir = array('.', '..', 'system', 'desktop', 'data', 'recycle', 'temp', 'session');
+	private static $except_dir = array('.', '..', 'system', 'desktop', 'data', 'recycle', 'temp', 'session');
 
 	public static function file_list($path)
 	{
