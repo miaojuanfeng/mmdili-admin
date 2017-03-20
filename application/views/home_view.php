@@ -31,7 +31,7 @@
 			</div>
 			<script type="text/javascript">
 			$('.exec').click(function(){
-				var file = $(this).attr('file-dir');
+				var file = encodeURI($(this).attr('file-dir'));
 				$.post("<?=base_url('home/exec')?>", {file: file}, function(data){
 					alert(data);
 				});
