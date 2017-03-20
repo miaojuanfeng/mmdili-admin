@@ -38,7 +38,8 @@ class Home extends CI_Controller {
 		if( is_file($file) ){
 			//$f = pathinfo($file);
 			rename($file, 'C:\MJF\web\doc\convert\\'.basename($file));
+			echo json_encode(basename($file));
 		}
-		echo json_encode($file);
+		echo json_encode('false');
 	}
 }
