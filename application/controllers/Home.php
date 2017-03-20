@@ -32,9 +32,9 @@ class Home extends CI_Controller {
 		$this->load->view('home_view', $data);
 	}
 
-	public function exec($file)
+	public function exec()
 	{
-		$file = urldecode($file);
-		echo $file;
+		$file = $this->input->post('file');
+		echo json_encode($file);
 	}
 }

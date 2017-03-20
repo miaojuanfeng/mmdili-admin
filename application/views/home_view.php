@@ -11,6 +11,7 @@
 		<?php require_once "header_view.php" ?>
 		<div class="content">
 			<div class="list">
+				<input type="hidden" name="file" />
 				<?php
 				foreach($file as $k => $v){
 				?>
@@ -20,7 +21,7 @@
 						<div class="file-dir"><?=$k?></div>
 					</div>
 					<div class="task-act">
-						<a href="<?=base_url('home/exec/'.urlencode('{'.$k.'}'))?>">Exec</a>
+						<a class="exec" href="javascript:;" file-dir="<?=$k?>">Exec</a>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -28,6 +29,14 @@
 				}
 				?>
 			</div>
+			<script type="text/javascript">
+			$('.exec').click(function(){
+				var file = $(this).attr('file-dir');
+				$.post("<?=base_url('home/exec')?>", {file: file}, function(data){
+					alert(data);
+				});
+			});
+			</script>
 		</div>
 	</div>
 </body>
