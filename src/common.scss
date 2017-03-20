@@ -1,0 +1,32 @@
+body {
+    padding-bottom: 0;
+    min-height: 100%;
+    font-family: 'Open Sans','Segoe UI';
+    font-size: 13px;
+    color: #444;
+}
+
+@font-face {
+	font-family: 'Glyphicons Halflings';
+	src: url('../../lib/fonts/glyphicons-halflings-regular.eot');
+	src: url('../../lib/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../../lib/fonts/glyphicons-halflings-regular.woff') format('woff'), url('../../lib/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../../lib/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+.main-container {
+    padding: 0;
+
+    background-color: #fff;
+    bottom: 0;
+    content: "";
+    display: block;
+    max-width: inherit;
+    position: fixed;
+    top: 45px;
+    width: 100%;
+    z-index: -2;
+    box-shadow: 0 1px 4px rgba(0,0,0,.3);
+
+    .page-container {
+	    position: relative;
+	}
+}
