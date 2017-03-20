@@ -34,12 +34,12 @@ class Home extends CI_Controller {
 
 	public function exec()
 	{
-		$file = json_decode($this->input->post('file'));
+		$file = $this->input->post('file');
 		if( is_file($file) ){
 			//$f = pathinfo($file);
 			rename($file, 'C:\MJF\web\doc\convert\\'.basename($file));
 			echo json_encode(basename($file));
 		}
-		echo json_encode('false');
+		echo json_encode($file);
 	}
 }
