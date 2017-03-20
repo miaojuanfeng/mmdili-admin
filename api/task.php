@@ -2,7 +2,7 @@
 class Task{
 	private $except_dir = array('.', '..', 'system', 'desktop', 'data', 'recycle', 'temp', 'session');
 
-	public function file_list($path)
+	public static function file_list($path)
 	{
 		$result = array();
 		$queue = array($path);
@@ -32,5 +32,4 @@ class Task{
 	}
 }
 
-$f = new Task();
-var_dump($f->file_list('C:\MJF\web\upload\data'));
+echo json_encode(Task::file_list('C:\MJF\web\upload\data'));
