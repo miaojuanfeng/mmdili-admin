@@ -17,7 +17,7 @@ class Task{
 					if( in_array($file, self::$except_dir) ) continue 1;
 					$real_path = str_replace(DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $path.DIRECTORY_SEPARATOR.$file);
 					if(is_file($real_path)){
-						$result[$file] = $real_path;
+						$result[$real_path] = $file;
 					}
 					if (is_dir($real_path)){
 						$queue[] = $real_path;
