@@ -31,4 +31,10 @@ class Home extends CI_Controller {
 		$data['file'] = $this->file->file_list('C:\MJF\web\upload\data');
 		$this->load->view('home_view', $data);
 	}
+
+	public function exec($file)
+	{
+		$file = urldecode($file);
+		echo $file;
+	}
 }
