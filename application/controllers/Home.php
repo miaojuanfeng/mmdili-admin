@@ -34,7 +34,7 @@ class Home extends CI_Controller {
 
 	public function exec()
 	{
-		$file = $this->input->post('file');
+		$file = json_decode($this->input->post('file'));
 		if( is_file($file) ){
 			//$f = pathinfo($file);
 			rename($file, 'C:\MJF\web\doc\convert\\'.basename($file));
