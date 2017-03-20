@@ -9,8 +9,8 @@ mmAdmin.controller('contentCtrl', function($scope, contentServ){
 	//});
 
 	$scope.exec = function(file){
-		contentServ.execTask(file).then(function(){
-			
+		contentServ.execTask(file).then(function(data){
+			console.log(data);
 		});
 	}
 });

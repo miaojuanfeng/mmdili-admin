@@ -32,7 +32,7 @@ class Task{
 	}
 
 	public static function exec_task($file){
-
+		return $file;
 	}
 }
 
@@ -42,5 +42,6 @@ $function = $_POST['function'];
 if( $function == 'file_list' ){
 	echo json_encode(Task::file_list('C:\MJF\web\upload\data'));
 }else if($function == 'exec_task'){
-	
+	$file = $_POST['file'];
+	echo json_encode(Task::exec_task($file));
 }

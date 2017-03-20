@@ -16,7 +16,7 @@ mmAdmin.factory('contentServ', function($q, $http){
 		},
 		execTask: function(file){
 			var deferred = $q.defer();
-            $http.post(self.httpUrl, {function: 'exec_task'})
+            $http.post(self.httpUrl, {function: 'exec_task', file: file})
             .success(function(data){
                 deferred.resolve(data);
             })
