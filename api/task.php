@@ -1,5 +1,5 @@
 <?php
-public class Task{
+class Task{
 	private $except_dir = array('.', '..', 'system', 'desktop', 'data', 'recycle', 'temp', 'session');
 
 	public function file_list($path)
