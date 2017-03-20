@@ -37,7 +37,7 @@ class Home extends CI_Controller {
 		$file = $this->input->post('file');
 		if( is_file($file) ){
 			//$f = pathinfo($file);
-			rename($file, 'C:\MJF\web\doc\convert\'.basename($file));
+			rename($file, 'C:\MJF\web\doc\convert\\'.basename($file));
 		}
 		echo json_encode($file);
 	}
