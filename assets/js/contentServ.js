@@ -5,7 +5,7 @@ mmAdmin.factory('contentServ', function($q, $http){
 	return {
 		getTaskFile: function(){
 			var deferred = $q.defer();
-            $http.get(self.httpUrl)
+            $http.post(self.httpUrl, {function: 'file_list'})
             .success(function(data){
                 deferred.resolve(data);
             })
@@ -13,6 +13,17 @@ mmAdmin.factory('contentServ', function($q, $http){
                 deferred.reject(reason);
             })
             return deferred.promise;
-		}
+		},
+		execTask: function(file){
+			var deferred = $q.defer();
+            $http.post(self.httpUrl, {function: 'exec_task'})
+            .success(function(data){
+                deferred.resolve(data);
+            })
+            .error(function(reason) {
+                deferred.reject(reason);
+            })
+            return deferred.promise;
+		},
 	}
 });

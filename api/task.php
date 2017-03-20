@@ -30,8 +30,17 @@ class Task{
 		}
 		return $result;
 	}
+
+	public static function exec_task($file){
+
+	}
 }
 
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-echo json_encode(Task::file_list('C:\MJF\web\upload\data'));
+$function = $_POST['function'];
+if( $function == 'file_list' ){
+	echo json_encode(Task::file_list('C:\MJF\web\upload\data'));
+}else if($function == 'exec_task'){
+	
+}
