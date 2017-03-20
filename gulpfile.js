@@ -28,13 +28,15 @@ gulp.task('css', function(){
         remove: true //是否去掉不必要的前缀 默认：true 
     }))
 	// .pipe(cssmin())
-	.pipe(gulp.dest('dist/css/'));
+	.pipe(gulp.dest('assets/css/'));
 });
 
 gulp.task('js', function(){
 	gulp.src('src/*.js')
+	.pipe(plumber({errorHandler: notify.onError('Error: <%= error.message %>')}))
+	.pipe(rename({ suffix: '.min' }))
 	.pipe(uglify())
-	.pipe(gulp.dest('dist/js/'));
+	.pipe(gulp.dest('assets/js/'));
 });
 
 // gulp.task('concat', function(){

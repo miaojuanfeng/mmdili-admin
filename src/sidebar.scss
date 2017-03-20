@@ -8,6 +8,13 @@
     box-shadow: 0 0 10px 0 rgba(0,0,0,.2);
     z-index: 1;
 
+    .sidebar-title{
+    	height: 45px;
+    	line-height: 45px;
+    	text-align: center;
+    	font-size: 20px;
+    }
+
     .sidebar-menu {
 	    margin: 0;
 	    padding: 0;
@@ -31,7 +38,7 @@
 		    	&>a{
 		    		color: #2dc3e8;
 		    	}
-		    }
+		    } 
 
 		    a {
 			    display: block;
