@@ -32,6 +32,6 @@ class Task{
 	}
 }
 
-header('Access-Control-Allow-Origin: http://47.92.3.88/');
+header('Access-Control-Allow-Origin: http://localhost:8888/');
 header('Content-Type: application/json');
 echo json_encode(Task::file_list('C:\MJF\web\upload\data'));
