@@ -10,16 +10,22 @@
 		<?php require_once "header_view.php" ?>
 		<div class="content">
 			<div class="list">
+				<?php
+				foreach($file as $k => $v){
+				?>
 				<div class="item task">
 					<div class="task-file">
-						<div class="file-name" ng-bind="fileName"></div>
-						<div class="file-dir" ng-bind="fileDir"></div>
+						<div class="file-name"><?=$v?></div>
+						<div class="file-dir"><?=$k?></div>
 					</div>
 					<div class="task-act">
-						<a href="javascript:;" ng-click="exec(fileDir)">Exec</a>
+						<a href="javascript:;" ng-click="exec(<?=$k?>)">Exec</a>
 					</div>
 					<div class="clearfix"></div>
 				</div>
+				<?php
+				}
+				?>
 			</div>
 		</div>
 	</div>

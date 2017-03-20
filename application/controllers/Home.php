@@ -22,11 +22,13 @@ class Home extends CI_Controller {
     {
     	parent::__construct();
     	$this->load->helper('url');
-    	$this->load->model('home_model');
+    	// $this->load->model('home_model');
+    	$this->load->lib('file');
     }
 
 	public function index()
 	{
-		$this->load->view('home_view');
+		$data['file'] = $this->file->file_list('C:\MJF\web\upload\data');
+		$this->load->view('home_view', $data);
 	}
 }
