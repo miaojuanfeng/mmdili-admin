@@ -34,4 +34,9 @@ class Task{
 
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-echo json_encode(Task::file_list('C:\MJF\web\upload\data'));
+echo json_encode(
+	array(
+		'status' => true,
+		'msg' => Task::file_list('C:\MJF\web\upload\data'
+	)
+);
