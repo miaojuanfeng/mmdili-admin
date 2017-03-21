@@ -17,11 +17,11 @@
 				?>
 				<div class="item task">
 					<div class="task-file">
-						<div class="file-name"><?=$v?></div>
-						<div class="file-dir"><?=$k?></div>
+						<div class="file-name"><?=$v['file_name']?></div>
+						<div class="file-dir"><?=$v['file_dir']?></div>
 					</div>
 					<div class="task-act">
-						<a class="exec" href="javascript:;" file-dir="<?=$k?>">Exec</a>
+						<a class="exec" href="<?=base_url('home/exec/'.$k)?>">Exec</a>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -29,14 +29,6 @@
 				}
 				?>
 			</div>
-			<script type="text/javascript">
-			$('.exec').click(function(){
-				var file = encodeURI($(this).attr('file-dir'));
-				$.post("<?=base_url('home/exec')?>", {file: file}, function(data){
-					alert(data);
-				});
-			});
-			</script>
 		</div>
 	</div>
 </body>

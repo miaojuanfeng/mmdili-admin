@@ -17,7 +17,10 @@ class File{
 					if( in_array($file, $this->except_dir) ) continue 1;
 					$real_path = str_replace(DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $path.DIRECTORY_SEPARATOR.$file);
 					if(is_file($real_path)){
-						$result[iconv('GB2312', 'UTF-8', $real_path)] = iconv('GB2312', 'UTF-8', $file);
+						$result[] = array(
+							'file_name' => iconv('GB2312', 'UTF-8', $file),
+							'file_dir' => iconv('GB2312', 'UTF-8', $real_path)
+						);
 					}
 					if (is_dir($real_path)){
 						$queue[] = $real_path;
