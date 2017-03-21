@@ -20,7 +20,7 @@ class Home extends CI_Controller {
 	 */
 	private static $exists_files = array();
 	private static $convert_path = 'C:\MJF\web\doc\convert\\';
-	private static $view_path = 'C:\MJF\web\doc\convert\\';
+	private static $view_path = 'C:\MJF\web\doc\view\\';
 	private static $online_path = 'C:\MJF\web\doc\online\\';
 
 private function path_info($filepath){   
@@ -41,12 +41,22 @@ private function mb_pathinfo($filepath) {
     return $ret;
 }
 
-	public function __construct()
+	function __construct()
     {
     	parent::__construct();
     	$this->load->helper('url');
-    	// $this->load->model('home_model');
+    	$this->load->model('home_model');
     	$this->load->library('file');
+
+	if( !is_dir(self::$convert_path) ){
+		mkdir(self::$convert_path);
+	}
+	if( !is_dir(self::$view_path) ){
+		mkdir(self::$view_path);
+	}
+	if( !is_dir(self::$online_path) ){
+		mkdir(self::$online_path);
+	}
 
 	self::$exists_files = $this->file->file_list('C:\MJF\web\upload\data');
     }
@@ -63,7 +73,7 @@ private function mb_pathinfo($filepath) {
 			echo 'index not exists!';
 			return;
 		}
-		$file_path = iconv('UTF-8','GB2312',self::$exists_files[$file_index]['file_dir']);
+		$file_path = iconv('UTF-8', 'GB2312', self::$exists_files[$file_index]['file_dir']);
 		if( !file_exists($file_path) ){
 			echo 'file not exists!';
 			return;
@@ -84,9 +94,45 @@ private function mb_pathinfo($filepath) {
 			echo $e->getMessage();
 			return;
 		}
-		$exec = ".\C:\MJF\SWFTools\pdf2swf.exe ".self::$convert_path.$file['filename'].".pdf -o ".self::$view_path."%.swf -f -T 9";
+		$now = date('Y-m-d H:i:s');
+		$time = strtotime($now);
+		$view_path = self::$view_path.$time.'\\';
+		if( !is_dir($view_path) ){
+			mkdir($view_path);
+		}
+		$exec = "C:\MJF\SWFTools\pdf2swf.exe ".self::$convert_path.$file['filename'].".pdf -o ".$view_path."%.swf -f -T 9";
 		exec($exec, $pdf_info);
-		var_dump($pdf_info);
-		//rename(self::$convert_path.$file['basename'], self::$online_path.$file['basename']);
+		//var_dump($pdf_info);
+		$page_num = 0;
+		$page_width = 0;
+		$page_height = 0;
+		foreach($pdf_info as $k => $v){
+			if( FALSE === strpos($v, 'NOTICE  processing PDF page') ) continue;
+			$info_arr = explode(' ', $v);
+			$page_num = $info_arr[5];
+			if( !$page_width || !$page_height ){
+				$page_width_height_string = $info_arr[6];
+				$page_width_height_string = trim($page_width_height_string, '()');
+				$page_width_height = explode(':', $page_width_height_string);
+				$page_width_height = explode('x', $page_width_height[0]);
+				$page_width = $page_width_height[0];
+				$page_height = $page_width_height[1];
+			}
+		}
+		//var_dump($page_num);
+		//var_dump($page_width);
+		//var_dump($page_height);
+		if( !$page_width || !$page_height || !$page_num ){
+			echo "get pdf info failed.";
+			return;
+		}
+		unlink(self::$convert_path.$file['filename'].".pdf");
+		$online_path = self::$online_path.date('Y',$time).'\\';
+		if( !is_dir($online_path) ){
+			mkdir($online_path);
+		}
+		rename(self::$convert_path.$file['basename'], $online_path.$file['basename']);
+		$this->home_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $page_width, $page_height, $page_num, $now);
+		header('Location:'.base_url('home'));
 	}
 }
