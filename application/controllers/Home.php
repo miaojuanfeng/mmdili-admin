@@ -79,6 +79,16 @@ private function mb_pathinfo($filepath) {
 			return;
 		}
 		$file = $this->mb_pathinfo($file_path);
+		if( !$this->home_model->check_doc_exists(iconv('GB2312', 'UTF-8', $file['filename'])) ){
+			echo 'database record already exists!';
+			return;
+		}
+		$time = time();
+		$online_path = self::$online_path.strtotime(date('Y', $time)).'\\';
+		if( file_exists($online_path.$file['basename']) ){
+			echo 'file already exists!';
+			return;
+		}
 		rename($file_path, self::$convert_path.$file['basename']);
 		try{
     			$word = new COM("Word.Application") or die ("Could not initialise Object.");   
@@ -103,8 +113,7 @@ private function mb_pathinfo($filepath) {
 			echo $e->getMessage();
 			return;
 		}
-		$now = date('Y-m-d H:i:s');
-		$time = strtotime($now);
+		
 		$view_path = self::$view_path.$time.'\\';
 		if( !is_dir($view_path) ){
 			mkdir($view_path);
@@ -136,12 +145,12 @@ private function mb_pathinfo($filepath) {
 			return;
 		}
 		unlink(self::$convert_path.$file['filename'].".pdf");
-		$online_path = self::$online_path.date('Y',$time).'\\';
+		
 		if( !is_dir($online_path) ){
 			mkdir($online_path);
 		}
 		rename(self::$convert_path.$file['basename'], $online_path.$file['basename']);
-		$this->home_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $page_width, $page_height, $page_num, $now);
+		$this->home_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $page_width, $page_height, $page_num);
 		header('Location:'.base_url('home'));
 	}
 }

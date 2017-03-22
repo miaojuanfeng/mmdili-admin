@@ -12,26 +12,34 @@ class home_model extends CI_Model{
         parent::__construct();
         $this->load->database('default');
     }
+	
+	public function check_doc_exists($file_name){
+		$query = $this->db->query("SELECT doc_url FROM m_doc WHERE doc_deleted = 0 AND doc_title = '".$file_name."' LIMIT 1");
+		if( $query->num_rows() ){
+			return false;
+		}
+		return true;
+	}
 
-    public function insert_doc($doc_url, $doc_title, $doc_width, $doc_height, $doc_page_num, $now){
+    public function insert_doc($doc_url, $doc_title, $doc_width, $doc_height, $doc_page_num){
 		$this->db->query("INSERT INTO m_doc(
 			doc_url,
 			doc_title,
+			doc_user_id,
 			doc_type,
 			doc_width,
 			doc_height,
 			doc_page_num,
-			doc_create_date,
 			doc_modify_date
 		) VALUES(
 			".$doc_url.",
 			'".$doc_title."',
 			1,
+			1,
 			".$doc_width.",
 			".$doc_height.",
 			".$doc_page_num.",
-			'".$now."',
-			'".$now."'
+			'".$doc_url."'
 		)");
 		return true;
     }
