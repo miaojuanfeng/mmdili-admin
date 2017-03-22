@@ -82,6 +82,15 @@ private function mb_pathinfo($filepath) {
 		rename($file_path, self::$convert_path.$file['basename']);
 		try{
     			$word = new COM("Word.Application") or die ("Could not initialise Object.");   
+			$retry = 20;
+			while( !$word && (--$retry) ){
+				sleep(100);
+			}
+			if( $retry <= 0 ){
+				echo "word application not ready!";
+				rename(self::$convert_path.$file['basename'], $file_path);
+				return;
+			}
    			$word->Visible = 0;   
     			$word->DisplayAlerts = 0; 
 			$word->Documents->Open(self::$convert_path.$file['basename']);
