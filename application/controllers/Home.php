@@ -89,7 +89,7 @@ private function mb_pathinfo($filepath) {
 		}
 		$time = time();
 		$online_path = self::$online_path.$_SESSION["user_url"].'\\'
-.strtotime(date('Y', $time)).'\\';
+.strtotime(date('Y', $time).'-01-01 00:00:00').'\\';
 		if( file_exists($online_path.$file['basename']) ){
 			echo 'file already exists!';
 			return;
@@ -161,7 +161,7 @@ private function mb_pathinfo($filepath) {
 			mkdir($online_path, 0777, true);
 		}
 		rename(self::$convert_path.$file['basename'], $online_path.$file['basename']);
-		if( !$this->oss->uploadFile(iconv('GB2312', 'UTF-8', 'doc/'.$_SESSION["user_url"].'/'.strtotime(date('Y', $time)).'/'.$file['basename']), iconv('GB2312', 'UTF-8', $online_path.$file['basename']))){					
+		if( !$this->oss->uploadFile(iconv('GB2312', 'UTF-8', 'doc/'.$_SESSION["user_url"].'/'.strtotime(date('Y', $time).'-01-01 00:00:00').'/'.$file['basename']), iconv('GB2312', 'UTF-8', $online_path.$file['basename']))){					
 			echo "upload doc to OSS failed.";
 			return;
 		}
