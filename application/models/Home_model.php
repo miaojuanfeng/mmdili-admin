@@ -10,6 +10,7 @@ class home_model extends CI_Model{
     function __construct()
     {
         parent::__construct();
+
         $this->load->database('default');
     }
 	
@@ -34,7 +35,7 @@ class home_model extends CI_Model{
 		) VALUES(
 			".$doc_url.",
 			'".$doc_title."',
-			1,
+			'".$_SESSION["user_id"]."',
 			1,
 			".$doc_width.",
 			".$doc_height.",

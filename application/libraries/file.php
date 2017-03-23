@@ -34,4 +34,24 @@ class File{
 		}
 		return $result;
 	}
+
+	/**
+ * 删除目录及目录下所有文件
+ * @param str $path   待删除目录路径
+ */
+ public function del_dir_file($path) {
+    $op = dir($path);
+    while(false != ($item = $op->read())) {
+        if($item == '.' || $item == '..') {
+            continue;
+        }
+        if(is_dir($op->path.'/'.$item)) {
+            $this->del_dir_file($op->path.'/'.$item);
+            rmdir($op->path.'/'.$item);
+        } else {
+            unlink($op->path.'/'.$item);
+        }
+    
+    } 
+ }
 }

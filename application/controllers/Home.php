@@ -47,6 +47,7 @@ private function mb_pathinfo($filepath) {
     	$this->load->helper('url');
     	$this->load->model('home_model');
     	$this->load->library('file');
+	$this->load->library('oss');
 
 	if( !is_dir(self::$convert_path) ){
 		mkdir(self::$convert_path);
@@ -57,6 +58,9 @@ private function mb_pathinfo($filepath) {
 	if( !is_dir(self::$online_path) ){
 		mkdir(self::$online_path);
 	}
+
+	$_SESSION["user_id"] = 1;
+	$_SESSION["user_url"] = 1490168888;
 
 	self::$exists_files = $this->file->file_list('C:\MJF\web\upload\data');
     }
@@ -84,7 +88,8 @@ private function mb_pathinfo($filepath) {
 			return;
 		}
 		$time = time();
-		$online_path = self::$online_path.strtotime(date('Y', $time)).'\\';
+		$online_path = self::$online_path.$_SESSION["user_url"].'\\'
+.strtotime(date('Y', $time)).'\\';
 		if( file_exists($online_path.$file['basename']) ){
 			echo 'file already exists!';
 			return;
@@ -116,7 +121,7 @@ private function mb_pathinfo($filepath) {
 		
 		$view_path = self::$view_path.$time.'\\';
 		if( !is_dir($view_path) ){
-			mkdir($view_path);
+			mkdir($view_path, 0777, true);
 		}
 		$exec = "C:\MJF\SWFTools\pdf2swf.exe ".self::$convert_path.$file['filename'].".pdf -o ".$view_path."%.swf -f -T 9";
 		exec($exec, $pdf_info);
@@ -145,11 +150,21 @@ private function mb_pathinfo($filepath) {
 			return;
 		}
 		unlink(self::$convert_path.$file['filename'].".pdf");
+
+		if( !$this->oss->uploadDir('view/'.$_SESSION["user_url"].'/'.$time, $view_path)){
+			echo "upload swf to OSS failed.";
+			return;
+		}
+		$this->file->del_dir_file(self::$view_path);
 		
 		if( !is_dir($online_path) ){
-			mkdir($online_path);
+			mkdir($online_path, 0777, true);
 		}
 		rename(self::$convert_path.$file['basename'], $online_path.$file['basename']);
+		if( !$this->oss->uploadFile(iconv('GB2312', 'UTF-8', 'doc/'.$_SESSION["user_url"].'/'.strtotime(date('Y', $time)).'/'.$file['basename']), iconv('GB2312', 'UTF-8', $online_path.$file['basename']))){					
+			echo "upload doc to OSS failed.";
+			return;
+		}
 		$this->home_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $page_width, $page_height, $page_num);
 		header('Location:'.base_url('home'));
 	}
