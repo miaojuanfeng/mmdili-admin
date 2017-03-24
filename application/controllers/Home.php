@@ -123,7 +123,7 @@ private function mb_pathinfo($filepath) {
 		if( !is_dir($view_path) ){
 			mkdir($view_path, 0777, true);
 		}
-		$exec = "C:\MJF\SWFTools\pdf2swf.exe ".self::$convert_path.$file['filename'].".pdf -o ".$view_path."%.swf -f -T 9";
+		$exec = "C:\MJF\SWFTools\pdf2swf.exe ".self::$convert_path.$file['filename'].".pdf -o ".$view_path."% -f -T 9";
 		exec($exec, $pdf_info);
 		//var_dump($pdf_info);
 		$page_num = 0;
