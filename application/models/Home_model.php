@@ -22,7 +22,7 @@ class home_model extends CI_Model{
 		return true;
 	}
 
-    public function insert_doc($doc_url, $doc_title, $doc_width, $doc_height, $doc_page_num, $doc_poly2bitmap){
+    public function insert_doc($doc_url, $doc_title, $doc_ext, $doc_width, $doc_height, $doc_page_num, $doc_poly2bitmap){
 		$this->db->query("INSERT INTO m_doc(
 			doc_url,
 			doc_title,
@@ -37,7 +37,7 @@ class home_model extends CI_Model{
 			".$doc_url.",
 			'".$doc_title."',
 			'".$_SESSION["user_id"]."',
-			1,
+			".$doc_ext.",
 			".$doc_width.",
 			".$doc_height.",
 			".$doc_page_num.",

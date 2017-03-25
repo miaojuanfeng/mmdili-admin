@@ -88,13 +88,13 @@ private function mb_pathinfo($filepath) {
 			return;
 		}
 		$time = time();
-		$online_path = self::$online_path.$_SESSION["user_url"].'\\'
-.strtotime(date('Y', $time).'-01-01 00:00:00').'\\';
+		$online_path = self::$online_path.$_SESSION["user_url"].'\\'.strtotime(date('Y', $time).'-01-01 00:00:00').'\\';
 		if( file_exists($online_path.$file['basename']) ){
 			echo 'file already exists!';
 			return;
 		}
 		rename($file_path, self::$convert_path.$file['basename']);
+		if( $file['extension'] == 'doc' || $file['extension'] == 'docx' ){
 		try{
     			$word = new COM("Word.Application") or die ("Could not initialise Object.");   
 			$retry = 20;
@@ -118,20 +118,17 @@ private function mb_pathinfo($filepath) {
 			echo $e->getMessage();
 			return;
 		}
+		}
 		
 		$view_path = self::$view_path.$time.'\\';
 		if( !is_dir($view_path) ){
 			mkdir($view_path, 0777, true);
 		}
-		//$poly2bitmap = "";
-//pdf2swf_run:
-		
-		//var_dump($pdf_info);
 
 		$page_num = 0;
 		$page_width = 0;
 		$page_height = 0;
-		$exec = "C:\MJF\SWFTools\pdf2swf.exe ".self::$convert_path.$file['filename'].".pdf -I";
+		$exec = "C:\MJF\SWFTools\pdf2swf.exe \"".self::$convert_path.$file['filename'].".pdf\" -I";
 		exec($exec, $pdf_info);
 		if( count($pdf_info) ){
 			$page_num = count($pdf_info);
@@ -145,17 +142,19 @@ private function mb_pathinfo($filepath) {
 		}
 		$poly2bitmap = '';
 pdf2swf_run:
-		$exec = "C:\MJF\SWFTools\pdf2swf.exe ".self::$convert_path.$file['filename'].".pdf -o ".$view_path."% -f -T 9".$poly2bitmap;
+		$exec = "C:\MJF\SWFTools\pdf2swf.exe \"".self::$convert_path.$file['filename'].".pdf\" -o ".$view_path."% -f -T 9".$poly2bitmap;
 		exec($exec, $swf_info);
 		foreach($swf_info as $k => $v){
 			//log_message('error', $v);
-			if( empty($poly2bitmap) && FALSE !== strpos($v, 'ERROR   This file is too complex to render- SWF only supports 65536 shapes at once') ){
+			if( empty($poly2bitmap) && $v == 'ERROR   This file is too complex to render- SWF only supports 65536 shapes at once' ){
 				$poly2bitmap = ' -s poly2bitmap';
 				log_message('error', 'run -s poly2bitmap');
 				goto pdf2swf_run;
 			}
 		}
-		unlink(self::$convert_path.$file['filename'].".pdf");
+		if( $file['extension'] != 'pdf' ){
+			unlink(self::$convert_path.$file['filename'].".pdf");
+		}
 
 		if( !$this->oss->uploadDir($_SESSION["user_url"].'/'.$time, $view_path)){
 			echo "upload swf to OSS failed.";
@@ -171,7 +170,21 @@ pdf2swf_run:
 			echo "upload doc to OSS failed.";
 			return;
 		}
-		$this->home_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $page_width, $page_height, $page_num, intval(!empty($poly2bitmap)));
+		switch($file['extension']){
+			case 'doc':
+				$doc_ext = 1;
+				break;
+			case 'docx':
+				$doc_ext = 2;
+				break;
+			case 'pdf':
+				$doc_ext = 3;
+				break;
+			default:
+				$doc_ext = 0;
+				break;
+		}
+		$this->home_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $doc_ext, $page_width, $page_height, $page_num, intval(!empty($poly2bitmap)));
 		header('Location:'.base_url('home'));
 	}
 }
