@@ -123,35 +123,41 @@ private function mb_pathinfo($filepath) {
 		if( !is_dir($view_path) ){
 			mkdir($view_path, 0777, true);
 		}
-		$exec = "C:\MJF\SWFTools\pdf2swf.exe ".self::$convert_path.$file['filename'].".pdf -o ".$view_path."% -f -T 9";
-		exec($exec, $pdf_info);
+		//$poly2bitmap = "";
+//pdf2swf_run:
+		
 		//var_dump($pdf_info);
+
 		$page_num = 0;
 		$page_width = 0;
 		$page_height = 0;
-		foreach($pdf_info as $k => $v){
-			if( FALSE === strpos($v, 'NOTICE  processing PDF page') ) continue;
-			$info_arr = explode(' ', $v);
-			$page_num = $info_arr[5];
-			if( !$page_width || !$page_height ){
-				$page_width_height_string = $info_arr[6];
-				$page_width_height_string = trim($page_width_height_string, '()');
-				$page_width_height = explode(':', $page_width_height_string);
-				$page_width_height = explode('x', $page_width_height[0]);
-				$page_width = $page_width_height[0];
-				$page_height = $page_width_height[1];
-			}
+		$exec = "C:\MJF\SWFTools\pdf2swf.exe ".self::$convert_path.$file['filename'].".pdf -I";
+		exec($exec, $pdf_info);
+		if( count($pdf_info) ){
+			$page_num = count($pdf_info);
+			$page_width_height_string = explode(' ', $pdf_info[0]);
+			$page_width  = intval(explode('=', $page_width_height_string[1])[1]);
+			$page_height = intval(explode('=', $page_width_height_string[2])[1]);
 		}
-		//var_dump($page_num);
-		//var_dump($page_width);
-		//var_dump($page_height);
 		if( !$page_width || !$page_height || !$page_num ){
 			echo "get pdf info failed.";
 			return;
 		}
+		$poly2bitmap = '';
+pdf2swf_run:
+		$exec = "C:\MJF\SWFTools\pdf2swf.exe ".self::$convert_path.$file['filename'].".pdf -o ".$view_path."% -f -T 9".$poly2bitmap;
+		exec($exec, $swf_info);
+		foreach($swf_info as $k => $v){
+			//log_message('error', $v);
+			if( empty($poly2bitmap) && FALSE !== strpos($v, 'ERROR   This file is too complex to render- SWF only supports 65536 shapes at once') ){
+				$poly2bitmap = ' -s poly2bitmap';
+				log_message('error', 'run -s poly2bitmap');
+				goto pdf2swf_run;
+			}
+		}
 		unlink(self::$convert_path.$file['filename'].".pdf");
 
-		if( !$this->oss->uploadDir('view/'.$_SESSION["user_url"].'/'.$time, $view_path)){
+		if( !$this->oss->uploadDir($_SESSION["user_url"].'/'.$time, $view_path)){
 			echo "upload swf to OSS failed.";
 			return;
 		}
@@ -161,11 +167,11 @@ private function mb_pathinfo($filepath) {
 			mkdir($online_path, 0777, true);
 		}
 		rename(self::$convert_path.$file['basename'], $online_path.$file['basename']);
-		if( !$this->oss->uploadFile(iconv('GB2312', 'UTF-8', 'doc/'.$_SESSION["user_url"].'/'.strtotime(date('Y', $time).'-01-01 00:00:00').'/'.$file['basename']), iconv('GB2312', 'UTF-8', $online_path.$file['basename']))){					
+		if( !$this->oss->uploadFile(iconv('GB2312', 'UTF-8', $_SESSION["user_url"].'/'.strtotime(date('Y', $time).'-01-01 00:00:00').'/'.$file['basename']), iconv('GB2312', 'UTF-8', $online_path.$file['basename']))){					
 			echo "upload doc to OSS failed.";
 			return;
 		}
-		$this->home_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $page_width, $page_height, $page_num);
+		$this->home_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $page_width, $page_height, $page_num, intval(!empty($poly2bitmap)));
 		header('Location:'.base_url('home'));
 	}
 }

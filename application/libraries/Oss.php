@@ -7,8 +7,8 @@ class Oss{
 	private $accessKeyId = 'LTAIYx4frWDru6Yt';
 	private $accessKeySecret = 'SSoDb1RVVkHrR568b2054gsXnGk9dE';
 	private $endpoint = 'oss-cn-shanghai.aliyuncs.com';
-	private $bucket_public = 'mmpub';
-	private $bucket_private = 'mmpvt';
+	private $bucket_view = 'mmview';
+	private $bucket_doc = 'mmdoc';
 
 	private $ossClient = null;
 
@@ -25,7 +25,7 @@ class Oss{
 	function uploadDir($prefix, $localDirectory)
 	{
 	    	try {
-	        	$this->ossClient->uploadDir($this->bucket_public, $prefix, $localDirectory);
+	        	$this->ossClient->uploadDir($this->bucket_view, $prefix, $localDirectory);
 	    	}catch(OssException $e){
 	        	printf($e->getMessage()."\n");
 	        	return false;
@@ -36,7 +36,7 @@ class Oss{
 	function uploadFile($prefix, $localFile)
 	{
 	    	try {
-	        	$this->ossClient->uploadFile($this->bucket_private, $prefix, $localFile);
+	        	$this->ossClient->uploadFile($this->bucket_doc, $prefix, $localFile);
 	    	}catch(OssException $e){
 	        	printf($e->getMessage()."\n");
 	        	return false;
