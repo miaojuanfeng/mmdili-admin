@@ -96,7 +96,7 @@ private function mb_pathinfo($filepath) {
 		rename($file_path, self::$convert_path.$file['basename']);
 		if( $file['extension'] == 'doc' || $file['extension'] == 'docx' ){
 		try{
-    			$word = new COM("Word.Application") or die ("Could not initialise Object.");   
+    			$word = new COM("Word.Application") or die ("Could not initialise Word Object.");   
 			$retry = 20;
 			while( !$word && (--$retry) ){
 				sleep(100);
@@ -119,7 +119,32 @@ private function mb_pathinfo($filepath) {
 			return;
 		}
 		}
-		
+
+		if( $file['extension'] == 'ppt' || $file['extension'] == 'pptx' ){
+		try{
+    			$ppt = new COM("powerpoint.Application") or die ("Could not initialise PowerPoint Object.");   
+			$retry = 20;
+			while( !$ppt && (--$retry) ){
+				sleep(100);
+			}
+			if( $retry <= 0 ){
+				echo "ppt application not ready!";
+				rename(self::$convert_path.$file['basename'], $file_path);
+				return;
+			}
+   			$ppt->Visible = true; //Hiding the application window is not allowed.   
+    			$ppt->DisplayAlerts = 0; 
+			$ppt->Presentations->Open(self::$convert_path.$file['basename']);
+			$ppt->ActivePresentation->SaveAs(self::$convert_path.$file['filename'].'.pdf', 32);
+			$ppt->Quit();  
+			unset($ppt);
+		}catch(Exception $e){
+    			$ppt->Quit();  
+    			unset($ppt);
+			echo $e->getMessage();
+			return;
+		}
+		}
 		$view_path = self::$view_path.$time.'\\';
 		if( !is_dir($view_path) ){
 			mkdir($view_path, 0777, true);
@@ -179,6 +204,12 @@ pdf2swf_run:
 				break;
 			case 'pdf':
 				$doc_ext = 3;
+				break;
+			case 'ppt':
+				$doc_ext = 4;
+				break;
+			case 'pptx':
+				$doc_ext = 5;
 				break;
 			default:
 				$doc_ext = 0;
