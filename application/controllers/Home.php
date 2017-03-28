@@ -119,7 +119,6 @@ private function mb_pathinfo($filepath) {
 			return;
 		}
 		}
-
 		if( $file['extension'] == 'ppt' || $file['extension'] == 'pptx' ){
 		try{
     			$ppt = new COM("powerpoint.Application") or die ("Could not initialise PowerPoint Object.");   
