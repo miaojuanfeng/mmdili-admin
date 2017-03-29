@@ -94,7 +94,7 @@ private function mb_pathinfo($filepath) {
 			return;
 		}
 		rename($file_path, self::$convert_path.$file['basename']);
-		if( $file['extension'] == 'doc' || $file['extension'] == 'docx' ){
+		if( $file['extension'] == 'doc' || $file['extension'] == 'docx' || $file['extension'] == 'txt' ){
 		try{
     			$word = new COM("Word.Application") or die ("Could not initialise Word Object.");   
 			$retry = 20;
@@ -209,6 +209,9 @@ pdf2swf_run:
 				break;
 			case 'pptx':
 				$doc_ext = 5;
+				break;
+			case 'txt':
+				$doc_ext = 6;
 				break;
 			default:
 				$doc_ext = 0;

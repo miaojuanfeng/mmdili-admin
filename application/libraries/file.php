@@ -1,7 +1,7 @@
 <?php
 class File{
 	private $except_dir = array('.', '..', 'system', 'desktop', 'data', 'recycle', 'temp', 'session');
-	private $require_ext = array('doc', 'docx', 'pdf', 'ppt', 'pptx');
+	private $require_ext = array('doc', 'docx', 'pdf', 'ppt', 'pptx', 'txt');
 
 	public function file_list($path)
 	{
