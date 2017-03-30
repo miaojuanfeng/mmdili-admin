@@ -144,6 +144,33 @@ private function mb_pathinfo($filepath) {
 			return;
 		}
 		}
+		if( $file['extension'] == 'xls' || $file['extension'] == 'xlsx' ){
+		try{
+    			$excel = new COM("excel.Application") or die ("Could not initialise Excel Object.");   
+			$retry = 20;
+			while( !$excel && (--$retry) ){
+				sleep(100);
+			}
+			if( $retry <= 0 ){
+				echo "excel application not ready!";
+				rename(self::$convert_path.$file['basename'], $file_path);
+				return;
+			}
+   			$excel->Visible = 1;   
+    			$excel->DisplayAlerts = 0; 
+			$excel->Workbooks->Open(self::$convert_path.$file['basename']);
+			$excel->Workbooks[1]->ExportAsFixedFormat(0, self::$convert_path.$file['filename'].'.pdf');
+			$excel->Workbooks[1]->Close(false);
+			$excel->Quit();  
+			unset($excel);
+		}catch(Exception $e){
+			$excel->Workbooks[1]->Close(false);
+    			$excel->Quit();  
+    			unset($excel);
+			echo $e->getMessage();
+			return;
+		}
+		}
 		$view_path = self::$view_path.$time.'\\';
 		if( !is_dir($view_path) ){
 			mkdir($view_path, 0777, true);
@@ -212,6 +239,12 @@ pdf2swf_run:
 				break;
 			case 'txt':
 				$doc_ext = 6;
+				break;
+			case 'xls':
+				$doc_ext = 7;
+				break;
+			case 'xlsx':
+				$doc_ext = 8;
 				break;
 			default:
 				$doc_ext = 0;
