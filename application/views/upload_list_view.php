@@ -21,7 +21,7 @@
 						<div class="file-dir"><?=$v['file_dir']?></div>
 					</div>
 					<div class="task-act">
-						<a class="exec" href="<?=base_url('upload/exec/'.$k)?>">Exec</a>
+						<a class="exec" href="<?=base_url('upload/detail/'.$k)?>">Exec</a>
 					</div>
 					<div class="clearfix"></div>
 				</div>

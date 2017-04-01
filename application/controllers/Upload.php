@@ -68,7 +68,16 @@ class Upload extends CI_Controller {
 	public function index()
 	{
 		$data['file'] = self::$exists_files;
-		$this->load->view('upload_view', $data);
+		$this->load->view('upload_list_view', $data);
+	}
+
+	public function detail($file_index){
+		if(!count(self::$exists_files) || !isset(self::$exists_files[$file_index])){
+			echo 'index not exists!';
+			return;
+		}
+		$data['file'] = self::$exists_files[$file_index];
+		$this->load->view('upload_detail_view', $data);
 	}
 
 	public function exec($file_index)
