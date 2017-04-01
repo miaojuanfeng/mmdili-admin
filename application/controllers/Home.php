@@ -97,7 +97,7 @@ private function mb_pathinfo($filepath) {
 		if( $file['extension'] == 'doc' || $file['extension'] == 'docx' || $file['extension'] == 'txt' ){
 		try{
     			$word = new COM("Word.Application") or die ("Could not initialise Word Object.");   
-			$retry = 20;
+			$retry = 50;
 			while( !$word && (--$retry) ){
 				sleep(100);
 			}
@@ -122,7 +122,7 @@ private function mb_pathinfo($filepath) {
 		if( $file['extension'] == 'ppt' || $file['extension'] == 'pptx' ){
 		try{
     			$ppt = new COM("powerpoint.Application") or die ("Could not initialise PowerPoint Object.");   
-			$retry = 20;
+			$retry = 50;
 			while( !$ppt && (--$retry) ){
 				sleep(100);
 			}
@@ -147,7 +147,7 @@ private function mb_pathinfo($filepath) {
 		if( $file['extension'] == 'xls' || $file['extension'] == 'xlsx' ){
 		try{
     			$excel = new COM("excel.Application") or die ("Could not initialise Excel Object.");   
-			$retry = 20;
+			$retry = 50;
 			while( !$excel && (--$retry) ){
 				sleep(100);
 			}
