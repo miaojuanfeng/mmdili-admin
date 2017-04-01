@@ -81,8 +81,14 @@ class Upload extends CI_Controller {
 		$this->load->view('upload_detail_view', $data);
 	}
 
-	public function exec($file_index)
+	public function exec()
 	{
+		$file_index = $this->input->post('file_index');
+		$doc_cate_id = $this->input->post('doc_cate_id');
+		if( empty($file_index) || empty($doc_cate_id) ){
+			echo 'paremeters wrong!';
+			return;
+		}
 		if(!count(self::$exists_files) || !isset(self::$exists_files[$file_index])){
 			echo 'index not exists!';
 			return;

@@ -10,17 +10,25 @@
 	<div class="main-container">
 		<?php require_once "header_view.php" ?>
 		<div class="content">
-			<form action="<?=base_url('upload/exec/'.$file_index)?>" method="post" class="list">
-				<input type="hidden" name="file" />
+			<form action="<?=base_url('upload/exec')?>" method="post" class="list">
+				<input type="hidden" name="file_index" value="<?=$file_index?>" />
 				<?php
 				var_dump($file);
 				?>
 				<div class="item upload">
 					<div class="upload-detail-file ">
 						<div class="file-name"><?=$file['file_name']?></div>
-					</div>
-					<div class="upload-detail-act">
-						<button type="submit" class="">Exec</button>
+						<div class="info-item">
+							<select name="doc_cate_id">
+								<option value="1" selected="selected">地理</option>
+								<option value="2">历史</option>
+								<option value="3">政治</option>
+								<option value="4">文综</option>
+							</select>
+						</div>
+						<div class="upload-detail-act">
+							<button type="submit" class="">Exec</button>
+						</div>
 					</div>
 				</div>
 			</form>
