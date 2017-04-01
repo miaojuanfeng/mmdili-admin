@@ -32,13 +32,13 @@ a{
         border: 1px solid #eee;
         margin: 0 0 10px 0;
 
-        &:last-child{
-            border-bottom: none;
-        }
-
-        &:hover{
-            background-color: #eee;
-            cursor: point;
+        a{
+            display: block;
+            
+            &:hover{
+                background-color: #eee;
+                cursor: point;
+            }
         }
     }
 }

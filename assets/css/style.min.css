@@ -25,11 +25,11 @@ a {
 .list .item {
   border: 1px solid #eee;
   margin: 0 0 10px 0; }
-  .list .item:last-child {
-    border-bottom: none; }
-  .list .item:hover {
-    background-color: #eee;
-    cursor: point; }
+  .list .item a {
+    display: block; }
+    .list .item a:hover {
+      background-color: #eee;
+      cursor: point; }
 
 .content {
   padding: 10px; }
