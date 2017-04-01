@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Upload extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -23,52 +23,52 @@ class Home extends CI_Controller {
 	private static $view_path = 'C:\MJF\web\doc\view\\';
 	private static $online_path = 'C:\MJF\web\doc\online\\';
 
-private function path_info($filepath){   
-    $path_parts = array();   
-    $path_parts ['dirname'] = rtrim(substr($filepath, 0, strrpos($filepath, '/')),"/")."/";   
-    $path_parts ['basename'] = ltrim(substr($filepath, strrpos($filepath, '/')),"/");   
-    $path_parts ['extension'] = substr(strrchr($filepath, '.'), 1);   
-    $path_parts ['filename'] = ltrim(substr($path_parts ['basename'], 0, strrpos($path_parts ['basename'], '.')),"/");   
-    return $path_parts;   
-}
+	private function path_info($filepath){   
+	    $path_parts = array();   
+	    $path_parts ['dirname'] = rtrim(substr($filepath, 0, strrpos($filepath, '/')),"/")."/";   
+	    $path_parts ['basename'] = ltrim(substr($filepath, strrpos($filepath, '/')),"/");   
+	    $path_parts ['extension'] = substr(strrchr($filepath, '.'), 1);   
+	    $path_parts ['filename'] = ltrim(substr($path_parts ['basename'], 0, strrpos($path_parts ['basename'], '.')),"/");   
+	    return $path_parts;   
+	}
 
-private function mb_pathinfo($filepath) {
-    preg_match('%^(.*?)[\\\\/]*(([^/\\\\]*?)(\.([^\.\\\\/]+?)|))[\\\\/\.]*$%im',$filepath,$m);
-    if($m[1]) $ret['dirname']=$m[1];
-    if($m[2]) $ret['basename']=$m[2];
-    if($m[5]) $ret['extension']=$m[5];
-    if($m[3]) $ret['filename']=$m[3];
-    return $ret;
-}
+	private function mb_pathinfo($filepath) {
+	    preg_match('%^(.*?)[\\\\/]*(([^/\\\\]*?)(\.([^\.\\\\/]+?)|))[\\\\/\.]*$%im',$filepath,$m);
+	    if($m[1]) $ret['dirname']=$m[1];
+	    if($m[2]) $ret['basename']=$m[2];
+	    if($m[5]) $ret['extension']=$m[5];
+	    if($m[3]) $ret['filename']=$m[3];
+	    return $ret;
+	}
 
 	function __construct()
     {
     	parent::__construct();
     	$this->load->helper('url');
-    	$this->load->model('home_model');
+    	$this->load->model('upload_model');
     	$this->load->library('file');
-	$this->load->library('oss');
+		$this->load->library('oss');
 
-	if( !is_dir(self::$convert_path) ){
-		mkdir(self::$convert_path);
-	}
-	if( !is_dir(self::$view_path) ){
-		mkdir(self::$view_path);
-	}
-	if( !is_dir(self::$online_path) ){
-		mkdir(self::$online_path);
-	}
+		if( !is_dir(self::$convert_path) ){
+			mkdir(self::$convert_path);
+		}
+		if( !is_dir(self::$view_path) ){
+			mkdir(self::$view_path);
+		}
+		if( !is_dir(self::$online_path) ){
+			mkdir(self::$online_path);
+		}
 
-	$_SESSION["user_id"] = 1;
-	$_SESSION["user_url"] = 1490168888;
+		$_SESSION["user_id"] = 1;
+		$_SESSION["user_url"] = 1490168888;
 
-	self::$exists_files = $this->file->file_list('C:\MJF\web\upload\data');
+		self::$exists_files = $this->file->file_list('C:\MJF\web\upload\data');
     }
 
 	public function index()
 	{
 		$data['file'] = self::$exists_files;
-		$this->load->view('home_view', $data);
+		$this->load->view('upload_view', $data);
 	}
 
 	public function exec($file_index)
@@ -83,7 +83,7 @@ private function mb_pathinfo($filepath) {
 			return;
 		}
 		$file = $this->mb_pathinfo($file_path);
-		if( !$this->home_model->check_doc_exists(iconv('GB2312', 'UTF-8', $file['filename'])) ){
+		if( !$this->upload_model->check_doc_exists(iconv('GB2312', 'UTF-8', $file['filename'])) ){
 			echo 'database record already exists!';
 			return;
 		}
@@ -250,7 +250,7 @@ pdf2swf_run:
 				$doc_ext = 0;
 				break;
 		}
-		$this->home_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $doc_ext, $page_width, $page_height, $page_num, intval(!empty($poly2bitmap)));
-		header('Location:'.base_url('home'));
+		$this->upload_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $doc_ext, $page_width, $page_height, $page_num, intval(!empty($poly2bitmap)));
+		header('Location:'.base_url('upload'));
 	}
 }
