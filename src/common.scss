@@ -28,13 +28,16 @@ a{
 }
 
 .list{
-    border: 1px solid #eee;
-
     .item{
-        border-bottom: 1px dashed #eee;
+        border: 1px solid #eee;
+        margin: 5px 0;
 
         &:last-child{
             border-bottom: none;
+        }
+
+        &:hover{
+            background-color: #eee;
         }
     }
 }
