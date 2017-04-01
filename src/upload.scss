@@ -17,18 +17,18 @@
     .upload-detail-file{
         @extend .upload-file;
 
-    }
-    .upload-detail-act{
+        .upload-detail-act{
+        
+            button{
+                line-height: 100%;
+                text-align: center;
+                color: #747474;
+                background-color: #eee;
 
-        button{
-            line-height: 100%;
-            text-align: center;
-            color: #747474;
-            background-color: #eee;
-
-            &:hover{
-                background-color: #5db2ff;
-                color: #fff;
+                &:hover{
+                    background-color: #5db2ff;
+                    color: #fff;
+                }
             }
         }
     }

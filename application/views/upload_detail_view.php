@@ -20,7 +20,7 @@
 						<div class="file-name"><?=$file['file_name']?></div>
 					</div>
 					<div class="upload-detail-act">
-						<button type="submit">Exec</button>
+						<button type="submit" class="">Exec</button>
 					</div>
 				</div>
 			</form>
