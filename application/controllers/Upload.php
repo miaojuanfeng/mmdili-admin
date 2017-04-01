@@ -112,6 +112,7 @@ class Upload extends CI_Controller {
 		rename($file_path, self::$convert_path.$file['basename']);
 		if( $file['extension'] == 'doc' || $file['extension'] == 'docx' || $file['extension'] == 'txt' ){
 		try{
+			$word = null;
     			$word = new COM("Word.Application") or die ("Could not initialise Word Object.");   
 			$retry = 50;
 			while( !$word && (--$retry) ){
@@ -137,6 +138,7 @@ class Upload extends CI_Controller {
 		}
 		if( $file['extension'] == 'ppt' || $file['extension'] == 'pptx' ){
 		try{
+			$ppt = null;
     			$ppt = new COM("powerpoint.Application") or die ("Could not initialise PowerPoint Object.");   
 			$retry = 50;
 			while( !$ppt && (--$retry) ){
@@ -162,6 +164,7 @@ class Upload extends CI_Controller {
 		}
 		if( $file['extension'] == 'xls' || $file['extension'] == 'xlsx' ){
 		try{
+			$excel = null;
     			$excel = new COM("excel.Application") or die ("Could not initialise Excel Object.");   
 			$retry = 50;
 			while( !$excel && (--$retry) ){
