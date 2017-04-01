@@ -266,7 +266,7 @@ pdf2swf_run:
 				$doc_ext = 0;
 				break;
 		}
-		$this->upload_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $doc_ext, $page_width, $page_height, $page_num, intval(!empty($poly2bitmap)));
+		$this->upload_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $doc_ext, $doc_cate_id, $page_width, $page_height, $page_num, intval(!empty($poly2bitmap)));
 		header('Location:'.base_url('upload'));
 	}
 }

@@ -12,9 +12,6 @@
 		<div class="content">
 			<form action="<?=base_url('upload/exec')?>" method="post" class="list">
 				<input type="hidden" name="file_index" value="<?=$file_index?>" />
-				<?php
-				var_dump($file);
-				?>
 				<div class="item upload">
 					<div class="upload-detail-file ">
 						<div class="file-name"><?=$file['file_name']?></div>
