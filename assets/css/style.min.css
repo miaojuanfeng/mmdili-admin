@@ -99,27 +99,23 @@ a {
         .page-sidebar .sidebar-menu li a .menu-text {
           line-height: 38px; }
 
-.upload {
-  position: relative; }
-  .upload .upload-file {
-    width: 100%;
-    padding: 10px 0 10px 10px; }
-    .upload .upload-file .file-name {
-      margin: 0;
-      font-size: 18px;
-      font-weight: normal;
-      color: #747474; }
-    .upload .upload-file .file-dir {
-      margin: 0;
-      color: #ccc; }
-  .upload .upload-act {
-    width: 10%; }
-    .upload .upload-act a {
-      display: block;
-      line-height: 100%;
-      text-align: center;
-      color: #747474;
-      background-color: #eee; }
-      .upload .upload-act a:hover {
-        background-color: #5db2ff;
-        color: #fff; }
+.upload .upload-file {
+  padding: 10px 0 10px 10px; }
+  .upload .upload-file .file-name {
+    margin: 0;
+    font-size: 18px;
+    font-weight: normal;
+    color: #747474; }
+  .upload .upload-file .file-dir {
+    margin: 0;
+    color: #ccc; }
+
+.upload .upload-act a {
+  display: block;
+  line-height: 100%;
+  text-align: center;
+  color: #747474;
+  background-color: #eee; }
+  .upload .upload-act a:hover {
+    background-color: #5db2ff;
+    color: #fff; }

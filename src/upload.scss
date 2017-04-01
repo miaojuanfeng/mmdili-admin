@@ -1,8 +1,5 @@
 .upload{
-    position:relative;
-
     .upload-file{
-        width: 100%;
         padding: 10px 0 10px 10px;
 
         .file-name{
@@ -18,7 +15,6 @@
         }
     } 
     .upload-act{
-        width: 10%;
 
         a{
             display: block;
