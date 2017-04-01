@@ -11,7 +11,6 @@
 		<?php require_once "header_view.php" ?>
 		<div class="content">
 			<div class="list">
-				<input type="hidden" name="file" />
 				<?php
 				foreach($file as $k => $v){
 				?>

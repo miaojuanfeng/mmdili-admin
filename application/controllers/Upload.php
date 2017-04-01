@@ -76,6 +76,7 @@ class Upload extends CI_Controller {
 			echo 'index not exists!';
 			return;
 		}
+		$date['file_index'] = $file_index;
 		$data['file'] = self::$exists_files[$file_index];
 		$this->load->view('upload_detail_view', $data);
 	}

@@ -10,7 +10,7 @@
 	<div class="main-container">
 		<?php require_once "header_view.php" ?>
 		<div class="content">
-			<div class="list">
+			<form action="<?=base_url('upload/exec/'.$file_index)?>" method="post" class="list">
 				<input type="hidden" name="file" />
 				<?php
 				echo $file;
@@ -20,10 +20,10 @@
 						<div class="file-name"><?=$file?></div>
 					</div>
 					<div class="task-act">
-						<a class="exec" href="<?=base_url('upload/exec/'.$k)?>">Exec</a>
+						<button type="submit">Exec</button>
 					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 	</div>
 </body>
