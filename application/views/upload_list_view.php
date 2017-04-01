@@ -16,14 +16,10 @@
 				foreach($file as $k => $v){
 				?>
 				<div class="item upload">
-					<div class="upload-file">
+					<a class="upload-file" href="<?=base_url('upload/detail/'.$k)?>">
 						<div class="file-name"><?=$v['file_name']?></div>
 						<div class="file-dir"><?=$v['file_dir']?></div>
-					</div>
-					<div class="upload-act">
-						<a class="exec" href="<?=base_url('upload/detail/'.$k)?>">Exec</a>
-					</div>
-					<div class="clearfix"></div>
+					</a>
 				</div>
 				<?php
 				}

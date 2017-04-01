@@ -30,7 +30,7 @@ a{
 .list{
     .item{
         border: 1px solid #eee;
-        margin: 5px 0;
+        margin: 0 0 10px 0;
 
         &:last-child{
             border-bottom: none;
@@ -38,6 +38,7 @@ a{
 
         &:hover{
             background-color: #eee;
+            cursor: point;
         }
     }
 }
