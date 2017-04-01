@@ -13,11 +13,11 @@
 			<form action="<?=base_url('upload/exec/'.$file_index)?>" method="post" class="list">
 				<input type="hidden" name="file" />
 				<?php
-				echo $file;
+				var_dump($file);
 				?>
 				<div class="item task">
 					<div class="task-file">
-						<div class="file-name"><?=$file?></div>
+						<div class="file-name"><?=$file[0]?></div>
 					</div>
 					<div class="task-act">
 						<button type="submit">Exec</button>
