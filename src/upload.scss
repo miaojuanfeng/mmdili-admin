@@ -1,5 +1,5 @@
 .upload{
-    .upload-file{
+    .upload-detail-file{
         padding: 10px 0 10px 10px;
 
         .file-name{
@@ -14,9 +14,9 @@
             color: #ccc;
         }
     } 
-    .upload-act{
+    .upload-detail-act{
 
-        a{
+        button{
             line-height: 100%;
             text-align: center;
             color: #747474;

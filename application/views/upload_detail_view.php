@@ -15,11 +15,11 @@
 				<?php
 				var_dump($file);
 				?>
-				<div class="item task">
-					<div class="task-file">
-						<div class="file-name"><?=$file[0]?></div>
+				<div class="item upload">
+					<div class="upload-detail-file ">
+						<div class="file-name"><?=$file['file_name']?></div>
 					</div>
-					<div class="task-act">
+					<div class="upload-detail-act">
 						<button type="submit">Exec</button>
 					</div>
 				</div>
