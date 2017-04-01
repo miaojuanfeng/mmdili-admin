@@ -26,7 +26,8 @@ a {
   border: 1px solid #eee;
   margin: 0 0 10px 0; }
   .list .item a {
-    display: block; }
+    display: block;
+    padding: 10px 0 10px 10px; }
     .list .item a:hover {
       background-color: #eee;
       cursor: point; }
