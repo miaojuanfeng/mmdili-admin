@@ -113,11 +113,11 @@ a {
     margin: 0;
     color: #ccc; }
 
-.upload .upload-detail-file .upload-detail-act button {
+.upload .upload-detail-file .upload-detail-act .exec {
   line-height: 100%;
   text-align: center;
   color: #747474;
   background-color: #eee; }
-  .upload .upload-detail-file .upload-detail-act button:hover {
+  .upload .upload-detail-file .upload-detail-act .exec:hover {
     background-color: #5db2ff;
     color: #fff; }
