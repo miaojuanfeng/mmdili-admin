@@ -1,5 +1,5 @@
 .upload{
-    .upload-detail-file{
+    .upload-file{
         padding: 10px 0 10px 10px;
 
         .file-name{
@@ -13,7 +13,11 @@
             margin:0;
             color: #ccc;
         }
-    } 
+    }
+    .upload-detail-file{
+        @extend .upload-file;
+
+    }
     .upload-detail-act{
 
         button{

@@ -102,14 +102,14 @@ a {
         .page-sidebar .sidebar-menu li a .menu-text {
           line-height: 38px; }
 
-.upload .upload-detail-file {
+.upload .upload-file, .upload .upload-detail-file {
   padding: 10px 0 10px 10px; }
-  .upload .upload-detail-file .file-name {
+  .upload .upload-file .file-name, .upload .upload-detail-file .file-name {
     margin: 0;
     font-size: 18px;
     font-weight: normal;
     color: #747474; }
-  .upload .upload-detail-file .file-dir {
+  .upload .upload-file .file-dir, .upload .upload-detail-file .file-dir {
     margin: 0;
     color: #ccc; }
 
