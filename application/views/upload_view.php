@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
-	<title>mmTeacher</title>
+	<title>文件夹</title>
 	<?php require_once "meta_view.php" ?>
 </head>
 <body>
