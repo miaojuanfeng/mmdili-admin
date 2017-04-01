@@ -27,8 +27,6 @@ a{
     padding: 0 0 0 219px;
 }
 
-////////
-
 .list{
     border: 1px solid #eee;
 
@@ -37,45 +35,6 @@ a{
 
         &:last-child{
             border-bottom: none;
-        }
-    }
-}
-
-.task{
-    position:relative;
-
-    .task-file{
-        width:calc(90% - 10px);
-        float:left;
-        padding: 10px 0 10px 10px;
-
-        .file-name{
-            margin:0;
-            font-size:18px;
-            font-weight: normal;
-            color: #747474;
-        }
-
-        .file-dir{
-            margin:0;
-            color: #ccc;
-        }
-    }
-    .task-act{
-        width: 10%;
-        float:right;
-
-        a{
-            display: block;
-            line-height: 100%;
-            text-align: center;
-            color: #747474;
-            background-color: #eee;
-
-            &:hover{
-                background-color: #5db2ff;
-                color: #fff;
-            }
         }
     }
 }

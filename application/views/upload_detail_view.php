@@ -17,13 +17,11 @@
 				?>
 				<div class="item task">
 					<div class="task-file">
-						<div class="file-name"><?=$v['file_name']?></div>
-						<div class="file-dir"><?=$v['file_dir']?></div>
+						<div class="file-name"><?=$file?></div>
 					</div>
 					<div class="task-act">
 						<a class="exec" href="<?=base_url('upload/exec/'.$k)?>">Exec</a>
 					</div>
-					<div class="clearfix"></div>
 				</div>
 			</div>
 		</div>

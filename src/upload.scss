@@ -1,0 +1,36 @@
+.upload{
+    position:relative;
+
+    .upload-file{
+        width: 100%;
+        padding: 10px 0 10px 10px;
+
+        .file-name{
+            margin:0;
+            font-size:18px;
+            font-weight: normal;
+            color: #747474;
+        }
+
+        .file-dir{
+            margin:0;
+            color: #ccc;
+        }
+    }
+    .upload-act{
+        width: 10%;
+
+        a{
+            display: block;
+            line-height: 100%;
+            text-align: center;
+            color: #747474;
+            background-color: #eee;
+
+            &:hover{
+                background-color: #5db2ff;
+                color: #fff;
+            }
+        }
+    }
+}
