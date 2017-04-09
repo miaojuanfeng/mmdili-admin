@@ -59,7 +59,7 @@ class Upload extends CI_Controller {
 			mkdir(self::$online_path);
 		}
 
-		$_SESSION["user_id"] = 1;
+		$_SESSION["user_id"] = 2;
 		$_SESSION["user_url"] = 1490168888;
 
 		self::$exists_files = $this->file->file_list('C:\MJF\web\upload\data');
@@ -85,7 +85,7 @@ class Upload extends CI_Controller {
 	{
 		$file_index = $this->input->post('file_index');
 		$doc_cate_id = $this->input->post('doc_cate_id');
-		if( empty($file_index) || empty($doc_cate_id) ){
+		if( ($file_index != 0 && empty($file_index)) || empty($doc_cate_id) ){
 			echo 'paremeters wrong!';
 			return;
 		}
@@ -130,8 +130,10 @@ class Upload extends CI_Controller {
 			$word->Quit(false);  
 			unset($word);
 		}catch(Exception $e){
+			if( $word ){
     			$word->Quit(false);  
     			unset($word);
+			}
 			echo $e->getMessage();
 			return;
 		}
@@ -156,8 +158,10 @@ class Upload extends CI_Controller {
 			$ppt->Quit();  
 			unset($ppt);
 		}catch(Exception $e){
+			if( $ppt ){
     			$ppt->Quit();  
     			unset($ppt);
+			}
 			echo $e->getMessage();
 			return;
 		}
@@ -183,9 +187,11 @@ class Upload extends CI_Controller {
 			$excel->Quit();  
 			unset($excel);
 		}catch(Exception $e){
+			if( $excel ){
 			$excel->Workbooks[1]->Close(false);
     			$excel->Quit();  
     			unset($excel);
+			}
 			echo $e->getMessage();
 			return;
 		}
@@ -212,7 +218,7 @@ class Upload extends CI_Controller {
 		}
 		$poly2bitmap = '';
 pdf2swf_run:
-		$exec = "C:\MJF\SWFTools\pdf2swf.exe \"".self::$convert_path.$file['filename'].".pdf\" -o ".$view_path."% -f -T 9".$poly2bitmap;
+		$exec = "C:\MJF\SWFTools\pdf2swf.exe \"".self::$convert_path.$file['filename'].".pdf\" -o ".$view_path."% -T 9 -j 20 -s zoom=8 -s disablelinks".$poly2bitmap;
 		exec($exec, $swf_info);
 		foreach($swf_info as $k => $v){
 			//log_message('error', $v);
