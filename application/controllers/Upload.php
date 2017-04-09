@@ -218,7 +218,7 @@ class Upload extends CI_Controller {
 		}
 		$poly2bitmap = '';
 pdf2swf_run:
-		$exec = "C:\MJF\SWFTools\pdf2swf.exe \"".self::$convert_path.$file['filename'].".pdf\" -o ".$view_path."% -T 9 -j 20 -s zoom=8 -s disablelinks".$poly2bitmap;
+		$exec = "C:\MJF\SWFTools\pdf2swf.exe \"".self::$convert_path.$file['filename'].".pdf\" -o ".$view_path."% -T 9 -j 20 -s disablelinks".$poly2bitmap;
 		exec($exec, $swf_info);
 		foreach($swf_info as $k => $v){
 			//log_message('error', $v);
