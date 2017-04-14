@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://47.92.3.88/admin';
+$config['base_url'] = 'http://admin.mmdili.com';
 
 /*
 |--------------------------------------------------------------------------
