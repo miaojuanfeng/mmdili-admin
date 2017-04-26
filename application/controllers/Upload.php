@@ -85,6 +85,7 @@ class Upload extends CI_Controller {
 	{
 		$file_index = $this->input->post('file_index');
 		$doc_cate_id = $this->input->post('doc_cate_id');
+		$doc_dl_forbidden = $this->input->post('doc_dl_forbidden');
 		if( ($file_index != 0 && empty($file_index)) || empty($doc_cate_id) ){
 			echo 'paremeters wrong!';
 			return;
@@ -134,6 +135,7 @@ class Upload extends CI_Controller {
     			$word->Quit(false);  
     			unset($word);
 			}
+			rename(self::$convert_path.$file['basename'], $file_path);
 			echo $e->getMessage();
 			return;
 		}
@@ -275,7 +277,7 @@ pdf2swf_run:
 				$doc_ext = 0;
 				break;
 		}
-		$this->upload_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $doc_ext, $doc_cate_id, $page_width, $page_height, $page_num, intval(!empty($poly2bitmap)));
+		$this->upload_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $doc_ext, $doc_cate_id, $page_width, $page_height, $page_num, intval(!empty($poly2bitmap)), $doc_dl_forbidden);
 		header('Location:'.base_url('upload'));
 	}
 }

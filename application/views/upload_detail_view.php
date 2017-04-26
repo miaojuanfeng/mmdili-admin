@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
@@ -22,6 +22,12 @@
 								<option value="2">历史</option>
 								<option value="3">政治</option>
 								<option value="4">文综</option>
+							</select>
+						</div>
+						<div class="info-item">
+							<select name="doc_dl_forbidden">
+								<option value="0" selected="selected">可以下载</option>
+								<option value="1">禁止下载</option>
 							</select>
 						</div>
 						<div class="upload-detail-act">
