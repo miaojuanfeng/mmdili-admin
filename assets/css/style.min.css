@@ -32,6 +32,9 @@ a {
       background-color: #eee;
       cursor: point; }
 
+.info-item {
+  margin: 5px 0; }
+
 .content {
   padding: 10px; }
 
