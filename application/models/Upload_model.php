@@ -22,7 +22,7 @@ class upload_model extends CI_Model{
 		return true;
 	}
 
-    public function insert_doc($doc_url, $doc_title, $doc_ext, $doc_cate_id, $doc_width, $doc_height, $doc_page_num, $doc_poly2bitmap, $doc_dl_forbidden){
+    public function insert_doc($doc_url, $doc_title, $doc_user_id, $doc_ext, $doc_cate_id, $doc_width, $doc_height, $doc_page_num, $doc_poly2bitmap, $doc_dl_forbidden){
 		$this->db->query("INSERT INTO m_doc(
 			doc_url,
 			doc_title,
@@ -38,7 +38,7 @@ class upload_model extends CI_Model{
 		) VALUES(
 			".$doc_url.",
 			'".$doc_title."',
-			'".$_SESSION["user_id"]."',
+			".$doc_user_id.",
 			".$doc_ext.",
 			".$doc_cate_id.",
 			".$doc_width.",

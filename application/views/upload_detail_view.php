@@ -30,6 +30,12 @@
 								<option value="1">禁止下载</option>
 							</select>
 						</div>
+						<div class="info-item">
+							<select name="doc_user_id">
+								<option value="1">M.J.F</option>
+								<option value="2" selected="selected">MCMM</option>
+							</select>
+						</div>
 						<div class="upload-detail-act">
 							<button type="submit" class="exec">Exec</button>
 						</div>

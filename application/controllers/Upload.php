@@ -59,8 +59,7 @@ class Upload extends CI_Controller {
 			mkdir(self::$online_path);
 		}
 
-		$_SESSION["user_id"] = 2;
-		$_SESSION["user_url"] = 1490168888;
+		$this->user_url = array(1 => 1490176666, 2 => 1490168888);
 
 		self::$exists_files = $this->file->file_list('C:\MJF\web\upload\data');
     }
@@ -86,6 +85,7 @@ class Upload extends CI_Controller {
 		$file_index = $this->input->post('file_index');
 		$doc_cate_id = $this->input->post('doc_cate_id');
 		$doc_dl_forbidden = $this->input->post('doc_dl_forbidden');
+		$doc_user_id = $this->input->post('doc_user_id');
 		if( ($file_index != 0 && empty($file_index)) || empty($doc_cate_id) ){
 			echo 'paremeters wrong!';
 			return;
@@ -105,7 +105,7 @@ class Upload extends CI_Controller {
 			return;
 		}
 		$time = time();
-		$online_path = self::$online_path.$_SESSION["user_url"].'\\'.strtotime(date('Y', $time).'-01-01 00:00:00').'\\';
+		$online_path = self::$online_path.$this->user_url[$doc_user_id].'\\'.strtotime(date('Y', $time).'-01-01 00:00:00').'\\';
 		if( file_exists($online_path.$file['basename']) ){
 			echo 'file already exists!';
 			return;
@@ -234,7 +234,7 @@ pdf2swf_run:
 			unlink(self::$convert_path.$file['filename'].".pdf");
 		}
 
-		if( !$this->oss->uploadDir($_SESSION["user_url"].'/'.$time, $view_path)){
+		if( !$this->oss->uploadDir($this->user_url[$doc_user_id].'/'.$time, $view_path)){
 			echo "upload swf to OSS failed.";
 			return;
 		}
@@ -244,7 +244,7 @@ pdf2swf_run:
 			mkdir($online_path, 0777, true);
 		}
 		rename(self::$convert_path.$file['basename'], $online_path.$file['basename']);
-		if( !$this->oss->uploadFile(iconv('GB2312', 'UTF-8', $_SESSION["user_url"].'/'.strtotime(date('Y', $time).'-01-01 00:00:00').'/'.$file['basename']), iconv('GB2312', 'UTF-8', $online_path.$file['basename']))){					
+		if( !$this->oss->uploadFile(iconv('GB2312', 'UTF-8', $this->user_url[$doc_user_id].'/'.strtotime(date('Y', $time).'-01-01 00:00:00').'/'.$file['basename']), iconv('GB2312', 'UTF-8', $online_path.$file['basename']))){					
 			echo "upload doc to OSS failed.";
 			return;
 		}
@@ -277,7 +277,7 @@ pdf2swf_run:
 				$doc_ext = 0;
 				break;
 		}
-		$this->upload_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $doc_ext, $doc_cate_id, $page_width, $page_height, $page_num, intval(!empty($poly2bitmap)), $doc_dl_forbidden);
+		$this->upload_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $doc_user_id, $doc_ext, $doc_cate_id, $page_width, $page_height, $page_num, intval(!empty($poly2bitmap)), $doc_dl_forbidden);
 		header('Location:'.base_url('upload'));
 	}
 }
