@@ -79,38 +79,38 @@ class Upload extends CI_Controller {
 		$data['file'] = self::$exists_files[$file_index];
 
 //  test
-		$file_path = iconv('UTF-8', 'GB2312', self::$exists_files[$file_index]['file_dir']);
-		$file = $this->mb_pathinfo($file_path);
-		if( $file['extension'] == 'doc' || $file['extension'] == 'docx' || $file['extension'] == 'txt' ){
-			try{
-				$word = null;
-	    			$word = new COM("Word.Application") or die ("Could not initialise Word Object.");   
-				$retry = 50;
-				while( !$word && (--$retry) ){
-					sleep(100);
-				}
-				if( $retry <= 0 ){
-					echo "word application not ready!";
-					rename(self::$convert_path.$file['basename'], $file_path);
-					return;
-				}
-	   			$word->Visible = 0;   
-	    		$word->DisplayAlerts = 0; 
-				$word->Documents->Open($file_path);
-				$test= $word->ActiveDocument->content->Text; 
-				echo $test;
-				// $word->ActiveDocument->ExportAsFixedFormat(self::$convert_path.$file['filename'].'.pdf', 17, false, 0, 0, 0, 0, 7, true, true, 2, true, true, false);
-				$word->Quit(false);  
-				unset($word);
-			}catch(Exception $e){
-				if( $word ){
-	    			$word->Quit(false);  
-	    			unset($word);
-				}
-				echo $e->getMessage();
-				return;
-			}
-		}
+		// $file_path = iconv('UTF-8', 'GB2312', self::$exists_files[$file_index]['file_dir']);
+		// $file = $this->mb_pathinfo($file_path);
+		// if( $file['extension'] == 'doc' || $file['extension'] == 'docx' || $file['extension'] == 'txt' ){
+		// 	try{
+		// 		$word = null;
+	 //    			$word = new COM("Word.Application") or die ("Could not initialise Word Object.");   
+		// 		$retry = 50;
+		// 		while( !$word && (--$retry) ){
+		// 			sleep(100);
+		// 		}
+		// 		if( $retry <= 0 ){
+		// 			echo "word application not ready!";
+		// 			rename(self::$convert_path.$file['basename'], $file_path);
+		// 			return;
+		// 		}
+	 //   			$word->Visible = 0;   
+	 //    		$word->DisplayAlerts = 0; 
+		// 		$word->Documents->Open($file_path);
+		// 		$test= $word->ActiveDocument->content->Text; 
+		// 		echo $test;
+		// 		// $word->ActiveDocument->ExportAsFixedFormat(self::$convert_path.$file['filename'].'.pdf', 17, false, 0, 0, 0, 0, 7, true, true, 2, true, true, false);
+		// 		$word->Quit(false);  
+		// 		unset($word);
+		// 	}catch(Exception $e){
+		// 		if( $word ){
+	 //    			$word->Quit(false);  
+	 //    			unset($word);
+		// 		}
+		// 		echo $e->getMessage();
+		// 		return;
+		// 	}
+		// }
 //  test
 
 		$this->load->view('upload_detail_view', $data);
@@ -118,10 +118,11 @@ class Upload extends CI_Controller {
 
 	public function exec()
 	{
-		$file_index = $this->input->post('file_index');
-		$doc_cate_id = $this->input->post('doc_cate_id');
+		$file_index       = $this->input->post('file_index');
+		$doc_cate_id      = $this->input->post('doc_cate_id');
 		$doc_dl_forbidden = $this->input->post('doc_dl_forbidden');
-		$doc_user_id = $this->input->post('doc_user_id');
+		$doc_user_id      = $this->input->post('doc_user_id');
+		$doc_content      = "";
 		if( ($file_index != 0 && empty($file_index)) || empty($doc_cate_id) ){
 			echo 'paremeters wrong!';
 			return;
@@ -163,6 +164,7 @@ class Upload extends CI_Controller {
 	   			$word->Visible = 0;   
 	    		$word->DisplayAlerts = 0; 
 				$word->Documents->Open(self::$convert_path.$file['basename']);
+				$doc_content = $word->ActiveDocument->content->Text;
 				$word->ActiveDocument->ExportAsFixedFormat(self::$convert_path.$file['filename'].'.pdf', 17, false, 0, 0, 0, 0, 7, true, true, 2, true, true, false);
 				$word->Quit(false);  
 				unset($word);
@@ -315,7 +317,7 @@ pdf2swf_run:
 				$doc_ext = 0;
 				break;
 		}
-		$this->upload_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $doc_user_id, $doc_ext, $doc_cate_id, $page_width, $page_height, $page_num, intval(!empty($poly2bitmap)), $doc_dl_forbidden);
+		$this->upload_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $doc_content, $doc_user_id, $doc_ext, $doc_cate_id, $page_width, $page_height, $page_num, intval(!empty($poly2bitmap)), $doc_dl_forbidden);
 		header('Location:'.base_url('upload'));
 	}
 }
