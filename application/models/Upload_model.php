@@ -50,34 +50,6 @@ class upload_model extends CI_Model{
 			".$doc_dl_forbidden.",
 			'".$doc_url."'
 		)");
-		echo "INSERT INTO m_doc(
-			doc_url,
-			doc_title,
-			doc_content,
-			doc_user_id,
-			doc_ext_id,
-			doc_cate_id,
-			doc_width,
-			doc_height,
-			doc_page_num,
-			doc_poly2bitmap,
-			doc_dl_forbidden,
-			doc_modify_date
-		) VALUES(
-			".$doc_url.",
-			'".$doc_title."',
-			'".$doc_content."',
-			".$doc_user_id.",
-			".$doc_ext.",
-			".$doc_cate_id.",
-			".$doc_width.",
-			".$doc_height.",
-			".$doc_page_num.",
-			".$doc_poly2bitmap.",
-			".$doc_dl_forbidden.",
-			'".$doc_url."'
-		)";
-		die();
 		return true;
     }
 }
