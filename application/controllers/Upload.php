@@ -79,7 +79,8 @@ class Upload extends CI_Controller {
 		$data['file'] = self::$exists_files[$file_index];
 
 //  test
-		$file = $this->mb_pathinfo($data['file']['file_dir']);
+		$file_path = iconv('UTF-8', 'GB2312', self::$exists_files[$file_index]['file_dir']);
+		$file = $this->mb_pathinfo($file_path);
 		if( $file['extension'] == 'doc' || $file['extension'] == 'docx' || $file['extension'] == 'txt' ){
 			try{
 				$word = null;
@@ -95,7 +96,7 @@ class Upload extends CI_Controller {
 				}
 	   			$word->Visible = 0;   
 	    		$word->DisplayAlerts = 0; 
-				$word->Documents->Open($data['file']['file_dir']);
+				$word->Documents->Open($file_path);
 				$test= $word->ActiveDocument->content->Text; 
 				echo $test;
 				// $word->ActiveDocument->ExportAsFixedFormat(self::$convert_path.$file['filename'].'.pdf', 17, false, 0, 0, 0, 0, 7, true, true, 2, true, true, false);
