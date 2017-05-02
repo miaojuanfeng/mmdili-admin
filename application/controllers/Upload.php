@@ -165,6 +165,8 @@ class Upload extends CI_Controller {
 	    		$word->DisplayAlerts = 0; 
 				$word->Documents->Open(self::$convert_path.$file['basename']);
 				$doc_content = $word->ActiveDocument->content->Text;
+echo $doc_content;
+return;
 				$word->ActiveDocument->ExportAsFixedFormat(self::$convert_path.$file['filename'].'.pdf', 17, false, 0, 0, 0, 0, 7, true, true, 2, true, true, false);
 				$word->Quit(false);  
 				unset($word);
