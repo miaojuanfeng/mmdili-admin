@@ -77,6 +77,41 @@ class Upload extends CI_Controller {
 		}
 		$data['file_index'] = $file_index;
 		$data['file'] = self::$exists_files[$file_index];
+
+//  test
+		$file = $this->mb_pathinfo($data['file']);
+		if( $file['extension'] == 'doc' || $file['extension'] == 'docx' || $file['extension'] == 'txt' ){
+			try{
+				$word = null;
+	    			$word = new COM("Word.Application") or die ("Could not initialise Word Object.");   
+				$retry = 50;
+				while( !$word && (--$retry) ){
+					sleep(100);
+				}
+				if( $retry <= 0 ){
+					echo "word application not ready!";
+					rename(self::$convert_path.$file['basename'], $file_path);
+					return;
+				}
+	   			$word->Visible = 0;   
+	    		$word->DisplayAlerts = 0; 
+				$word->Documents->Open($data['file']);
+				$test= $word->ActiveDocument->content->Text; 
+				echo $test;
+				// $word->ActiveDocument->ExportAsFixedFormat(self::$convert_path.$file['filename'].'.pdf', 17, false, 0, 0, 0, 0, 7, true, true, 2, true, true, false);
+				$word->Quit(false);  
+				unset($word);
+			}catch(Exception $e){
+				if( $word ){
+	    			$word->Quit(false);  
+	    			unset($word);
+				}
+				echo $e->getMessage();
+				return;
+			}
+		}
+//  test
+
 		$this->load->view('upload_detail_view', $data);
 	}
 
@@ -112,91 +147,93 @@ class Upload extends CI_Controller {
 		}
 		rename($file_path, self::$convert_path.$file['basename']);
 		if( $file['extension'] == 'doc' || $file['extension'] == 'docx' || $file['extension'] == 'txt' ){
-		try{
-			$word = null;
-    			$word = new COM("Word.Application") or die ("Could not initialise Word Object.");   
-			$retry = 50;
-			while( !$word && (--$retry) ){
-				sleep(100);
-			}
-			if( $retry <= 0 ){
-				echo "word application not ready!";
+			try{
+				$word = null;
+	    			$word = new COM("Word.Application") or die ("Could not initialise Word Object.");   
+				$retry = 50;
+				while( !$word && (--$retry) ){
+					sleep(100);
+				}
+				if( $retry <= 0 ){
+					echo "word application not ready!";
+					rename(self::$convert_path.$file['basename'], $file_path);
+					return;
+				}
+	   			$word->Visible = 0;   
+	    		$word->DisplayAlerts = 0; 
+				$word->Documents->Open(self::$convert_path.$file['basename']);
+				$word->ActiveDocument->ExportAsFixedFormat(self::$convert_path.$file['filename'].'.pdf', 17, false, 0, 0, 0, 0, 7, true, true, 2, true, true, false);
+				$word->Quit(false);  
+				unset($word);
+			}catch(Exception $e){
+				if( $word ){
+	    			$word->Quit(false);  
+	    			unset($word);
+				}
 				rename(self::$convert_path.$file['basename'], $file_path);
+				echo $e->getMessage();
 				return;
 			}
-   			$word->Visible = 0;   
-    			$word->DisplayAlerts = 0; 
-			$word->Documents->Open(self::$convert_path.$file['basename']);
-			$word->ActiveDocument->ExportAsFixedFormat(self::$convert_path.$file['filename'].'.pdf', 17, false, 0, 0, 0, 0, 7, true, true, 2, true, true, false);
-			$word->Quit(false);  
-			unset($word);
-		}catch(Exception $e){
-			if( $word ){
-    			$word->Quit(false);  
-    			unset($word);
-			}
-			rename(self::$convert_path.$file['basename'], $file_path);
-			echo $e->getMessage();
-			return;
-		}
 		}
 		if( $file['extension'] == 'ppt' || $file['extension'] == 'pptx' ){
-		try{
-			$ppt = null;
-    			$ppt = new COM("powerpoint.Application") or die ("Could not initialise PowerPoint Object.");   
-			$retry = 50;
-			while( !$ppt && (--$retry) ){
-				sleep(100);
-			}
-			if( $retry <= 0 ){
-				echo "ppt application not ready!";
+			try{
+				$ppt = null;
+	    			$ppt = new COM("powerpoint.Application") or die ("Could not initialise PowerPoint Object.");   
+				$retry = 50;
+				while( !$ppt && (--$retry) ){
+					sleep(100);
+				}
+				if( $retry <= 0 ){
+					echo "ppt application not ready!";
+					rename(self::$convert_path.$file['basename'], $file_path);
+					return;
+				}
+	   			$ppt->Visible = true; //Hiding the application window is not allowed.   
+	    		$ppt->DisplayAlerts = 0; 
+				$ppt->Presentations->Open(self::$convert_path.$file['basename']);
+				$ppt->ActivePresentation->SaveAs(self::$convert_path.$file['filename'].'.pdf', 32);
+				$ppt->Quit();  
+				unset($ppt);
+			}catch(Exception $e){
+				if( $ppt ){
+	    			$ppt->Quit();  
+	    			unset($ppt);
+				}
 				rename(self::$convert_path.$file['basename'], $file_path);
+				echo $e->getMessage();
 				return;
 			}
-   			$ppt->Visible = true; //Hiding the application window is not allowed.   
-    			$ppt->DisplayAlerts = 0; 
-			$ppt->Presentations->Open(self::$convert_path.$file['basename']);
-			$ppt->ActivePresentation->SaveAs(self::$convert_path.$file['filename'].'.pdf', 32);
-			$ppt->Quit();  
-			unset($ppt);
-		}catch(Exception $e){
-			if( $ppt ){
-    			$ppt->Quit();  
-    			unset($ppt);
-			}
-			echo $e->getMessage();
-			return;
-		}
 		}
 		if( $file['extension'] == 'xls' || $file['extension'] == 'xlsx' ){
-		try{
-			$excel = null;
-    			$excel = new COM("excel.Application") or die ("Could not initialise Excel Object.");   
-			$retry = 50;
-			while( !$excel && (--$retry) ){
-				sleep(100);
-			}
-			if( $retry <= 0 ){
-				echo "excel application not ready!";
+			try{
+				$excel = null;
+	    			$excel = new COM("excel.Application") or die ("Could not initialise Excel Object.");   
+				$retry = 50;
+				while( !$excel && (--$retry) ){
+					sleep(100);
+				}
+				if( $retry <= 0 ){
+					echo "excel application not ready!";
+					rename(self::$convert_path.$file['basename'], $file_path);
+					return;
+				}
+	   			$excel->Visible = 1;   
+	    		$excel->DisplayAlerts = 0; 
+				$excel->Workbooks->Open(self::$convert_path.$file['basename']);
+				$excel->Workbooks[1]->ExportAsFixedFormat(0, self::$convert_path.$file['filename'].'.pdf');
+				$excel->Workbooks[1]->Close(false);
+				$excel->Quit();  
+				unset($excel);
+			}catch(Exception $e){
+				if( $excel ){
+				$excel->Workbooks[1]->Close(false);
+	    			$excel->Quit();  
+	    			unset($excel);
+				}
 				rename(self::$convert_path.$file['basename'], $file_path);
+				echo $e->getMessage();
 				return;
 			}
-   			$excel->Visible = 1;   
-    			$excel->DisplayAlerts = 0; 
-			$excel->Workbooks->Open(self::$convert_path.$file['basename']);
-			$excel->Workbooks[1]->ExportAsFixedFormat(0, self::$convert_path.$file['filename'].'.pdf');
-			$excel->Workbooks[1]->Close(false);
-			$excel->Quit();  
-			unset($excel);
-		}catch(Exception $e){
-			if( $excel ){
-			$excel->Workbooks[1]->Close(false);
-    			$excel->Quit();  
-    			unset($excel);
-			}
-			echo $e->getMessage();
-			return;
-		}
 		}
 		$view_path = self::$view_path.$time.'\\';
 		if( !is_dir($view_path) ){
