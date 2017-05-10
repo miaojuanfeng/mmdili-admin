@@ -39,7 +39,7 @@ class upload_model extends CI_Model{
 		) VALUES(
 			".$doc_url.",
 			'".$doc_title."',
-			'".$doc_content."',
+			'".$this->db->escape_str($doc_content)."',
 			".$doc_user_id.",
 			".$doc_ext.",
 			".$doc_cate_id.",

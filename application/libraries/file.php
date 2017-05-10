@@ -54,4 +54,19 @@ class File{
     
     } 
  }
+
+ public function count_file($path)
+	{
+		$result = 0;
+		if (is_dir($path) && $handle = opendir($path)){
+				while (FALSE !== ($file = readdir($handle))) 
+				{
+					$real_path = str_replace(DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $path.DIRECTORY_SEPARATOR.$file);
+					if( is_file($real_path) ){
+						$result++;
+					}
+				}
+		}
+		return $result;
+	}
 }

@@ -195,6 +195,22 @@ class Upload extends CI_Controller {
 	   			$ppt->Visible = true; //Hiding the application window is not allowed.   
 	    		$ppt->DisplayAlerts = 0; 
 				$ppt->Presentations->Open(self::$convert_path.$file['basename']);
+$doc_content = "";
+foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
+	foreach($v1->Shapes as $k2 => $v2 ){
+		if( $v2->HasTextFrame && $v2->TextFrame->HasText ){
+			$doc_content .= $v2->TextFrame->TextRange->Text." ";
+		}
+		if( $v2->HasTable ){
+			foreach($v2->Table->Rows as $k3 => $v3){
+				foreach($v2->Table->Columns as $k4 => $v4){
+					$doc_content .= $v2->Table->Cell($k3+1, $k4+1)->Shape->TextFrame->TextRange->Text." ";
+				}
+			}
+		}
+	}
+}
+$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
 				$ppt->ActivePresentation->SaveAs(self::$convert_path.$file['filename'].'.pdf', 32);
 				$ppt->Quit();  
 				unset($ppt);
@@ -240,8 +256,12 @@ class Upload extends CI_Controller {
 			}
 		}
 		$view_path = self::$view_path.$time.'\\';
+		$view_optimizer_path = self::$view_path.$time.'_o'.'\\';
 		if( !is_dir($view_path) ){
 			mkdir($view_path, 0777, true);
+		}
+		if( !is_dir($view_optimizer_path) ){
+			mkdir($view_optimizer_path, 0777, true);
 		}
 
 		$page_num = 0;
@@ -261,7 +281,7 @@ class Upload extends CI_Controller {
 		}
 		$poly2bitmap = '';
 pdf2swf_run:
-		$exec = "C:\MJF\SWFTools\pdf2swf.exe \"".self::$convert_path.$file['filename'].".pdf\" -o ".$view_path."% -T 9 -j 20 -s zoom=15 -s disablelinks".$poly2bitmap;
+		$exec = "C:\MJF\SWFTools\pdf2swf.exe \"".self::$convert_path.$file['filename'].".pdf\" -o ".$view_path."%.swf -T 9 -j 20 -s disablelinks".$poly2bitmap;
 		exec($exec, $swf_info);
 		foreach($swf_info as $k => $v){
 			//log_message('error', $v);
@@ -274,8 +294,27 @@ pdf2swf_run:
 		if( $file['extension'] != 'pdf' ){
 			unlink(self::$convert_path.$file['filename'].".pdf");
 		}
+		
+		$fo2 = 'C:\MJF\fo2\fo2.exe';
+		for($i=1;$i<=$page_num;$i++){
+			$fo2 .= ' /f "'.$view_path.$i.'.swf" /t "'.$view_optimizer_path.$i.'"';
+		}
+		$fo2 .= ' /o mmdili';
+		pclose(popen("start /B ". $fo2, "r"));
+		$retry = 60;
+		while( $retry-- ){
+			if( $this->file->count_file($view_optimizer_path) == $page_num ){
+				break;
+			}
+			sleep(1);
+		}
+                exec("taskkill /f /im fo2.exe");
+		if( $retry <= 0 ){
+			echo "fo2 make files failed";
+			die();
+		}
 
-		if( !$this->oss->uploadDir($this->user_url[$doc_user_id].'/'.$time, $view_path)){
+		if( !$this->oss->uploadDir($this->user_url[$doc_user_id].'/'.$time, $view_optimizer_path)){
 			echo "upload swf to OSS failed.";
 			return;
 		}
@@ -284,11 +323,13 @@ pdf2swf_run:
 		if( !is_dir($online_path) ){
 			mkdir($online_path, 0777, true);
 		}
-		rename(self::$convert_path.$file['basename'], $online_path.$file['basename']);
-		if( !$this->oss->uploadFile(iconv('GB2312', 'UTF-8', $this->user_url[$doc_user_id].'/'.strtotime(date('Y', $time).'-01-01 00:00:00').'/'.$file['basename']), iconv('GB2312', 'UTF-8', $online_path.$file['basename']))){					
+		
+		if( !$this->oss->uploadFile(iconv('GB2312', 'UTF-8', $this->user_url[$doc_user_id].'/'.strtotime(date('Y', $time).'-01-01 00:00:00').'/'.$file['basename']), iconv('GB2312', 'UTF-8', self::$convert_path.$file['basename'])) ){					
 			echo "upload doc to OSS failed.";
 			return;
 		}
+		rename(self::$convert_path.$file['basename'], $online_path.$file['basename']);
+
 		switch($file['extension']){
 			case 'doc':
 				$doc_ext = 1;
