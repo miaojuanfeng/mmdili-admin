@@ -41,31 +41,34 @@ class Upload extends CI_Controller {
 	    return $ret;
 	}
 
-        private function trim_whitespace($str){
+    private function trim_whitespace($str)
+    {
 		// First remove the leading/trailing whitespace 
-		//È¥µô¿ªÊ¼ºÍ½áÊøµÄ¿Õ°× 
-		$str = trim($str);
+		//å»æ‰å¼€å§‹å’Œç»“æŸçš„ç©ºç™½ 
+		$str = trim($str); 
 
-		$str = preg_replace('/¡¡(?=¡¡)/', ' ', $str);
+		$str = preg_replace('/ã€€(?=ã€€)/', ' ', $str);
 		$str = preg_replace('/(?=)/', ' ', $str);
 		$str = preg_replace('/(?=)/', ' ', $str);
 
-		$str = preg_replace('/¡¡/', ' ', $str);
+		$str = preg_replace('/ã€€/', ' ', $str);
 		$str = preg_replace('//', ' ', $str);
 		$str = preg_replace('//', ' ', $str);
 
 		$str = preg_replace('/_(?=_)/', '', $str);
 
 		// Now remove any doubled-up whitespace 
-		//È¥µô¸úËæ±ğµÄ¼·ÔÚÒ»¿éµÄ¿Õ°× 
+		//å»æ‰è·Ÿéšåˆ«çš„æŒ¤åœ¨ä¸€å—çš„ç©ºç™½
 		$str = preg_replace('/\s(?=\s)/', '', $str);
 
+
+
 		// Finally, replace any non-space whitespace, with a space 
-		//×îºó£¬È¥µô·Çspace µÄ¿Õ°×£¬ÓÃÒ»¸ö¿Õ¸ñ´úÌæ 
-		$str = preg_replace('/[\n\r\t]/', ' ', $str);
+		//æœ€åï¼Œå»æ‰éspace çš„ç©ºç™½ï¼Œç”¨ä¸€ä¸ªç©ºæ ¼ä»£æ›¿ 
+		$str = preg_replace('/[\n\r\t]/', ' ', $str); 
 
 		return $str;
-        }
+    }
 
 	function __construct()
     {
