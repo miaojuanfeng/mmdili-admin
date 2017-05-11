@@ -41,6 +41,32 @@ class Upload extends CI_Controller {
 	    return $ret;
 	}
 
+        private function trim_whitespace($str){
+		// First remove the leading/trailing whitespace 
+		//去掉开始和结束的空白 
+		$str = trim($str);
+
+		$str = preg_replace('/　(?=　)/', ' ', $str);
+		$str = preg_replace('/(?=)/', ' ', $str);
+		$str = preg_replace('/(?=)/', ' ', $str);
+
+		$str = preg_replace('/　/', ' ', $str);
+		$str = preg_replace('//', ' ', $str);
+		$str = preg_replace('//', ' ', $str);
+
+		$str = preg_replace('/_(?=_)/', '', $str);
+
+		// Now remove any doubled-up whitespace 
+		//去掉跟随别的挤在一块的空白 
+		$str = preg_replace('/\s(?=\s)/', '', $str);
+
+		// Finally, replace any non-space whitespace, with a space 
+		//最后，去掉非space 的空白，用一个空格代替 
+		$str = preg_replace('/[\n\r\t]/', ' ', $str);
+
+		return $str;
+        }
+
 	function __construct()
     {
     	parent::__construct();
@@ -165,7 +191,6 @@ class Upload extends CI_Controller {
 	    		$word->DisplayAlerts = 0; 
 				$word->Documents->Open(self::$convert_path.$file['basename']);
 				$doc_content = $word->ActiveDocument->content->Text;
-				$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
 				$word->ActiveDocument->ExportAsFixedFormat(self::$convert_path.$file['filename'].'.pdf', 17, false, 0, 0, 0, 0, 7, true, true, 2, true, true, false);
 				$word->Quit(false);  
 				unset($word);
@@ -195,7 +220,6 @@ class Upload extends CI_Controller {
 	   			$ppt->Visible = true; //Hiding the application window is not allowed.   
 	    		$ppt->DisplayAlerts = 0; 
 				$ppt->Presentations->Open(self::$convert_path.$file['basename']);
-$doc_content = "";
 foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 	foreach($v1->Shapes as $k2 => $v2 ){
 		if( $v2->HasTextFrame && $v2->TextFrame->HasText ){
@@ -210,7 +234,6 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 		}
 	}
 }
-$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
 				$ppt->ActivePresentation->SaveAs(self::$convert_path.$file['filename'].'.pdf', 32);
 				$ppt->Quit();  
 				unset($ppt);
@@ -330,6 +353,8 @@ pdf2swf_run:
 		}
 		rename(self::$convert_path.$file['basename'], $online_path.$file['basename']);
 
+		$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
+		$doc_content = $this->trim_whitespace($doc_content);
 		switch($file['extension']){
 			case 'doc':
 				$doc_ext = 1;
