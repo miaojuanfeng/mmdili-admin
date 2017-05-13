@@ -10,7 +10,13 @@ class Test extends CI_Controller {
 	}
 
 	function o(){
-pclose(popen("start /B ". 'C:\MJF\fo2\fo2.exe /f "c:\2013doc\1.swf" /t "c:\2013doc\1_o.swf" /o mmdili', "r"));
+		$fo2 = 'C:\MJF\fo2\fo2.exe';
+		for($i=1;$i<=11;$i++){
+			$fo2 .= ' /f "C:\\2013doc\\'.$i.'.swf" /t "C:\\2013doc\\'.$i.'"';
+		}
+		$fo2 .= ' /o mmdili';
+echo $fo2;
+		pclose(popen("start /B ". $fo2, "r"));
 	}
 
 	function fo2(){
