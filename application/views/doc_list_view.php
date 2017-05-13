@@ -29,3 +29,24 @@
 	</div>
 </body>
 </html>
+<script type="text/javascript">
+	.pn .pn-container {
+  float: right; }
+  .pn .pn-container span {
+    float: left;
+    margin-left: 10px;
+    font-size: 14px;
+    line-height: 24px; }
+    .pn .pn-container span a {
+      display: block;
+      padding: 2px 10px;
+      color: #747474;
+      background-color: #EDF2F8; }
+      .pn .pn-container span a:hover {
+        background-color: #a4bddb;
+        color: #FFF; }
+    .pn .pn-container span.current {
+      padding: 2px 10px;
+      background-color: #a4bddb;
+      color: #FFF; }
+</script>
