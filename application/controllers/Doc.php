@@ -18,6 +18,9 @@ class Doc extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+	private static $online_path = 'C:\MJF\web\doc\online\\';
+
 	function __construct()
     {
     	parent::__construct();
@@ -123,6 +126,7 @@ class Doc extends CI_Controller {
 
 		if( $doc_id ){
 			if( $update_doc_content ){
+				$file_path = iconv('UTF-8', 'GB2312', $file_path);
 				$file = $this->mb_pathinfo($file_path);
 				if( $file['extension'] == 'doc' || $file['extension'] == 'docx' || $file['extension'] == 'txt' ){
 					try{
@@ -134,14 +138,12 @@ class Doc extends CI_Controller {
 						}
 						if( $retry <= 0 ){
 							echo "word application not ready!";
-							rename(self::$convert_path.$file['basename'], $file_path);
 							return;
 						}
 			   			$word->Visible = 0;   
 			    		$word->DisplayAlerts = 0; 
 						$word->Documents->Open(self::$convert_path.$file['basename']);
 						$doc_content = $word->ActiveDocument->content->Text;
-						$word->ActiveDocument->ExportAsFixedFormat(self::$convert_path.$file['filename'].'.pdf', 17, false, 0, 0, 0, 0, 7, true, true, 2, true, true, false);
 						$word->Quit(false);  
 						unset($word);
 					}catch(Exception $e){
@@ -149,7 +151,6 @@ class Doc extends CI_Controller {
 			    			$word->Quit(false);  
 			    			unset($word);
 						}
-						rename(self::$convert_path.$file['basename'], $file_path);
 						echo $e->getMessage();
 						return;
 					}
