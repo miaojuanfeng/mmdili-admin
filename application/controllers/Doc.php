@@ -46,6 +46,8 @@ class Doc extends CI_Controller {
 		$str = preg_replace('/_(?=_)/', '', $str);
 		$str = preg_replace('/…(?=…)/', '', $str);
 		$str = preg_replace('/\?(?=\?)/', '', $str);
+		$str = preg_replace('/\? (?=\? )/', '', $str);
+		$str = preg_replace('/\？(?=\？)/', '', $str);
 		$str = preg_replace('/\？ (?=\？ )/', '', $str);
 
 		// Now remove any doubled-up whitespace 
