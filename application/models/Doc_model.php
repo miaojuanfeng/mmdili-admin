@@ -49,7 +49,7 @@ class doc_model extends CI_Model{
     		doc_cate_id = ".$doc_cate_id.",
     		doc_user_id = ".$doc_user_id.",";
     	if( $update_doc_content ){
-    		$sql .= "doc_content = '".$doc_content."',";
+    		$sql .= "doc_content = '".$this->db->escape_str($doc_content)."',";
     	}
     	$sql .=	"doc_dl_forbidden = ".$doc_dl_forbidden.",
     		doc_modify_date = ".time()."  
