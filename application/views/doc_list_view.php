@@ -12,7 +12,7 @@
 		<div class="content">
 			<div class="list">
 				<?php
-				foreach($doc as $k => $v){
+				foreach($doc['doc'] as $k => $v){
 				?>
 				<div class="item upload">
 					<a class="upload-file" href="<?=base_url('upload/detail/'.$k)?>">
