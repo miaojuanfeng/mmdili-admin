@@ -49,8 +49,8 @@ class Doc extends CI_Controller {
 		$str = preg_replace('/\? (?=\? )/', '', $str);
 		$str = preg_replace('/\？(?=\？)/', '', $str);
 		$str = preg_replace('/\？ (?=\？ )/', '', $str);
-		$str = preg_replace('/、(?=、)/', '', $str);
-		$str = preg_replace('/、 (?=、 )/', '', $str);
+		$str = preg_replace('/\、(?=\、)/', '', $str);
+		$str = preg_replace('/\、 (?=\、 )/', '', $str);
 
 		// Now remove any doubled-up whitespace 
 		//去掉跟随别的挤在一块的空白
