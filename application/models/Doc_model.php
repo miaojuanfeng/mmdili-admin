@@ -51,7 +51,8 @@ class doc_model extends CI_Model{
     	if( $update_doc_content ){
     		$sql .= "doc_content = '".$doc_content."',";
     	}
-    	$sql .=	"doc_dl_forbidden = ".$doc_dl_forbidden." 
+    	$sql .=	"doc_dl_forbidden = ".$doc_dl_forbidden.",
+    		doc_modify_date = ".time()."  
     		WHERE doc_id = ".$doc_id;
     	$this->db->query($sql);
     	if( $this->db->affected_rows() ){
