@@ -61,10 +61,12 @@ class Doc extends CI_Controller {
 		
 		$detail = $this->doc_model->get_detail($doc_id);
 
+		$data['doc']['doc_id'] = $detail['doc_id'];
 		$data['doc']['doc_title'] = $detail['doc_title'];
 		$data['doc']['doc_desc'] = $detail['doc_desc'];
 		$data['doc']['doc_cate_id'] = $detail['doc_cate_id'];
 		$data['doc']['doc_user_id'] = $detail['doc_user_id'];
+		$data['doc']['doc_dl_forbidden'] = $detail['doc_dl_forbidden'];
 
 		$this->load->view('doc_detail_view', $data);
 	}
