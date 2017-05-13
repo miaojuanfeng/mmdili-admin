@@ -70,5 +70,19 @@ class Doc extends CI_Controller {
 
 		$this->load->view('doc_detail_view', $data);
 	}
+
+	public function update(){
+		$doc_id = $this->input->post('doc_id');
+		$doc_cate_id = $this->input->post('doc_cate_id');
+		$doc_user_id = $this->input->post('doc_user_id');
+		$doc_dl_forbidden = $this->input->post('doc_dl_forbidden');
+
+		if( $doc_id ){
+			if( $this->doc_model->update($doc_id, $doc_cate_id, $doc_user_id, $doc_dl_forbidden) ){
+				redirect(base_url('doc/detail/'.$doc_id));
+			}
+		}
+		redirect(base_url('doc'));
+	}
 }
 ?>

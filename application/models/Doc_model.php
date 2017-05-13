@@ -39,4 +39,17 @@ class doc_model extends CI_Model{
     	$query = $this->db->query($sql);
     	return $query->row_array();
     }
+
+    public function update($doc_id, $doc_cate_id, $doc_user_id, $doc_dl_forbidden){
+    	$sql = "UPDATE m_doc SET 
+    		doc_cate_id = ".$doc_cate_id.",
+    		doc_user_id = ".$doc_user_id.",
+    		doc_dl_forbidden = ".$doc_dl_forbidden." 
+    		WHERE doc_id = ".$doc_id;
+    	$this->db->query($sql);
+    	if( $this->db->affected_rows() ){
+    		return true;
+    	}
+    	return false;
+    }
 }
