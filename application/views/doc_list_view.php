@@ -16,7 +16,7 @@
 				?>
 				<div class="item upload">
 					<a class="upload-file" href="<?=base_url('upload/detail/'.$k)?>">
-						<div class="file-name"><?=$v['file_name']?></div>
+						<div class="file-name"><?=$v['doc_title']?></div>
 						<!-- <div class="file-dir"><?=$v['file_dir']?></div> -->
 					</a>
 				</div>

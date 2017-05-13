@@ -29,7 +29,7 @@ class Doc extends CI_Controller {
     	// 每页显示数量
 		$limit = 10;
 		// 总记录数量
-		$total = $this->doc_model->get_count($cate_id);
+		$total = $this->doc_model->get_count();
 		// 总页数
 		$page = ceil($total/$limit);
 		/*
@@ -46,7 +46,7 @@ class Doc extends CI_Controller {
 		// 计算偏移量
 		$offset = ($pn - 1) * $limit;
 		//
-		$data['doc']['doc'] = $this->cate_model->get_list($cate_id, $limit, $offset);
+		$data['doc']['doc'] = $this->doc_model->get_list($limit, $offset);
 
 		$cii_pagination['base_url'] = base_url('cate/'.$cate_url.'/');
 		$cii_pagination['per_page'] = $limit;
