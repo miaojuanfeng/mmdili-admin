@@ -37,6 +37,9 @@
 								<option value="2" <?php if($doc['doc_user_id']==2) echo "selected='selected'"; ?>>MCMM</option>
 							</select>
 						</div>
+						<div class="info-item">
+							<input type="checkbox" name="update_doc_content" value="1">更新文档内容
+						</div>
 						<div class="upload-detail-act">
 							<button type="submit" class="exec">Update</button>
 						</div>
