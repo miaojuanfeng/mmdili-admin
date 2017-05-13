@@ -56,5 +56,17 @@ class Doc extends CI_Controller {
 		//
 		$this->load->view('doc_list_view', $data);
     }
+
+    public function detail($doc_id){
+		
+		$detail = $this->doc_model->get_detail($doc_id);
+
+		$data['doc']['doc_title'] = $detail['doc_title'];
+		$data['doc']['doc_desc'] = $detail['doc_desc'];
+		$data['doc']['doc_cate_id'] = $detail['doc_cate_id'];
+		$data['doc']['doc_user_id'] = $detail['doc_user_id'];
+
+		$this->load->view('doc_detail_view', $data);
+	}
 }
 ?>

@@ -15,9 +15,8 @@
 				foreach($doc['doc'] as $k => $v){
 				?>
 				<div class="item upload">
-					<a class="upload-file" href="<?=base_url('upload/detail/'.$k)?>">
+					<a class="upload-file" href="<?=base_url('doc/detail/'.$v['doc_id'])?>">
 						<div class="file-name"><?=$v['doc_title']?></div>
-						<!-- <div class="file-dir"><?=$v['file_dir']?></div> -->
 					</a>
 				</div>
 				<?php
