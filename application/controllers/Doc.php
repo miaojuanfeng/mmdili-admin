@@ -122,7 +122,7 @@ class Doc extends CI_Controller {
 		$doc_dl_forbidden = $this->input->post('doc_dl_forbidden');
 		$update_doc_content = $this->input->post('update_doc_content');
 		$doc_content = "";
-		$file_path = $this->input->post('file_path');
+		$file_path = self::$online_path.$this->input->post('file_path');
 
 		if( $doc_id ){
 			if( $update_doc_content ){
@@ -142,7 +142,7 @@ class Doc extends CI_Controller {
 						}
 			   			$word->Visible = 0;   
 			    		$word->DisplayAlerts = 0; 
-						$word->Documents->Open(self::$online_path.$file['basename']);
+						$word->Documents->Open($file_path);
 						$doc_content = $word->ActiveDocument->content->Text;
 						$word->Quit(false);  
 						unset($word);
