@@ -20,7 +20,7 @@ class doc_model extends CI_Model{
     }
 	
 	public function get_list($limit, $offset){
-    	$query = $this->db->query("SELECT doc_url, doc_title, doc_page_num FROM m_doc WHERE doc_deleted = 0 ORDER BY doc_id DESC LIMIT ".$limit." OFFSET ".$offset);
+    	$query = $this->db->query("SELECT doc_id, doc_title, doc_page_num FROM m_doc WHERE doc_deleted = 0 ORDER BY doc_id DESC LIMIT ".$limit." OFFSET ".$offset);
     	return $query->result_array();
     }
 
