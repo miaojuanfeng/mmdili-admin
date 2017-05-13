@@ -21,6 +21,7 @@ class Doc extends CI_Controller {
 	function __construct()
     {
     	parent::__construct();
+    	$this->load->helper('url');
     	$this->load->model('doc_model');
     	$this->cii_pagination = new cii_pagination();
     }
