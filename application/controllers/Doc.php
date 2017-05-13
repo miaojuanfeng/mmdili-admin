@@ -142,7 +142,7 @@ class Doc extends CI_Controller {
 						}
 			   			$word->Visible = 0;   
 			    		$word->DisplayAlerts = 0; 
-						$word->Documents->Open(self::$convert_path.$file['basename']);
+						$word->Documents->Open(self::$online_path.$file['basename']);
 						$doc_content = $word->ActiveDocument->content->Text;
 						$word->Quit(false);  
 						unset($word);
