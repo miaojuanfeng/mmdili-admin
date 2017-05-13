@@ -4,7 +4,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-class upload_model extends CI_Model{
+class doc_model extends CI_Model{
     //put your code here
     
     function __construct()
