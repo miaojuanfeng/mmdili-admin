@@ -31,7 +31,7 @@
 							</select>
 						</div>
 						<div class="info-item">
-							<input type="hidden" name="doc_user_id" value="$doc['doc_user_id']" />
+							<input type="hidden" name="doc_user_id" value="<?=$doc['doc_user_id']?>" />
 							<select name="doc_user_id" disabled="disabled">
 								<option value="1" <?php if($doc['doc_user_id']==1) echo "selected='selected'"; ?>>M.J.F</option>
 								<option value="2" <?php if($doc['doc_user_id']==2) echo "selected='selected'"; ?>>MCMM</option>
