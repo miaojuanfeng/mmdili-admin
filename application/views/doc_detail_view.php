@@ -11,7 +11,7 @@
 		<?php require_once "header_view.php" ?>
 		<div class="content">
 			<form action="<?=base_url('doc/update')?>" method="post" class="list">
-				<input type="hidden" name="doc_id" value="<?=$doc_id?>" />
+				<input type="hidden" name="doc_id" value="<?=$doc['doc_id']?>" />
 				<div class="item upload">
 					<div class="upload-detail-file ">
 						<div class="file-name"><?=$doc['doc_title']?></div>
