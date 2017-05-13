@@ -124,8 +124,6 @@ class Doc extends CI_Controller {
 		$doc_content = "";
 		$file_path = self::$online_path.$this->input->post('file_path');
 
-		echo $file_path;return;
-
 		if( $doc_id ){
 			if( $update_doc_content ){
 				$file_path = iconv('UTF-8', 'GB2312', $file_path);
