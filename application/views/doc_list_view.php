@@ -24,6 +24,7 @@
 				}
 				?>
 			</div>
+			<?=$this->cii_pagination->create_links($this->uri->segment(3))?>
 		</div>
 	</div>
 </body>

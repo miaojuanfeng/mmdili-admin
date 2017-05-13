@@ -49,7 +49,7 @@ class Doc extends CI_Controller {
 		//
 		$data['doc']['doc'] = $this->doc_model->get_list($limit, $offset);
 
-		$cii_pagination['base_url'] = base_url('cate/'.$cate_url.'/');
+		$cii_pagination['base_url'] = base_url('doc/index/');
 		$cii_pagination['per_page'] = $limit;
 		$cii_pagination['total_rows'] = $total;
 		$this->cii_pagination->initialize($cii_pagination);
