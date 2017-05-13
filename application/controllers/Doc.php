@@ -131,7 +131,7 @@ class Doc extends CI_Controller {
 				if( $file['extension'] == 'doc' || $file['extension'] == 'docx' || $file['extension'] == 'txt' ){
 					try{
 						$word = null;
-			    			$word = new COM("Word.Application") or die ("Could not initialise Word Object.");   
+			    		$word = new COM("Word.Application") or die ("Could not initialise Word Object.");   
 						$retry = 50;
 						while( !$word && (--$retry) ){
 							sleep(100);
