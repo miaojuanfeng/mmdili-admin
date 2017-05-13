@@ -29,7 +29,7 @@
 	</div>
 </body>
 </html>
-<script type="text/javascript">
+<style type="text/css">
 	.pn .pn-container {
   float: right; }
   .pn .pn-container span {
@@ -49,4 +49,4 @@
       padding: 2px 10px;
       background-color: #a4bddb;
       color: #FFF; }
-</script>
+</style>
