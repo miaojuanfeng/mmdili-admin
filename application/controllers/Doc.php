@@ -160,6 +160,46 @@ class Doc extends CI_Controller {
 						return;
 					}
 				}
+				if( $file['extension'] == 'ppt' || $file['extension'] == 'pptx' ){
+					try{
+						$ppt = null;
+			    			$ppt = new COM("powerpoint.Application") or die ("Could not initialise PowerPoint Object.");   
+						$retry = 50;
+						while( !$ppt && (--$retry) ){
+							sleep(100);
+						}
+						if( $retry <= 0 ){
+							echo "ppt application not ready!";
+							return;
+						}
+			   			$ppt->Visible = true; //Hiding the application window is not allowed.   
+			    		$ppt->DisplayAlerts = 0; 
+						$ppt->Presentations->Open($file_path);
+						foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
+							foreach($v1->Shapes as $k2 => $v2 ){
+								if( $v2->HasTextFrame && $v2->TextFrame->HasText ){
+									$doc_content .= $v2->TextFrame->TextRange->Text." ";
+								}
+								if( $v2->HasTable ){
+									foreach($v2->Table->Rows as $k3 => $v3){
+										foreach($v2->Table->Columns as $k4 => $v4){
+											$doc_content .= $v2->Table->Cell($k3+1, $k4+1)->Shape->TextFrame->TextRange->Text." ";
+										}
+									}
+								}
+							}
+						}
+						$ppt->Quit();  
+						unset($ppt);
+					}catch(Exception $e){
+						if( $ppt ){
+			    			$ppt->Quit();  
+			    			unset($ppt);
+						}
+						echo $e->getMessage();
+						return;
+					}
+				}
 				$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
 				$doc_content = $this->trim_whitespace($doc_content);
 			}
