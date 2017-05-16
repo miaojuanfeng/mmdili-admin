@@ -55,16 +55,17 @@
 </style>
 <script type="text/javascript">
 	$('.load-view').click(function(){
-		if( $(this).next('.view-detail').is(':hidden') ){
-			$(this).next('.view-detail').show();
+		var mine = $(this);
+		if( mine.next('.view-detail').is(':hidden') ){
+			mine.next('.view-detail').show();
 
-			$(this).next('.view-detail').children('.view-loading').show();
+			mine.next('.view-detail').children('.view-loading').show();
 			$.post('<?=base_url('doc/load')?>', {user_url: '1490168888', date_url: '1491409463'}, function(data){
 				console.log(data);
-				$(this).next('.view-detail').child('.view-loading').hide();
+				mine.next('.view-detail').children('.view-loading').hide();
 			});
 		}else{
-			$(this).next('.view-detail').hide();
+			mine.next('.view-detail').hide();
 		}
 	});
 </script>
