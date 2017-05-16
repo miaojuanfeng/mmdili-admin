@@ -62,9 +62,9 @@
 			mine.next('.view-detail').children('.view-loading').show();
 			$.post('<?=base_url('doc/load')?>', {user_url: '1490168888', date_url: '1491409463'}, function(data){
 				data = $.parseJSON(data);
-				console.log(data);
 				mine.next('.view-detail').children('.view-loading').hide();
-				var html = '<table width="100%">';
+				var html = '';
+				html = '<table width="100%">';
 				for(var i=0;i<data.length;i++){
 					html += '<tr>';
 					html += 	'<td width="33%" style="border-top:1px solid #eee;padding:10px;">'+data[i].key+'</td>';
