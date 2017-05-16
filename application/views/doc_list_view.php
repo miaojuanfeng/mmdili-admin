@@ -55,7 +55,7 @@
 </style>
 <script type="text/javascript">
 	$('.load-view').click(function(){
-		if( $(this).next('.view-detail').is(":visible") ){
+		if( $(this).next('.view-detail').is(":show") ){
 			$(this).next('.view-detail').hide();
 		}else{
 			$(this).next('.view-detail').show();
