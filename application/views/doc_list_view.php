@@ -72,13 +72,13 @@
 					total += data[i].size;
 					html += '<tr>';
 					html += 	'<td width="33%" style="border-top:1px solid #eee;padding:10px;">'+data[i].key+'</td>';
-					html += 	'<td width="33%" style="border-top:1px solid #eee;padding:10px;">'+data[i].size+'</td>';
+					html += 	'<td width="33%" style="border-top:1px solid #eee;padding:10px;">'+data[i].size.toFixed(3)+'KB</td>';
 					html += 	'<td width="33%" style="border-top:1px solid #eee;padding:10px;">'+data[i].modify+'</td>';
 					html += '</tr>';
 				}
 					html += '<tr>';
-					html += 	'<td width="33%" style="border-top:1px solid #eee;padding:10px;">'+data.length+'</td>';
-					html += 	'<td width="33%" style="border-top:1px solid #eee;padding:10px;">'+total+'</td>';
+					html += 	'<td width="33%" style="border-top:1px solid #eee;padding:10px;">'+data.length+'个文件</td>';
+					html += 	'<td width="33%" style="border-top:1px solid #eee;padding:10px;">'+total.toFixed(3)+'KB</td>';
 					html += 	'<td width="33%" style="border-top:1px solid #eee;padding:10px;"></td>';
 					html += '</tr>';
 				html += '</table>';
