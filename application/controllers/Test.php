@@ -7,6 +7,7 @@ class Test extends CI_Controller {
     	{
     	parent::__construct();
 	$this->load->library('file');
+	$this->load->library('oss');
 	}
 
 	function o(){
@@ -39,6 +40,10 @@ pclose(popen("start /B ". 'C:\MJF\fo2\fo2.exe /f "c:\2013doc\1.swf" /t "c:\2013d
 function fn()
 {
 	echo var_dump($this->file->count_file('C:\MJF\web\doc\view\1494245507_o\\'));
+}
+
+function lv(){
+	$this->oss->listView();
 }
 
 	/*function ppt(){
