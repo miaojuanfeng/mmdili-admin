@@ -45,6 +45,10 @@ class Oss{
 	}
 
 	function listView(){
+		$prefix = '1490168888/1491409463/';
+	    $delimiter = '/';
+	    $nextMarker = '';
+	    $maxkeys = 30;
 		$options = array(
             'delimiter' => $delimiter,
             'prefix' => $prefix,
