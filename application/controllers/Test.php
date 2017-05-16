@@ -49,7 +49,7 @@ function fn()
 }
 
 function lv(){
-	$this->oss->listView();
+	var_dump($this->oss->listView());
 }
 
 	/*function ppt(){
