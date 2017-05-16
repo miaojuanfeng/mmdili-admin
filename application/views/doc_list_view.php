@@ -61,7 +61,7 @@
 			$(this).next('.view-detail').children('.view-loading').show();
 			$.post('<?=base_url('doc/load')?>', {user_url: '1490168888', date_url: '1491409463'}, function(data){
 				console.log(data);
-				$(this).next('.view-detail').children('.view-loading').hide();
+				$(this).next('.view-detail').child('.view-loading').hide();
 			});
 		}else{
 			$(this).next('.view-detail').hide();
