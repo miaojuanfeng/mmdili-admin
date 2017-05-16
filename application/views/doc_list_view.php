@@ -71,6 +71,7 @@
 					html += 	'<td width="33%">'+data[i].modify+'</td>';
 					html += '</tr>';
 				}
+				html += '</table>';
 			});
 		}else{
 			mine.next('.view-detail').hide();
