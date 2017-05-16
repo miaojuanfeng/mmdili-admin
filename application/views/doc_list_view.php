@@ -72,6 +72,7 @@
 					html += '</tr>';
 				}
 				html += '</table>';
+				mine.next('.view-detail').append(html);
 			});
 		}else{
 			mine.next('.view-detail').hide();
