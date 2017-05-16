@@ -14,8 +14,8 @@
 				<?php
 				foreach($doc['doc'] as $k => $v){
 				?>
-				<div class="item upload">
-					<a class="upload-file load-view" href="<?=base_url('doc/detail/'.$v['doc_id'])?>">
+				<div class="item upload" <?=base_url('doc/detail/'.$v['doc_id'])?>>
+					<a class="upload-file load-view" href="javascript:;">
 						<div class="file-name"><?=$v['doc_title']?></div>
 						<div class="file-dir"><?=$v['doc_desc']?></div>
 					</a>
