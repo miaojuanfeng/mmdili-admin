@@ -67,9 +67,9 @@
 				var html = '<table width="100%">';
 				for(var i=0;i<data.length;i++){
 					html += '<tr>';
-					html += 	'<td width="33%">'+data[i].key+'</td>';
-					html += 	'<td width="33%">'+data[i].size+'</td>';
-					html += 	'<td width="33%">'+data[i].modify+'</td>';
+					html += 	'<td width="33%" style="border-top:1px solid #eee;padding:10px;">'+data[i].key+'</td>';
+					html += 	'<td width="33%" style="border-top:1px solid #eee;padding:10px;">'+data[i].size+'</td>';
+					html += 	'<td width="33%" style="border-top:1px solid #eee;padding:10px;">'+data[i].modify+'</td>';
 					html += '</tr>';
 				}
 				html += '</table>';
