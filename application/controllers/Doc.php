@@ -305,7 +305,7 @@ class Doc extends CI_Controller {
 			$retval = array();
 			foreach ($views as $key => $value) {
 				$retval[$key]['key'] = $value->getKey();
-				$retval[$key]['size'] = number_format($value->getSize()/1024, 3).'KB';
+				$retval[$key]['size'] = $value->getSize()/1024;
 				$retval[$key]['modify'] = date('Y-m-d H:i:s', strtotime($value->getLastModified()));
 			}
 			echo json_encode($retval);

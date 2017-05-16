@@ -67,13 +67,20 @@
 				data = $.parseJSON(data);
 				mine.next('.view-detail').children().remove();
 				var html = '<table width="100%">';
+				var total = 0;
 				for(var i=0;i<data.length;i++){
+					total += data[i].size;
 					html += '<tr>';
 					html += 	'<td width="33%" style="border-top:1px solid #eee;padding:10px;">'+data[i].key+'</td>';
 					html += 	'<td width="33%" style="border-top:1px solid #eee;padding:10px;">'+data[i].size+'</td>';
 					html += 	'<td width="33%" style="border-top:1px solid #eee;padding:10px;">'+data[i].modify+'</td>';
 					html += '</tr>';
 				}
+					html += '<tr>';
+					html += 	'<td width="33%" style="border-top:1px solid #eee;padding:10px;">'+data.length+'</td>';
+					html += 	'<td width="33%" style="border-top:1px solid #eee;padding:10px;">'+total+'</td>';
+					html += 	'<td width="33%" style="border-top:1px solid #eee;padding:10px;"></td>';
+					html += '</tr>';
 				html += '</table>';
 				mine.next('.view-detail').append(html);
 			});
