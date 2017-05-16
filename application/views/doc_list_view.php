@@ -19,7 +19,9 @@
 						<div class="file-name"><?=$v['doc_title']?></div>
 						<div class="file-dir"><?=$v['doc_desc']?></div>
 					</a>
-					<div class="view-detail">ds</div>
+					<div class="view-detail">
+						<p class="view-loading" style="text-align:center;">Loading...</p>
+					</div>
 				</div>
 				<?php
 				}
