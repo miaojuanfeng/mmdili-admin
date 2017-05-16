@@ -217,7 +217,12 @@ class Doc extends CI_Controller {
 		$date_url = $this->input->post('date_url');
 
 		if( $user_url && $date_url ){
-			echo json_encode($this->oss->listView($user_url, $date_url));
+			$views = $this->oss->listView($user_url, $date_url);
+			$retval = array();
+			foreach ($views as $key => $value) {
+				$retval[]['key'] = $value->key;
+			}
+			echo json_encode($retval);
 		}
 	}
 }
