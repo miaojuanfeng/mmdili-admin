@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Upload extends CI_Controller {
@@ -56,6 +56,11 @@ class Upload extends CI_Controller {
 		$str = preg_replace('//', ' ', $str);
 
 		$str = preg_replace('/_(?=_)/', '', $str);
+		$str = preg_replace('/…(?=…)/', '', $str);
+		$str = preg_replace('/\?(?=\?)/', '', $str);
+		$str = preg_replace('/\? (?=\? )/', '', $str);
+		$str = preg_replace('/\？(?=\？)/', '', $str);
+		$str = preg_replace('/\？ (?=\？ )/', '', $str);
 
 		// Now remove any doubled-up whitespace 
 		//去掉跟随别的挤在一块的空白
@@ -106,41 +111,6 @@ class Upload extends CI_Controller {
 		}
 		$data['file_index'] = $file_index;
 		$data['file'] = self::$exists_files[$file_index];
-
-//  test
-		// $file_path = iconv('UTF-8', 'GB2312', self::$exists_files[$file_index]['file_dir']);
-		// $file = $this->mb_pathinfo($file_path);
-		// if( $file['extension'] == 'doc' || $file['extension'] == 'docx' || $file['extension'] == 'txt' ){
-		// 	try{
-		// 		$word = null;
-	 //    			$word = new COM("Word.Application") or die ("Could not initialise Word Object.");   
-		// 		$retry = 50;
-		// 		while( !$word && (--$retry) ){
-		// 			sleep(100);
-		// 		}
-		// 		if( $retry <= 0 ){
-		// 			echo "word application not ready!";
-		// 			rename(self::$convert_path.$file['basename'], $file_path);
-		// 			return;
-		// 		}
-	 //   			$word->Visible = 0;   
-	 //    		$word->DisplayAlerts = 0; 
-		// 		$word->Documents->Open($file_path);
-		// 		$test= $word->ActiveDocument->content->Text; 
-		// 		echo $test;
-		// 		// $word->ActiveDocument->ExportAsFixedFormat(self::$convert_path.$file['filename'].'.pdf', 17, false, 0, 0, 0, 0, 7, true, true, 2, true, true, false);
-		// 		$word->Quit(false);  
-		// 		unset($word);
-		// 	}catch(Exception $e){
-		// 		if( $word ){
-	 //    			$word->Quit(false);  
-	 //    			unset($word);
-		// 		}
-		// 		echo $e->getMessage();
-		// 		return;
-		// 	}
-		// }
-//  test
 
 		$this->load->view('upload_detail_view', $data);
 	}
