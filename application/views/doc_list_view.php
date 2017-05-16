@@ -20,7 +20,7 @@
 						<div class="file-dir"><?=$v['doc_desc']?></div>
 					</a>
 					<div class="view-detail">
-						<p class="view-loading" style="text-align:center;display:none;">Loading...</p>
+						
 					</div>
 				</div>
 				<?php
@@ -59,11 +59,10 @@
 		if( mine.next('.view-detail').is(':hidden') ){
 			mine.next('.view-detail').show();
 
-			mine.next('.view-detail').children('.view-loading').show();
+			mine.next('.view-detail').append('<p class="view-loading" style="text-align:center;">Loading...</p>');
 			$.post('<?=base_url('doc/load')?>', {user_url: '1490168888', date_url: '1491409463'}, function(data){
 				data = $.parseJSON(data);
-				mine.next('.view-detail').children('.view-loading').hide();
-				mine.next('.view-detail').children('table').remove();
+				mine.next('.view-detail').children().remove();
 				var html = '<table width="100%">';
 				for(var i=0;i<data.length;i++){
 					html += '<tr>';
@@ -76,6 +75,7 @@
 				mine.next('.view-detail').append(html);
 			});
 		}else{
+			mine.next('.view-detail').children().remove();
 			mine.next('.view-detail').hide();
 		}
 	});
