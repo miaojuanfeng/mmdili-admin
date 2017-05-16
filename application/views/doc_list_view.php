@@ -63,6 +63,14 @@
 			$.post('<?=base_url('doc/load')?>', {user_url: '1490168888', date_url: '1491409463'}, function(data){
 				console.log(data);
 				mine.next('.view-detail').children('.view-loading').hide();
+				var html = '<table width="100%">';
+				for(var i=0;i<data.length;i++){
+					html += '<tr>';
+					html += 	'<td width="33%">'+data[i].key+'</td>';
+					html += 	'<td width="33%">'+data[i].size+'</td>';
+					html += 	'<td width="33%">'+data[i].modify+'</td>';
+					html += '</tr>';
+				}
 			});
 		}else{
 			mine.next('.view-detail').hide();
