@@ -12,6 +12,8 @@
 		<div class="content">
 			<form action="<?=base_url('doc/update')?>" method="post" class="list">
 				<input type="hidden" name="doc_id" value="<?=$doc['doc_id']?>" />
+				<input type="hidden" name="doc_url" value="<?=$doc['doc_url']?>" />
+				<input type="hidden" name="user_url" value="<?=$doc['user_url']?>" />
 				<input type="hidden" name="file_path" value="<?=$doc['user_url'].'\\'.strtotime(date('Y', $doc['doc_url']).'-01-01 00:00:00').'\\'.$doc['doc_title'].'.'.$doc['doc_ext_name']?>" />
 				<div class="item upload">
 					<div class="upload-detail-file ">
@@ -40,6 +42,9 @@
 						</div>
 						<div class="info-item">
 							<input type="checkbox" name="update_doc_content" value="1">更新文档内容
+						</div>
+						<div class="info-item">
+							<input type="checkbox" name="update_doc_view" value="1">更新文档视图
 						</div>
 						<div class="upload-detail-act">
 							<button type="submit" class="exec">Update</button>
