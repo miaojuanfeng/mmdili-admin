@@ -20,7 +20,7 @@
 						<div class="file-dir"><?=$v['doc_desc']?></div>
 					</a>
 					<div class="view-detail">
-						<p class="view-loading" style="text-align:center;">Loading...</p>
+						<p class="view-loading" style="text-align:center;display:none;">Loading...</p>
 					</div>
 				</div>
 				<?php
@@ -59,6 +59,10 @@
 			$(this).next('.view-detail').hide();
 		}else{
 			$(this).next('.view-detail').show();
+
+			$.post('<?=base_url('doc/load')?>', {user_url: '1490168888', date_url: '1491409463'}, function(data){
+				console.log(data);
+			});
 		}
 	});
 </script>

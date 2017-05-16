@@ -44,11 +44,11 @@ class Oss{
     	return true;
 	}
 
-	function listView(){
-		$prefix = '1490168888/1491409463/';
+	function listView($user_url, $date_url){
+		$prefix = $user_url.'/'.$date_url.'/';
 	    $delimiter = '/';
 	    $nextMarker = '';
-	    $maxkeys = 30;
+	    $maxkeys = 1000;
 		$options = array(
             'delimiter' => $delimiter,
             'prefix' => $prefix,
@@ -58,7 +58,6 @@ class Oss{
 		try {
             $listObjectInfo = $this->ossClient->listObjects($this->bucket_view, $options);
         } catch (OssException $e) {
-            printf(__FUNCTION__ . ": FAILED\n");
             printf($e->getMessage() . "\n");
             return;
         }

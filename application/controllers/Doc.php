@@ -26,6 +26,7 @@ class Doc extends CI_Controller {
     	parent::__construct();
     	$this->load->helper('url');
     	$this->load->model('doc_model');
+    	$this->load->library('oss');
     	$this->cii_pagination = new cii_pagination();
     }
 
@@ -209,6 +210,15 @@ class Doc extends CI_Controller {
 			}
 		}
 		redirect(base_url('doc'));
+	}
+
+	public function load(){
+		$user_url = $this->input->post('user_url');
+		$date_url = $this->input->post('date_url');
+
+		if( $user_url && $date_url ){
+			echo json_encode($this->oss->listView($user_url, $date_url));
+		}
 	}
 }
 ?>
