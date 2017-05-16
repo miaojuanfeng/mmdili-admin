@@ -55,14 +55,14 @@
 </style>
 <script type="text/javascript">
 	$('.load-view').click(function(){
-		if( $(this).next('.view-detail').is(":show") ){
-			$(this).next('.view-detail').hide();
-		}else{
+		if( $(this).next('.view-detail').is(":hidden") ){
 			$(this).next('.view-detail').show();
 
 			$.post('<?=base_url('doc/load')?>', {user_url: '1490168888', date_url: '1491409463'}, function(data){
 				console.log(data);
 			});
+		}else{
+			$(this).next('.view-detail').hide();
 		}
 	});
 </script>
