@@ -29,6 +29,7 @@ class Doc extends CI_Controller {
     	$this->load->helper('url');
     	$this->load->model('doc_model');
     	$this->load->library('oss');
+    	$this->load->library('file');
     	$this->cii_pagination = new cii_pagination();
     }
 
