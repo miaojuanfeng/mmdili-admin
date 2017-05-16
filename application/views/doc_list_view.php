@@ -15,10 +15,11 @@
 				foreach($doc['doc'] as $k => $v){
 				?>
 				<div class="item upload">
-					<a class="upload-file" href="<?=base_url('doc/detail/'.$v['doc_id'])?>">
+					<a class="upload-file load-view" href="<?=base_url('doc/detail/'.$v['doc_id'])?>">
 						<div class="file-name"><?=$v['doc_title']?></div>
 						<div class="file-dir"><?=$v['doc_desc']?></div>
 					</a>
+					<div class="view-detail">ds</div>
 				</div>
 				<?php
 				}
@@ -50,3 +51,12 @@
       background-color: #a4bddb;
       color: #FFF; }
 </style>
+<script type="text/javascript">
+	$('.load-view').click(function(){
+		if( $(this).next('.view-detail') ){
+			$(this).next('.view-detail').hide();
+		}else{
+			$(this).next('.view-detail').show();
+		}
+	});
+</script>
