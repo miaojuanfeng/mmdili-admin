@@ -20,7 +20,7 @@ class doc_model extends CI_Model{
     }
 	
 	public function get_list($limit, $offset){
-    	$query = $this->db->query("SELECT user_url, doc_id, doc_title, substring(doc_content, 1, 250) as doc_desc, doc_page_num FROM m_doc LEFT JOIN m_user ON doc_user_id = user_id WHERE doc_deleted = 0 AND user_deleted = 0 ORDER BY doc_id DESC LIMIT ".$limit." OFFSET ".$offset);
+    	$query = $this->db->query("SELECT user_url, doc_id, doc_url, doc_title, substring(doc_content, 1, 250) as doc_desc, doc_page_num FROM m_doc LEFT JOIN m_user ON doc_user_id = user_id WHERE doc_deleted = 0 AND user_deleted = 0 ORDER BY doc_id DESC LIMIT ".$limit." OFFSET ".$offset);
     	return $query->result_array();
     }
 
