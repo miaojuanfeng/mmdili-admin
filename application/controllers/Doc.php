@@ -220,9 +220,9 @@ class Doc extends CI_Controller {
 			$views = $this->oss->listView($user_url, $date_url);
 			$retval = array();
 			foreach ($views as $key => $value) {
-				$retval[]['key'] = $value->getKey();
-				$retval[]['size'] = number_format($value->getSize()/1024, 0).'KB';
-				$retval[]['modify'] = $value->getLastModified();
+				$retval[$key]['key'] = $value->getKey();
+				$retval[$key]['size'] = number_format($value->getSize()/1024, 0).'KB';
+				$retval[$key]['modify'] = $value->getLastModified();
 			}
 			echo json_encode($retval);
 		}
