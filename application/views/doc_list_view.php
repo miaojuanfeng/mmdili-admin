@@ -14,12 +14,12 @@
 				<?php
 				foreach($doc['doc'] as $k => $v){
 				?>
-				<div class="item upload" <?=base_url('doc/detail/'.$v['doc_id'])?>>
+				<div class="item upload">
 					<a class="upload-file load-view" href="javascript:;">
 						<div class="file-name"><?=$v['doc_title']?></div>
 						<div class="file-dir"><?=$v['doc_desc']?></div>
 					</a>
-					<div class="view-detail">
+					<div class="view-detail" user-url="<?=$v['user_url']?>" doc-url="<?=$v['doc_url']?>">
 						
 					</div>
 				</div>
@@ -57,10 +57,13 @@
 	$('.load-view').click(function(){
 		var mine = $(this);
 		if( mine.next('.view-detail').is(':hidden') ){
+			var user_url = mine.next('.view-detail').attr('user-url');
+			var doc_url  = mine.next('.view-detail').attr('doc-url');
+
 			mine.next('.view-detail').show();
 
 			mine.next('.view-detail').append('<p class="view-loading" style="text-align:center;">Loading...</p>');
-			$.post('<?=base_url('doc/load')?>', {user_url: '1490168888', date_url: '1491409463'}, function(data){
+			$.post('<?=base_url('doc/load')?>', {user_url: user_url, doc_url: doc_url}, function(data){
 				data = $.parseJSON(data);
 				mine.next('.view-detail').children().remove();
 				var html = '<table width="100%">';

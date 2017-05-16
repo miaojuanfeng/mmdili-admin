@@ -44,8 +44,8 @@ class Oss{
     	return true;
 	}
 
-	function listView($user_url, $date_url){
-		$prefix = $user_url.'/'.$date_url.'/';
+	function listView($user_url, $doc_url){
+		$prefix = $user_url.'/'.$doc_url.'/';
 	    $delimiter = '/';
 	    $nextMarker = '';
 	    $maxkeys = 1000;

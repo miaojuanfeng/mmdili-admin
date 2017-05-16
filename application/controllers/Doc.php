@@ -214,10 +214,10 @@ class Doc extends CI_Controller {
 
 	public function load(){
 		$user_url = $this->input->post('user_url');
-		$date_url = $this->input->post('date_url');
+		$doc_url = $this->input->post('doc_url');
 
-		if( $user_url && $date_url ){
-			$views = $this->oss->listView($user_url, $date_url);
+		if( $user_url && $doc_url ){
+			$views = $this->oss->listView($user_url, $doc_url);
 			$retval = array();
 			foreach ($views as $key => $value) {
 				$retval[$key]['key'] = $value->getKey();
