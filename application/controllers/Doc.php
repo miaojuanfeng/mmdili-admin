@@ -286,21 +286,21 @@ class Doc extends CI_Controller {
 				}else if( $update_doc_html ){
 					$view_path = self::$view_path.$doc_url.'\\';
 					
-					$cmd  = 'C:\\MJF\\pdf2htmlEX\\pdf2htmlEX.exe';
+					$cmd  = 'C:\MJF\pdf2htmlEX\pdf2htmlEX.exe';
 					$cmd .= ' --zoom 1.613';
 					$cmd .= ' --split-pages 1';
 					$cmd .= ' --embed-image 0';
 					$cmd .= ' --embed-css 0';
 					$cmd .= ' --embed-font 0';
 					$cmd .= ' --bg-format "jpg"';
-					$cmd .= ' --dest-dir "'.$view_path.'"';
+					// $cmd .= ' --dest-dir "'.$view_path.'"';
 					$cmd .= ' --page-filename "'.$doc_url.'-%03d.page"';
 					$cmd .= ' --css-filename "'.$doc_url.'.css"';
 					$cmd .= ' --embed-javascript 0';
 					$cmd .= ' --process-outline 0';
 					$cmd .= ' --vdpi 80';
 					$cmd .= ' --hdpi 80';
-					$cmd .= ' "'.self::$convert_path.$doc_url.'.pdf"';
+					// $cmd .= ' "'.self::$convert_path.$doc_url.'.pdf"';
 					exec($cmd, $r);
 					var_dump($r);
 					if( $file['extension'] != 'pdf' ){
