@@ -305,6 +305,7 @@ class Doc extends CI_Controller {
 					if( $file['extension'] != 'pdf' ){
 						unlink(self::$convert_path.$file['filename'].".pdf");
 					}
+					echo $cmd;die();
 				}
 				if( $update_doc_content ){
 					$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
