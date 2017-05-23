@@ -292,15 +292,18 @@ class Doc extends CI_Controller {
 					$cmd .= ' --embed-css 0';
 					$cmd .= ' --embed-font 0';
 					$cmd .= ' --bg-format "jpg"';
-					$cmd .= ' --dest-dir "C:\test"';
+					$cmd .= ' --dest-dir "'.$view_path.'"';
 					$cmd .= ' --page-filename "'.$doc_url.'-%03d.page"';
 					$cmd .= ' --css-filename "'.$doc_url.'.css"';
 					$cmd .= ' --embed-javascript 0';
 					$cmd .= ' --process-outline 0';
 					$cmd .= ' --vdpi 80';
 					$cmd .= ' --hdpi 80';
-					$cmd .= ' C:\MJF\pdf2htmlEX\convert\test.pdf';
+					$cmd .= ' '.self::$convert_path.$file['filename'].'.pdf';
 					exec($cmd, $r);
+					if( $file['extension'] != 'pdf' ){
+						unlink(self::$convert_path.$file['filename'].".pdf");
+					}
 				}
 				if( $update_doc_content ){
 					$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
