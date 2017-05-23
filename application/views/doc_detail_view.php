@@ -46,6 +46,9 @@
 						<div class="info-item">
 							<input type="checkbox" name="update_doc_view" value="1">更新文档视图
 						</div>
+						<div class="info-item">
+							<input type="checkbox" name="update_doc_html" value="1">更新文档Html
+						</div>
 						<div class="upload-detail-act">
 							<button type="submit" class="exec">Update</button>
 						</div>
