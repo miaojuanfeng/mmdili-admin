@@ -159,7 +159,7 @@ class Doc extends CI_Controller {
 						if( $update_doc_content ){
 							$doc_content = $word->ActiveDocument->content->Text;
 						}
-						if( $update_doc_view ){
+						if( $update_doc_view || $update_doc_html ){
 							$word->ActiveDocument->ExportAsFixedFormat(self::$convert_path.$file['filename'].'.pdf', 17, false, 0, 0, 0, 0, 7, true, true, 2, true, true, false);
 						}
 						$word->Quit(false);  
@@ -204,7 +204,7 @@ class Doc extends CI_Controller {
 								}
 							}
 						}
-						if( $update_doc_view ){
+						if( $update_doc_view || $update_doc_html ){
 							$ppt->ActivePresentation->SaveAs(self::$convert_path.$file['filename'].'.pdf', 32);
 						}
 						$ppt->Quit();  
