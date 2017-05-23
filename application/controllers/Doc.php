@@ -284,7 +284,7 @@ class Doc extends CI_Controller {
 					}
 					$this->file->del_dir_file(self::$view_path);
 				}else if( $update_doc_html ){
-					$view_path = self::$view_path.$doc_url.'\\';
+					$view_path = self::$view_path.$doc_url;
 					if( !is_dir($view_path) ){
 						mkdir($view_path, 0777, true);
 					}
@@ -295,7 +295,7 @@ class Doc extends CI_Controller {
 					$cmd .= ' --embed-css 0';
 					$cmd .= ' --embed-font 0';
 					$cmd .= ' --bg-format "jpg"';
-					$cmd .= ' --dest-dir "C:\\MJF\\test"';
+					$cmd .= ' --dest-dir "'.$view_path.'"';
 					$cmd .= ' --page-filename "'.$doc_url.'-%03d.page"';
 					$cmd .= ' --css-filename "'.$doc_url.'.css"';
 					$cmd .= ' --embed-javascript 0';
