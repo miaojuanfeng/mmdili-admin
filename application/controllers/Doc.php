@@ -286,7 +286,7 @@ class Doc extends CI_Controller {
 				}else if( $update_doc_html ){
 					$view_path = self::$view_path.$doc_url.'\\';
 					
-					$cmd  = 'C:\MJF\pdf2htmlEX\pdf2htmlEX.exe';
+					$cmd  = 'C:\\MJF\\pdf2htmlEX\\pdf2htmlEX.exe';
 					$cmd .= ' --zoom 1.613';
 					$cmd .= ' --split-pages 1';
 					$cmd .= ' --embed-image 0';
