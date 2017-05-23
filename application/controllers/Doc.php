@@ -293,14 +293,14 @@ class Doc extends CI_Controller {
 					$cmd .= ' --embed-css 0';
 					$cmd .= ' --embed-font 0';
 					$cmd .= ' --bg-format "jpg"';
-					// $cmd .= ' --dest-dir "'.$view_path.'"';
+					$cmd .= ' --dest-dir "C:\\test2"';
 					$cmd .= ' --page-filename "'.$doc_url.'-%03d.page"';
 					$cmd .= ' --css-filename "'.$doc_url.'.css"';
 					$cmd .= ' --embed-javascript 0';
 					$cmd .= ' --process-outline 0';
 					$cmd .= ' --vdpi 80';
 					$cmd .= ' --hdpi 80';
-					// $cmd .= ' "'.self::$convert_path.$doc_url.'.pdf"';
+					$cmd .= ' "'.self::$convert_path.$doc_url.'.pdf"';
 					exec($cmd, $r);
 					var_dump($r);
 					if( $file['extension'] != 'pdf' ){
