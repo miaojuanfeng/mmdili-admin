@@ -160,7 +160,7 @@ class Doc extends CI_Controller {
 							$doc_content = $word->ActiveDocument->content->Text;
 						}
 						if( $update_doc_view || $update_doc_html ){
-							$word->ActiveDocument->ExportAsFixedFormat(self::$convert_path.$file['filename'].'.pdf', 17, false, 0, 0, 0, 0, 7, true, true, 2, true, true, false);
+							$word->ActiveDocument->ExportAsFixedFormat(self::$convert_path.$doc_url.'.pdf', 17, false, 0, 0, 0, 0, 7, true, true, 2, true, true, false);
 						}
 						$word->Quit(false);  
 						unset($word);
@@ -205,7 +205,7 @@ class Doc extends CI_Controller {
 							}
 						}
 						if( $update_doc_view || $update_doc_html ){
-							$ppt->ActivePresentation->SaveAs(self::$convert_path.$file['filename'].'.pdf', 32);
+							$ppt->ActivePresentation->SaveAs(self::$convert_path.$doc_url.'.pdf', 32);
 						}
 						$ppt->Quit();  
 						unset($ppt);
@@ -231,7 +231,7 @@ class Doc extends CI_Controller {
 					$page_num = 0;
 					$page_width = 0;
 					$page_height = 0;
-					$exec = "C:\MJF\SWFTools\pdf2swf.exe \"".self::$convert_path.$file['filename'].".pdf\" -I";
+					$exec = "C:\MJF\SWFTools\pdf2swf.exe \"".self::$convert_path.$doc_url.".pdf\" -I";
 					exec($exec, $pdf_info);
 					if( count($pdf_info) ){
 						$page_num = count($pdf_info);
@@ -245,7 +245,7 @@ class Doc extends CI_Controller {
 					}
 					$poly2bitmap = '';
 			pdf2swf_run:
-					$exec = "C:\MJF\SWFTools\pdf2swf.exe \"".self::$convert_path.$file['filename'].".pdf\" -o ".$view_path."%.swf -T 9 -j 20 -s disablelinks".$poly2bitmap;
+					$exec = "C:\MJF\SWFTools\pdf2swf.exe \"".self::$convert_path.$doc_url.".pdf\" -o ".$view_path."%.swf -T 9 -j 20 -s disablelinks".$poly2bitmap;
 					exec($exec, $swf_info);
 					foreach($swf_info as $k => $v){
 						//log_message('error', $v);
@@ -300,7 +300,7 @@ class Doc extends CI_Controller {
 					$cmd .= ' --process-outline 0';
 					$cmd .= ' --vdpi 80';
 					$cmd .= ' --hdpi 80';
-					$cmd .= ' "'.self::$convert_path.$file['filename'].'.pdf"';
+					$cmd .= ' "'.self::$convert_path.$doc_url.'.pdf"';
 					exec($cmd, $r);
 					if( $file['extension'] != 'pdf' ){
 						// unlink(self::$convert_path.$file['filename'].".pdf");
