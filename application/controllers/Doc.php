@@ -133,11 +133,12 @@ class Doc extends CI_Controller {
 		$doc_dl_forbidden = $this->input->post('doc_dl_forbidden');
 		$update_doc_content = $this->input->post('update_doc_content');
 		$update_doc_view = $this->input->post('update_doc_view');
+		$update_doc_html = $this->input->post('update_doc_html');
 		$doc_content = "";
 		$file_path = self::$online_path.$this->input->post('file_path');
 
 		if( $doc_id ){
-			if( $update_doc_content || $update_doc_view ){
+			if( $update_doc_content || $update_doc_view || $update_doc_html ){
 				$file_path = iconv('UTF-8', 'GB2312', $file_path);
 				$file = $this->mb_pathinfo($file_path);
 				if( $file['extension'] == 'doc' || $file['extension'] == 'docx' || $file['extension'] == 'txt' ){
