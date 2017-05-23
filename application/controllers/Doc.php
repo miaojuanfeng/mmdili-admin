@@ -295,7 +295,7 @@ class Doc extends CI_Controller {
 					$cmd .= ' --embed-css 0';
 					$cmd .= ' --embed-font 0';
 					$cmd .= ' --bg-format "jpg"';
-					$cmd .= ' --dest-dir "C:\\MJF\\web\\doc\\view\\1495349360\\"';
+					$cmd .= ' --dest-dir "C:\\MJF\\test"';
 					$cmd .= ' --page-filename "'.$doc_url.'-%03d.page"';
 					$cmd .= ' --css-filename "'.$doc_url.'.css"';
 					$cmd .= ' --embed-javascript 0';
