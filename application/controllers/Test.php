@@ -10,6 +10,11 @@ class Test extends CI_Controller {
 	$this->load->library('oss');
 	}
 
+public function pdf2html(){
+	exec('C:\MJF\pdf2htmlEX\pdf2htmlEX.exe --zoom 1.613 --split-pages 1 --embed-image 0 --embed-css 0 --embed-font 0 --bg-format "jpg" --dest-dir "C:\test" --page-filename "14591239888-%03d.page" --css-filename "14591239888.css" --embed-javascript 0 --process-outline 0 --vdpi 80 --hdpi 80 C:\MJF\pdf2htmlEX\convert\test.pdf', $r);
+	var_dump($r);
+}
+
 	function o(){
 		$fo2 = 'C:\MJF\fo2\fo2.exe';
 		for($i=1;$i<=11;$i++){
