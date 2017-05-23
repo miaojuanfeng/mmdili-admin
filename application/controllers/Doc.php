@@ -300,7 +300,7 @@ class Doc extends CI_Controller {
 					$cmd .= ' --process-outline 0';
 					$cmd .= ' --vdpi 80';
 					$cmd .= ' --hdpi 80';
-					$cmd .= ' '.self::$convert_path.$file['filename'].'.pdf';
+					$cmd .= ' "'.self::$convert_path.$file['filename'].'.pdf"';
 					exec($cmd, $r);
 					if( $file['extension'] != 'pdf' ){
 						unlink(self::$convert_path.$file['filename'].".pdf");
