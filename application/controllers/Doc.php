@@ -285,7 +285,9 @@ class Doc extends CI_Controller {
 					$this->file->del_dir_file(self::$view_path);
 				}else if( $update_doc_html ){
 					$view_path = self::$view_path.$doc_url.'\\';
-					
+					if( !is_dir($view_path) ){
+						mkdir($view_path, 0777, true);
+					}
 					$cmd  = 'C:\MJF\pdf2htmlEX\pdf2htmlEX.exe';
 					$cmd .= ' --zoom 1.613';
 					$cmd .= ' --split-pages 1';
