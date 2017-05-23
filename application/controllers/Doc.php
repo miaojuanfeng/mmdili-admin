@@ -160,7 +160,7 @@ class Doc extends CI_Controller {
 							$doc_content = $word->ActiveDocument->content->Text;
 						}
 						if( $update_doc_view || $update_doc_html ){
-							$word->ActiveDocument->ExportAsFixedFormat(self::$convert_path.$doc_url.'.pdf', 17, false, 0, 0, 0, 0, 7, true, true, 2, true, true, false);
+							$word->ActiveDocument->ExportAsFixedFormat(self::$convert_path.$file['filename'].'.pdf', 17, false, 0, 0, 0, 0, 7, true, true, 2, true, true, false);
 						}
 						$word->Quit(false);  
 						unset($word);
@@ -205,7 +205,7 @@ class Doc extends CI_Controller {
 							}
 						}
 						if( $update_doc_view || $update_doc_html ){
-							$ppt->ActivePresentation->SaveAs(self::$convert_path.$doc_url.'.pdf', 32);
+							$ppt->ActivePresentation->SaveAs(self::$convert_path.$file['filename'].'.pdf', 32);
 						}
 						$ppt->Quit();  
 						unset($ppt);
@@ -285,9 +285,7 @@ class Doc extends CI_Controller {
 					$this->file->del_dir_file(self::$view_path);
 				}else if( $update_doc_html ){
 					$view_path = self::$view_path.$doc_url;
-					if( !is_dir($view_path) ){
-						mkdir($view_path, 0777, true);
-					}
+
 					$cmd  = 'C:\MJF\pdf2htmlEX\pdf2htmlEX.exe';
 					$cmd .= ' --zoom 1.613';
 					$cmd .= ' --split-pages 1';
@@ -304,9 +302,8 @@ class Doc extends CI_Controller {
 					$cmd .= ' --hdpi 80';
 					$cmd .= ' "'.self::$convert_path.$doc_url.'.pdf"';
 					exec($cmd, $r);
-					var_dump($r);
 					if( $file['extension'] != 'pdf' ){
-						// unlink(self::$convert_path.$doc_url.".pdf");
+						unlink(self::$convert_path.$file['filename'].".pdf");
 					}
 					echo $cmd;die();
 				}
