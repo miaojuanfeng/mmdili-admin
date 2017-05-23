@@ -303,7 +303,7 @@ class Doc extends CI_Controller {
 					$cmd .= ' "'.self::$convert_path.$file['filename'].'.pdf"';
 					exec($cmd, $r);
 					if( $file['extension'] != 'pdf' ){
-						unlink(self::$convert_path.$file['filename'].".pdf");
+						// unlink(self::$convert_path.$file['filename'].".pdf");
 					}
 					echo $cmd;die();
 				}
