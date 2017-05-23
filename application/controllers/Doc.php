@@ -160,7 +160,7 @@ class Doc extends CI_Controller {
 							$doc_content = $word->ActiveDocument->content->Text;
 						}
 						if( $update_doc_view || $update_doc_html ){
-							$word->ActiveDocument->ExportAsFixedFormat(self::$convert_path.$file['filename'].'.pdf', 17, false, 0, 0, 0, 0, 7, true, true, 2, true, true, false);
+							$word->ActiveDocument->ExportAsFixedFormat(self::$convert_path.$doc_url.'.pdf', 17, false, 0, 0, 0, 0, 7, true, true, 2, true, true, false);
 						}
 						$word->Quit(false);  
 						unset($word);
@@ -205,7 +205,7 @@ class Doc extends CI_Controller {
 							}
 						}
 						if( $update_doc_view || $update_doc_html ){
-							$ppt->ActivePresentation->SaveAs(self::$convert_path.$file['filename'].'.pdf', 32);
+							$ppt->ActivePresentation->SaveAs(self::$convert_path.$doc_url.'.pdf', 32);
 						}
 						$ppt->Quit();  
 						unset($ppt);
@@ -303,9 +303,8 @@ class Doc extends CI_Controller {
 					$cmd .= ' "'.self::$convert_path.$doc_url.'.pdf"';
 					exec($cmd, $r);
 					if( $file['extension'] != 'pdf' ){
-						unlink(self::$convert_path.$file['filename'].".pdf");
+						unlink(self::$convert_path.$doc_url.".pdf");
 					}
-					echo $cmd;die();
 				}
 				if( $update_doc_content ){
 					$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
