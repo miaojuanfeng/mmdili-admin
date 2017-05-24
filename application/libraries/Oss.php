@@ -67,7 +67,7 @@ class Oss{
 	function deleteObject($object)
 	{
 	    try{
-	        $ossClient->deleteObject($this->bucket_view, $object);
+	        $this->ossClient->deleteObject($this->bucket_view, $object);
 	    } catch(OssException $e) {
 	        printf($e->getMessage() . "\n");
 	        return;
