@@ -307,6 +307,11 @@ class Doc extends CI_Controller {
 					if( $file['extension'] != 'pdf' ){
 						unlink(self::$convert_path.$doc_url.".pdf");
 					}
+					for($i=1;$i<=$page_num;$i++){
+						$file_content = file_get_contents($view_path.'\\'.sprintf("%03d", $i));
+						var_dump($file_content);
+						die();
+					}
 					$views = $this->oss->listView($user_url, $doc_url);
 					$objects = array();
 					foreach ($views as $key => $value) {
