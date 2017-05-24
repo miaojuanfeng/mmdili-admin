@@ -296,7 +296,8 @@ class Doc extends CI_Controller {
 					$cmd .= ' --dest-dir "'.$view_path.'"';
 					// $cmd .= ' --page-filename "'.$doc_url.'-%03d.page"';
 					$cmd .= ' --page-filename "%03d"';
-					$cmd .= ' --css-filename "'.$doc_url.'.css"';
+					// $cmd .= ' --css-filename "'.$doc_url.'.css"';
+					$cmd .= ' --css-filename "page.min.css"';
 					$cmd .= ' --embed-javascript 0';
 					$cmd .= ' --process-outline 0';
 					$cmd .= ' --vdpi 80';
