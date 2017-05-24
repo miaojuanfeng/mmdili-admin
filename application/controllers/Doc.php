@@ -327,7 +327,9 @@ class Doc extends CI_Controller {
 						$file_content = file_get_contents($view_path.'\\'.sprintf("%03d", $i));
 						$preg = '/<img.+src=\"?(.+\.(jpg|gif|bmp|bnp|png))\"?.+>/i';
 						preg_match_all($preg, $file_content, $imgArr);
-						print_r($imgArr[1][0]);
+						$src = $imgArr[1][0];
+						str_replace($src, 'http://view.mmdili.com/'.$user_url.'/'.$doc_url.'/'.$src, $file_content);
+						var_dump($file_content);
 						die();
 					}
 					$views = $this->oss->listView($user_url, $doc_url);
