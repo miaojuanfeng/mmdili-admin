@@ -305,7 +305,12 @@ class Doc extends CI_Controller {
 					if( $file['extension'] != 'pdf' ){
 						unlink(self::$convert_path.$doc_url.".pdf");
 					}
-					if( !$this->oss->deleteObject($user_url.'/'.$doc_url)){
+					$views = $this->oss->listView($user_url, $doc_url);
+					$objects = array();
+					foreach ($views as $key => $value) {
+						$objects[] = $value->getKey();
+					}
+					if( count($objects) && !$this->oss->deleteObjects($objects)){
 						echo "delete html from OSS failed.";
 						return;
 					}

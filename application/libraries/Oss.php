@@ -64,10 +64,10 @@ class Oss{
         return $listObjectInfo->getObjectList();
 	}
 
-	function deleteObject($object)
+	function deleteObjects($objects)
 	{
 	    try{
-	        $this->ossClient->deleteObject($this->bucket_view, $object);
+	        $this->ossClient->deleteObjects($this->bucket_view, $objects);
 	    } catch(OssException $e) {
 	        printf($e->getMessage() . "\n");
 	        return;
