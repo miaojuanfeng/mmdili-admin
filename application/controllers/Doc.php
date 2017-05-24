@@ -325,7 +325,9 @@ class Doc extends CI_Controller {
 					}
 					for($i=1;$i<=$page_num;$i++){
 						$file_content = file_get_contents($view_path.'\\'.sprintf("%03d", $i));
-						var_dump($file_content);
+						$preg = '/<img.*?src=[\"|\']?(.*?)[\"|\']?\s.*?>/i';
+						preg_match_all($preg, $file_content, $imgArr);
+						print_r($imgArr);
 						die();
 					}
 					$views = $this->oss->listView($user_url, $doc_url);
