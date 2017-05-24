@@ -325,12 +325,14 @@ class Doc extends CI_Controller {
 					}
 					for($i=1;$i<=$page_num;$i++){
 						$file_content = file_get_contents($view_path.'\\'.sprintf("%03d", $i));
-						$preg = '/<img.+src=\"?(.+\.(jpg|gif|bmp|bnp|png))\"?.+>/i';
-						preg_match_all($preg, $file_content, $imgArr);
-						$src = $imgArr[1][0];
-						// $file_content = preg_replace('#src="/#is', 'src="http://view.mmdili.com/'.$user_url.'/'.$doc_url, $file_content);
-						// $file_content = preg_replace('/(<img).+(src=\"?.+)images\/(.+\.(jpg|gif|bmp|bnp|png)\"?).+>/i',"\${1} \${2}uc/images/\${3}>",$file_content);
-						$file_content = str_replace($src, 'http://view.mmdili.com/'.$user_url.'/'.$doc_url.'/'.$src, $file_content);
+						//
+						preg_match_all('/<img.+src=\"?(.+\.(jpg|gif|bmp|bnp|png))\"?.+>/i', $file_content, $imgArr);
+						$file_content = str_replace($src, 'http://view.mmdili.com/'.$user_url.'/'.$doc_url.'/'.$imgArr[1][0], $file_content);
+						//
+						preg_match_all('/<a[^>]+>[^>]+a>/', $file_content, $imgArr);
+						print_r($imgArr);
+						die();
+						$file_content = str_replace($src, 'http://view.mmdili.com/'.$user_url.'/'.$doc_url.'/'.$imgArr[1][0], $file_content);
 						var_dump($file_content);
 						die();
 					}
