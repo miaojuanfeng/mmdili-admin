@@ -145,9 +145,9 @@ class Doc extends CI_Controller {
 					try{
 						$word = null;
 			    		$word = new COM("Word.Application") or die ("Could not initialise Word Object.");   
-						$retry = 50;
+						$retry = 60;
 						while( !$word && (--$retry) ){
-							sleep(100);
+							sleep(1);
 						}
 						if( $retry <= 0 ){
 							echo "word application not ready!";
@@ -177,9 +177,9 @@ class Doc extends CI_Controller {
 					try{
 						$ppt = null;
 			    			$ppt = new COM("powerpoint.Application") or die ("Could not initialise PowerPoint Object.");   
-						$retry = 50;
+						$retry = 60;
 						while( !$ppt && (--$retry) ){
-							sleep(100);
+							sleep(1);
 						}
 						if( $retry <= 0 ){
 							echo "ppt application not ready!";
