@@ -325,7 +325,7 @@ class Doc extends CI_Controller {
 					}
 					for($i=1;$i<=$page_num;$i++){
 						$file_content = file_get_contents($view_path.'\\'.sprintf("%03d", $i));
-						$preg = '/<img.*?src=[\"|\']?(.*?)[\"|\']?\s.*?>/i';
+						$preg = '/<img.+src=\"?(.+\.(jpg|gif|bmp|bnp|png))\"?.+>/i';
 						preg_match_all($preg, $file_content, $imgArr);
 						print_r($imgArr[1]);
 						die();
