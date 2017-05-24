@@ -333,6 +333,7 @@ class Doc extends CI_Controller {
 						foreach($imgArr[1] as $key => $value){
 							$file_content = str_replace($value, 'javascript:;', $file_content);
 						}
+						file_put_contents($view_path.'\\'.sprintf("%03d", $i), $file_content);
 					}
 					$views = $this->oss->listView($user_url, $doc_url);
 					$objects = array();
