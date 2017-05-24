@@ -328,7 +328,7 @@ class Doc extends CI_Controller {
 						$preg = '/<img.+src=\"?(.+\.(jpg|gif|bmp|bnp|png))\"?.+>/i';
 						preg_match_all($preg, $file_content, $imgArr);
 						$src = $imgArr[1][0];
-						preg_replace('#src="/#is', 'src="http://view.mmdili.com/'.$user_url.'/'.$doc_url, $file_content);
+						$file_content = preg_replace('#src="/#is', 'src="http://view.mmdili.com/'.$user_url.'/'.$doc_url, $file_content);
 						// str_replace($src, 'http://view.mmdili.com/'.$user_url.'/'.$doc_url.'/'.$src, $file_content);
 						var_dump($file_content);
 						die();
