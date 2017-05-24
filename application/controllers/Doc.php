@@ -330,9 +330,9 @@ class Doc extends CI_Controller {
 						$file_content = str_replace($imgArr[1][0], 'http://view.mmdili.com/'.$user_url.'/'.$doc_url.'/'.$imgArr[1][0], $file_content);
 						//
 						preg_match_all('/<a .*?href="(.*?)".*?>/is', $file_content, $imgArr);
-						print_r($imgArr);
-						die();
-						$file_content = str_replace($src, 'http://view.mmdili.com/'.$user_url.'/'.$doc_url.'/'.$imgArr[1][0], $file_content);
+						foreach ($imgArr[1] as $key => $value) {
+							$file_content = str_replace($value, 'javascript:;', $file_content);
+						}
 						var_dump($file_content);
 						die();
 					}
