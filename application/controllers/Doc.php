@@ -305,8 +305,12 @@ class Doc extends CI_Controller {
 					if( $file['extension'] != 'pdf' ){
 						unlink(self::$convert_path.$doc_url.".pdf");
 					}
+					if( !$this->oss->deleteObject($user_url.'/'.$doc_url)){
+						echo "delete html from OSS failed.";
+						return;
+					}
 					if( !$this->oss->uploadDir($user_url.'/'.$doc_url, $view_path)){
-						echo "upload swf to OSS failed.";
+						echo "upload html to OSS failed.";
 						return;
 					}
 					$this->file->del_dir_file(self::$view_path);

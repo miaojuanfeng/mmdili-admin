@@ -63,4 +63,15 @@ class Oss{
         }
         return $listObjectInfo->getObjectList();
 	}
+
+	function deleteObject($object)
+	{
+	    try{
+	        $ossClient->deleteObject($this->bucket_view, $object);
+	    } catch(OssException $e) {
+	        printf($e->getMessage() . "\n");
+	        return;
+	    }
+	    return true;
+	}
 }
