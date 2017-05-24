@@ -356,7 +356,7 @@ class Doc extends CI_Controller {
 				}
 			}
 
-			if( $this->doc_model->update($doc_id, $doc_cate_id, $doc_user_id, $doc_dl_forbidden, $update_doc_content, $doc_content) ){
+			if( $this->doc_model->update($doc_id, $doc_cate_id, $doc_user_id, $doc_dl_forbidden, $update_doc_content, $doc_content, $update_doc_html) ){
 				redirect(base_url('doc/detail/'.$doc_id));
 			}
 		}
