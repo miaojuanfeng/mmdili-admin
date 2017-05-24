@@ -286,6 +286,22 @@ class Doc extends CI_Controller {
 				}else if( $update_doc_html ){
 					$view_path = self::$view_path.$doc_url;
 
+					$page_num = 0;
+					$page_width = 0;
+					$page_height = 0;
+					$exec = "C:\MJF\SWFTools\pdf2swf.exe \"".self::$convert_path.$doc_url.".pdf\" -I";
+					exec($exec, $pdf_info);
+					if( count($pdf_info) ){
+						$page_num = count($pdf_info);
+						$page_width_height_string = explode(' ', $pdf_info[0]);
+						$page_width  = intval(explode('=', $page_width_height_string[1])[1]);
+						$page_height = intval(explode('=', $page_width_height_string[2])[1]);
+					}
+					if( !$page_width || !$page_height || !$page_num ){
+						echo "get pdf info failed.";
+						return;
+					}
+
 					$cmd  = 'C:\MJF\pdf2htmlEX\pdf2htmlEX.exe';
 					$cmd .= ' --zoom 1.613';
 					$cmd .= ' --split-pages 1';
