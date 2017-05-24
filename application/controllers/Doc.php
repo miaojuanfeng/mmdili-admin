@@ -329,7 +329,7 @@ class Doc extends CI_Controller {
 						preg_match_all('/<img.+src=\"?(.+\.(jpg|gif|bmp|bnp|png))\"?.+>/i', $file_content, $imgArr);
 						$file_content = str_replace($imgArr[1][0], 'http://view.mmdili.com/'.$user_url.'/'.$doc_url.'/'.$imgArr[1][0], $file_content);
 						//
-						preg_match_all('/<a.*?href=".*?".*?>.*?</a>/i', $file_content, $imgArr);
+						preg_match_all('/<a .*?href="(.*?)".*?>/is', $file_content, $imgArr);
 						print_r($imgArr);
 						die();
 						$file_content = str_replace($src, 'http://view.mmdili.com/'.$user_url.'/'.$doc_url.'/'.$imgArr[1][0], $file_content);
