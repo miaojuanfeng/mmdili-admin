@@ -362,7 +362,6 @@ class Doc extends CI_Controller {
 					foreach ($imgArr[0] as $key => $value) {
 						$file_content = str_replace($value, '', $file_content);
 					}
-					var_dump($file_content);die();
 					for($i=1;$i<=$page_num;$i++){
 						$file_content = file_get_contents($view_path.'\\'.sprintf("%03d", $i));
 						//
