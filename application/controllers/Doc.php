@@ -359,7 +359,10 @@ class Doc extends CI_Controller {
 					$this->clearn_file($view_path, 'woff');
 					$file_content = file_get_contents($view_path.'\page.min.css');
 					preg_match_all('/@font-face{font-family:(.*?)}/i', $file_content, $imgArr);
-					var_dump($imgArr);die();
+					foreach ($imgArr[0] as $key => $value) {
+						$file_content = str_replace($value, '', $file_content);
+					}
+					var_dump($file_content);die();
 					for($i=1;$i<=$page_num;$i++){
 						$file_content = file_get_contents($view_path.'\\'.sprintf("%03d", $i));
 						//
