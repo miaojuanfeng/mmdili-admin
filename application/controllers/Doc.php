@@ -349,20 +349,20 @@ class Doc extends CI_Controller {
 					$cmd .= ' --css-filename "page.min.css"';
 					$cmd .= ' --embed-javascript 0';
 					$cmd .= ' --process-outline 0';
-					// $cmd .= ' --vdpi 80';
-					// $cmd .= ' --hdpi 80';
+					$cmd .= ' --vdpi 80';
+					$cmd .= ' --hdpi 80';
 					$cmd .= ' "'.self::$convert_path.$doc_url.'.pdf"';
 					exec($cmd, $r);
 					if( $file['extension'] != 'pdf' ){
 						unlink(self::$convert_path.$doc_url.".pdf");
 					}
 					$this->clearn_file($view_path, 'woff');
-					// $file_content = file_get_contents($view_path.'\page.min.css');
-					// preg_match_all('/@font-face{font-family:(.*?)}/i', $file_content, $imgArr);
-					// foreach ($imgArr[0] as $key => $value) {
-					// 	$file_content = str_replace($value, '', $file_content);
-					// }
-					// file_put_contents($view_path.'\page.min.css', $file_content);
+					$file_content = file_get_contents($view_path.'\page.min.css');
+					preg_match_all('/@font-face{font-family:(.*?)}/i', $file_content, $imgArr);
+					foreach ($imgArr[0] as $key => $value) {
+						$file_content = str_replace($value, '', $file_content);
+					}
+					file_put_contents($view_path.'\page.min.css', $file_content);
 					for($i=1;$i<=$page_num;$i++){
 						$file_content = file_get_contents($view_path.'\\'.sprintf("%03d", $i));
 						//
