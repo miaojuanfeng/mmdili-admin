@@ -358,7 +358,7 @@ class Doc extends CI_Controller {
 					}
 					$this->clearn_file($view_path, 'woff');
 					$file_content = file_get_contents($view_path.'\page.min.css');
-					preg_match_all('/@font-face{font-family:\s*}/i', $file_content, $imgArr);
+					preg_match_all('/@font-face{font-family:(.*?)}/i', $file_content, $imgArr);
 					var_dump($imgArr);die();
 					for($i=1;$i<=$page_num;$i++){
 						$file_content = file_get_contents($view_path.'\\'.sprintf("%03d", $i));
