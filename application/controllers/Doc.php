@@ -149,8 +149,8 @@ class Doc extends CI_Controller {
 	        }else{
 	            preg_match("/(.*)\.$file_type/",$filename,$match);
 	            if(!empty($match[0][0])){
-	                echo $full_name;
-	                echo '<br>';
+	                // echo $full_name;
+	                // echo '<br>';
 	                unlink($full_name);
 	            }
 	        }
@@ -357,7 +357,9 @@ class Doc extends CI_Controller {
 						unlink(self::$convert_path.$doc_url.".pdf");
 					}
 					$this->clearn_file($view_path, 'woff');
-					return;
+					$file_content = file_get_contents($view_path.'\page.min.css');
+					preg_match_all('/@font-face{font-family:\s*}', $file_content, $imgArr);
+					var_dump($imgArr);die();
 					for($i=1;$i<=$page_num;$i++){
 						$file_content = file_get_contents($view_path.'\\'.sprintf("%03d", $i));
 						//
