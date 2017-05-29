@@ -333,7 +333,6 @@ class Doc extends CI_Controller {
  						preg_match_all('/<\s*img\s+[^>]*?class\s*=\s*(\'|\")(.*?)\\1+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', $file_content, $imgArr); 
  						$div = '<div class="'.$imgArr[2][0].'" style="background-image:url('.'http://view.mmdili.com/'.$user_url.'/'.$doc_url.'/'.$imgArr[4][0].')></div>';
  						$file_content = str_replace($imgArr[0][0], $div, $file_content);
- 						var_dump($imgArr);echo $file_content;die();
 						//
 						preg_match_all('/<a .*?href="(.*?)".*?>/is', $file_content, $imgArr);
 						foreach($imgArr[1] as $key => $value){
