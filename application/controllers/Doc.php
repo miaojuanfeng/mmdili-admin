@@ -622,6 +622,8 @@ class Doc extends CI_Controller {
 							}
 							file_put_contents($view_path.'\page.min.css', $file_content);
 							for($i=1;$i<=$page_num;$i++){
+								var_dump($i);
+								var_dump($page_num);
 								$file_content = file_get_contents($view_path.'\\'.sprintf("%03d", $i));
 								//
 								// preg_match_all('/<img.+src=\"?(.+\.(jpg|gif|bmp|bnp|png))\"?.+>/i', $file_content, $imgArr);
