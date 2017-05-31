@@ -584,7 +584,7 @@ class Doc extends CI_Controller {
 							exec($exec, $pdf_info);
 							if( count($pdf_info) ){
 								$page_num = count($pdf_info);
-								var_dump($page_num);die();
+								var_dump($page_num);
 								$page_width_height_string = explode(' ', $pdf_info[0]);
 								$page_width  = intval(explode('=', $page_width_height_string[1])[1]);
 								$page_height = intval(explode('=', $page_width_height_string[2])[1]);
@@ -623,8 +623,6 @@ class Doc extends CI_Controller {
 							}
 							file_put_contents($view_path.'\page.min.css', $file_content);
 							for($i=1;$i<=$page_num;$i++){
-								var_dump($i);
-								var_dump($page_num);
 								$file_content = file_get_contents($view_path.'\\'.sprintf("%03d", $i));
 								//
 								// preg_match_all('/<img.+src=\"?(.+\.(jpg|gif|bmp|bnp|png))\"?.+>/i', $file_content, $imgArr);
