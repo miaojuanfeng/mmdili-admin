@@ -410,7 +410,7 @@ class Doc extends CI_Controller {
 
 	public function batch($start, $end){
 		for($i=$start;$i<=$end;$i++){
-			$detail = $this->doc_model->get_detail($doc_id);
+			$detail = $this->doc_model->get_detail($i);
 
 			if( $detail ){
 
