@@ -408,6 +408,263 @@ class Doc extends CI_Controller {
 		redirect(base_url('doc'));
 	}
 
+	public function batch($start, $end){
+		for($i=$start;$i<=$end;$i++){
+			$detail = $this->doc_model->get_detail($doc_id);
+
+			if( $detail ){
+
+				$doc_id = $detail['doc_id'];
+				$doc_url = $detail['doc_url'];
+				$user_url = $detail['user_url'];
+				$doc_cate_id = $detail['doc_cate_id'];
+				$doc_user_id = $detail['doc_user_id'];
+				$doc_dl_forbidden = $detail['doc_dl_forbidden'];
+				$update_doc_content = 0;
+				$update_doc_view = 0;
+				$update_doc_html = 1;
+				$doc_content = "";
+				$file_path = self::$online_path.$detail['user_url'].'\\'.strtotime(date('Y', $detail['doc_url']).'-01-01 00:00:00').'\\'.$detail['doc_title'].'.'.$detail['doc_ext_name'];
+
+				if( $doc_id ){
+					if( $update_doc_content || $update_doc_view || $update_doc_html ){
+						$file_path = iconv('UTF-8', 'GB2312', $file_path);
+						$file = $this->mb_pathinfo($file_path);
+						if( $file['extension'] == 'doc' || $file['extension'] == 'docx' || $file['extension'] == 'txt' ){
+							try{
+								$word = null;
+					    		$word = new COM("Word.Application") or die ("Could not initialise Word Object.");   
+								$retry = 60;
+								while( !$word && (--$retry) ){
+									sleep(1);
+								}
+								if( $retry <= 0 ){
+									echo "word application not ready!";
+									return;
+								}
+					   			$word->Visible = 0;   
+					    		$word->DisplayAlerts = 0; 
+								$word->Documents->Open($file_path);
+								if( $update_doc_content ){
+									$doc_content = $word->ActiveDocument->content->Text;
+								}
+								if( $update_doc_view || $update_doc_html ){
+									$word->ActiveDocument->ExportAsFixedFormat(self::$convert_path.$doc_url.'.pdf', 17, false, 0, 0, 0, 0, 7, true, true, 2, true, true, false);
+								}
+								$word->Quit(false);  
+								unset($word);
+							}catch(Exception $e){
+								if( $word ){
+					    			$word->Quit(false);  
+					    			unset($word);
+								}
+								echo $e->getMessage();
+								return;
+							}
+						}
+						if( $file['extension'] == 'ppt' || $file['extension'] == 'pptx' ){
+							try{
+								$ppt = null;
+					    			$ppt = new COM("powerpoint.Application") or die ("Could not initialise PowerPoint Object.");   
+								$retry = 60;
+								while( !$ppt && (--$retry) ){
+									sleep(1);
+								}
+								if( $retry <= 0 ){
+									echo "ppt application not ready!";
+									return;
+								}
+					   			$ppt->Visible = true; //Hiding the application window is not allowed.   
+					    		$ppt->DisplayAlerts = 0; 
+								$ppt->Presentations->Open($file_path);
+								if( $update_doc_content ){
+									foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
+										foreach($v1->Shapes as $k2 => $v2 ){
+											if( $v2->HasTextFrame && $v2->TextFrame->HasText ){
+												$doc_content .= $v2->TextFrame->TextRange->Text." ";
+											}
+											if( $v2->HasTable ){
+												foreach($v2->Table->Rows as $k3 => $v3){
+													foreach($v2->Table->Columns as $k4 => $v4){
+														$doc_content .= $v2->Table->Cell($k3+1, $k4+1)->Shape->TextFrame->TextRange->Text." ";
+													}
+												}
+											}
+										}
+									}
+								}
+								if( $update_doc_view || $update_doc_html ){
+									$ppt->ActivePresentation->SaveAs(self::$convert_path.$doc_url.'.pdf', 32);
+								}
+								$ppt->Quit();  
+								unset($ppt);
+							}catch(Exception $e){
+								if( $ppt ){
+					    			$ppt->Quit();  
+					    			unset($ppt);
+								}
+								echo $e->getMessage();
+								return;
+							}
+						}
+						if( $update_doc_view ){
+							$view_path = self::$view_path.$doc_url.'\\';
+							$view_optimizer_path = self::$view_path.$doc_url.'_o'.'\\';
+							if( !is_dir($view_path) ){
+								mkdir($view_path, 0777, true);
+							}
+							if( !is_dir($view_optimizer_path) ){
+								mkdir($view_optimizer_path, 0777, true);
+							}
+
+							$page_num = 0;
+							$page_width = 0;
+							$page_height = 0;
+							$exec = "C:\MJF\SWFTools\pdf2swf.exe \"".self::$convert_path.$doc_url.".pdf\" -I";
+							exec($exec, $pdf_info);
+							if( count($pdf_info) ){
+								$page_num = count($pdf_info);
+								$page_width_height_string = explode(' ', $pdf_info[0]);
+								$page_width  = intval(explode('=', $page_width_height_string[1])[1]);
+								$page_height = intval(explode('=', $page_width_height_string[2])[1]);
+							}
+							if( !$page_width || !$page_height || !$page_num ){
+								echo "get pdf info failed.";
+								return;
+							}
+							$poly2bitmap = '';
+					pdf2swf_run:
+							$exec = "C:\MJF\SWFTools\pdf2swf.exe \"".self::$convert_path.$doc_url.".pdf\" -o ".$view_path."%.swf -T 9 -j 20 -s disablelinks".$poly2bitmap;
+							exec($exec, $swf_info);
+							foreach($swf_info as $k => $v){
+								//log_message('error', $v);
+								if( empty($poly2bitmap) && $v == 'ERROR   This file is too complex to render- SWF only supports 65536 shapes at once' ){
+									$poly2bitmap = ' -s poly2bitmap';
+									log_message('error', 'run -s poly2bitmap');
+									goto pdf2swf_run;
+								}
+							}
+							if( $file['extension'] != 'pdf' ){
+								unlink(self::$convert_path.$file['filename'].".pdf");
+							}
+							
+							$fo2 = 'C:\MJF\fo2\fo2.exe';
+							for($i=1;$i<=$page_num;$i++){
+								$fo2 .= ' /f "'.$view_path.$i.'.swf" /t "'.$view_optimizer_path.$i.'"';
+							}
+							$fo2 .= ' /o mmdili';
+							pclose(popen("start /B ". $fo2, "r"));
+							$retry = 60;
+							while( $retry-- ){
+								if( $this->file->count_file($view_optimizer_path) == $page_num ){
+									break;
+								}
+								sleep(1);
+							}
+					                exec("taskkill /f /im fo2.exe");
+							if( $retry <= 0 ){
+								echo "fo2 make files failed";
+								die();
+							}
+
+							if( !$this->oss->uploadDir($user_url.'/'.$doc_url, $view_optimizer_path)){
+								echo "upload swf to OSS failed.";
+								return;
+							}
+							$this->file->del_dir_file(self::$view_path);
+						}else if( $update_doc_html ){
+							$view_path = self::$view_path.$doc_url;
+
+							$page_num = 0;
+							$page_width = 0;
+							$page_height = 0;
+							$exec = "C:\MJF\SWFTools\pdf2swf.exe \"".self::$convert_path.$doc_url.".pdf\" -I";
+							exec($exec, $pdf_info);
+							if( count($pdf_info) ){
+								$page_num = count($pdf_info);
+								$page_width_height_string = explode(' ', $pdf_info[0]);
+								$page_width  = intval(explode('=', $page_width_height_string[1])[1]);
+								$page_height = intval(explode('=', $page_width_height_string[2])[1]);
+							}
+							if( !$page_width || !$page_height || !$page_num ){
+								echo "get pdf info failed.";
+								return;
+							}
+
+							$cmd  = 'C:\MJF\pdf2htmlEX\pdf2htmlEX.exe';
+							$cmd .= ' --zoom 1.613';
+							$cmd .= ' --split-pages 1';
+							$cmd .= ' --embed-image 0';
+							$cmd .= ' --embed-css 0';
+							$cmd .= ' --embed-font 0';
+							$cmd .= ' --bg-format "jpg"';
+							$cmd .= ' --dest-dir "'.$view_path.'"';
+							// $cmd .= ' --page-filename "'.$doc_url.'-%03d.page"';
+							$cmd .= ' --page-filename "%03d"';
+							// $cmd .= ' --css-filename "'.$doc_url.'.css"';
+							$cmd .= ' --css-filename "page.min.css"';
+							$cmd .= ' --embed-javascript 0';
+							$cmd .= ' --process-outline 0';
+							$cmd .= ' --vdpi 80';
+							$cmd .= ' --hdpi 80';
+							$cmd .= ' "'.self::$convert_path.$doc_url.'.pdf"';
+							exec($cmd, $r);
+							if( $file['extension'] != 'pdf' ){
+								unlink(self::$convert_path.$doc_url.".pdf");
+							}
+							$this->clearn_file($view_path, 'woff');
+							$file_content = file_get_contents($view_path.'\page.min.css');
+							preg_match_all('/@font-face{font-family:(.*?)}/i', $file_content, $imgArr);
+							foreach ($imgArr[0] as $key => $value) {
+								$file_content = str_replace($value, '', $file_content);
+							}
+							file_put_contents($view_path.'\page.min.css', $file_content);
+							for($i=1;$i<=$page_num;$i++){
+								$file_content = file_get_contents($view_path.'\\'.sprintf("%03d", $i));
+								//
+								// preg_match_all('/<img.+src=\"?(.+\.(jpg|gif|bmp|bnp|png))\"?.+>/i', $file_content, $imgArr);
+								// $file_content = str_replace($imgArr[1][0], 'http://view.mmdili.com/'.$user_url.'/'.$doc_url.'/'.$imgArr[1][0], $file_content);
+								//
+								// preg_match_all('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', $file_content, $imgArr); 
+		 						preg_match_all('/<\s*img\s+[^>]*?class\s*=\s*(\'|\")(.*?)\\1+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', $file_content, $imgArr); 
+		 						$div = '<div class="'.$imgArr[2][0].'" style="background-image:url('.'http://view.mmdili.com/'.$user_url.'/'.$doc_url.'/'.$imgArr[4][0].')"></div>';
+		 						$file_content = str_replace($imgArr[0][0], $div, $file_content);
+								//
+								preg_match_all('/<a .*?href="(.*?)".*?>/is', $file_content, $imgArr);
+								foreach($imgArr[1] as $key => $value){
+									$file_content = str_replace($value, 'javascript:;', $file_content);
+								}
+								file_put_contents($view_path.'\\'.sprintf("%03d", $i), $file_content);
+							}
+							$views = $this->oss->listView($user_url, $doc_url);
+							$objects = array();
+							foreach ($views as $key => $value) {
+								$objects[] = $value->getKey();
+							}
+							if( count($objects) && !$this->oss->deleteObjects($objects)){
+								echo "delete html from OSS failed.";
+								return;
+							}
+							if( !$this->oss->uploadDir($user_url.'/'.$doc_url, $view_path)){
+								echo "upload html to OSS failed.";
+								return;
+							}
+							$this->file->del_dir_file(self::$view_path);
+						}
+						if( $update_doc_content ){
+							$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
+							$doc_content = $this->trim_whitespace($doc_content);
+						}
+					}
+
+					if( $this->doc_model->update($doc_id, $doc_cate_id, $doc_user_id, $doc_dl_forbidden, $update_doc_content, $doc_content, $update_doc_html) ){
+						redirect(base_url('doc/detail/'.$doc_id));
+					}
+				}
+			}
+		}
+	}
+
 	public function load(){
 		$user_url = $this->input->post('user_url');
 		$doc_url = $this->input->post('doc_url');
