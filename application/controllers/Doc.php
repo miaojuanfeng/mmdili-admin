@@ -584,6 +584,7 @@ class Doc extends CI_Controller {
 							exec($exec, $pdf_info);
 							if( count($pdf_info) ){
 								$page_num = count($pdf_info);
+								var_dump($page_num);die();
 								$page_width_height_string = explode(' ', $pdf_info[0]);
 								$page_width  = intval(explode('=', $page_width_height_string[1])[1]);
 								$page_height = intval(explode('=', $page_width_height_string[2])[1]);
