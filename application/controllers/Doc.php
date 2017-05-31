@@ -580,6 +580,7 @@ class Doc extends CI_Controller {
 							$page_num = 0;
 							$page_width = 0;
 							$page_height = 0;
+							$pdf_info = array();
 							$exec = "C:\MJF\SWFTools\pdf2swf.exe \"".self::$convert_path.$doc_url.".pdf\" -I";
 							exec($exec, $pdf_info);
 							if( count($pdf_info) ){
