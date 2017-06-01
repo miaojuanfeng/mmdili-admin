@@ -338,7 +338,8 @@ class Doc extends CI_Controller {
 					}
 
 					$cmd  = 'C:\MJF\pdf2htmlEX\pdf2htmlEX.exe';
-					$cmd .= ' --zoom 1.613';
+					//$cmd .= ' --zoom 1.613';
+					$cmd .= ' --fit-width 960';
 					$cmd .= ' --split-pages 1';
 					$cmd .= ' --embed-image 0';
 					$cmd .= ' --embed-css 0';
