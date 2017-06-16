@@ -12,15 +12,18 @@ class doc_model extends CI_Model{
         parent::__construct();
 
         $this->load->database('default');
+	$this->cii_db = new cii_database('localhost', 'root', '', 'mmdili');
     }
 
     public function get_count(){
-        $query = $this->db->query("SELECT COUNT(doc_id) as rows_total FROM m_doc WHERE doc_deleted = 0");
-        return $query->row_array()['rows_total'];
+        //$query = $this->db->query("SELECT COUNT(doc_id) as rows_total FROM m_doc WHERE doc_deleted = 0");
+        //return $query->row_array()['rows_total'];
+	$query = $this->cii_db->query("SELECT doc_id FROM m_doc WHERE doc_deleted = 0");
+	return $query->num_rows();
     }
 	
 	public function get_list($limit, $offset){
-    	$query = $this->db->query("SELECT user_url, doc_id, doc_url, doc_title, substring(doc_content, 1, 250) as doc_desc, doc_page_num FROM m_doc LEFT JOIN m_user ON doc_user_id = user_id WHERE doc_deleted = 0 AND user_deleted = 0 ORDER BY doc_id DESC LIMIT ".$limit." OFFSET ".$offset);
+    	$query = $this->cii_db->query("SELECT user_url, doc_id, doc_url, doc_title, substring(doc_content, 1, 250) as doc_desc, doc_page_num FROM m_doc LEFT JOIN m_user ON doc_user_id = user_id WHERE doc_deleted = 0 AND user_deleted = 0 ORDER BY doc_id DESC LIMIT ".$limit." OFFSET ".$offset);
     	return $query->result_array();
     }
 

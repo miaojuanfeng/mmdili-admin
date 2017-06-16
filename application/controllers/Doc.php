@@ -68,7 +68,7 @@ class Doc extends CI_Controller {
     }
 
     public function index($pn = 1){
-    	// 每页显示数量
+    		// 每页显示数量
 		$limit = 10;
 		// 总记录数量
 		$total = $this->doc_model->get_count();
@@ -93,6 +93,10 @@ class Doc extends CI_Controller {
 		$cii_pagination['base_url'] = base_url('doc/index/');
 		$cii_pagination['per_page'] = $limit;
 		$cii_pagination['total_rows'] = $total;
+		$cii_pagination['first_link'] = '首页';
+		$cii_pagination['prev_link'] = '上一页';
+		$cii_pagination['next_link'] = '下一页';
+		$cii_pagination['last_link'] = '尾页';
 		$this->cii_pagination->initialize($cii_pagination);
 		//
 		$this->load->view('doc_list_view', $data);

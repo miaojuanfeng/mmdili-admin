@@ -102,4 +102,58 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 			}
 	}*/
 
+	function search($keyword){
+var_dump(time());
+		$this->load->database('default');
+		include 'C:\MJF\coreseek\api\sphinxapi.php';  // 加载Sphinx API   
+		$sc = new SphinxClient(); // 实例化Api 
+		$sc->setServer('localhost', 9312); // 设置服务端，第一个参数sphinx服务器地址，第二个sphinx监听端口
+		$res = $sc->query($keyword, 'mysql'); // 执行查询，第一个参数查询的关键字，第二个查询的索引名称，mysql索引名称（这个也是在配置文件中定义的），多个索引名称以,分开，也可以用*表示所有索引。
+var_dump(time());
+		echo "<pre>";
+		var_dump($res);
+		echo "</pre>";
+		if( $res['total'] ){
+			$key = array_keys($res['matches']);
+			$ids = implode(',',$key);
+var_dump(time());
+			$result = $this->db->query('select doc_url, doc_title, doc_content from m_doc where doc_id in ('.$ids.') limit 10');
+			$opt = array("before_match"=>"<font style='font-weight:bold;color:#f00'>","after_match"=>"</font>");
+var_dump(time());	
+			foreach($result->result_array() as $k => $v){
+				echo '<pre>';
+                		//这里为sphinx高亮显示
+				$rows = $sc->buildExcerpts($v,"mysql",$keyword,$opt);
+				echo "<pre>";
+				print_r($rows);
+				echo "</pre>";
+var_dump(time());
+			}
+		}
+		
+	}
+
+	function db($limit, $offset){
+		$this->cii_db = new cii_database('localhost', 'root', '', 'mmdili');
+		$result = $this->cii_db->query("SELECT user_url, doc_id, doc_url, doc_title, substring(doc_content, 1, 250) as doc_desc, doc_page_num FROM m_doc LEFT JOIN m_user ON doc_user_id = user_id WHERE doc_deleted = 0 AND user_deleted = 0 ORDER BY doc_id DESC LIMIT ".$limit." OFFSET ".$offset);
+		echo "<pre>";
+		var_dump($result->result_array());
+		echo "</pre>";
+		/*
+		$this->load->database('default');
+		$result = $this->db->query('select doc_title from m_doc where doc_deleted = 12 order by doc_id desc limit 1');
+		echo "<pre>";
+		var_dump($this->db);
+		echo "</pre>";
+		echo "<pre>";
+		//$result->num_rows();
+		$result->row_array();
+		var_dump($result);
+		echo "</pre>";*/
+		/*$db = new cii_database('localhost', 'root', '', 'mmdili');
+		echo "<pre>";
+		var_dump($db);
+		echo "</pre>";*/
+	}
+
 }
