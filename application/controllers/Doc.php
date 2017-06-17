@@ -371,10 +371,9 @@ class Doc extends CI_Controller {
 						$file_content = str_replace($value, '', $file_content);
 					}
 					preg_match_all('/.ff[0-9]*{(.*?)}/i', $file_content, $imgArr);
-					var_dump($imgArr);die();
-					// foreach ($imgArr[0] as $key => $value) {
-					// 	$file_content = str_replace($value, '', $file_content);
-					// }
+					foreach ($imgArr[1] as $key => $value) {
+						$file_content = str_replace($value, '', $file_content);
+					}
 					file_put_contents($view_path.'\page.min.css', $file_content);
 					for($i=1;$i<=$page_num;$i++){
 						$file_content = file_get_contents($view_path.'\\'.sprintf("%03d", $i));
