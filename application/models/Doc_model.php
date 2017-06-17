@@ -54,9 +54,11 @@ class doc_model extends CI_Model{
     	if( $update_doc_content ){
     		$sql .= "doc_content = '".$this->db->escape_str($doc_content)."',";
     	}
+	if( !empty($update_doc_html) ){
+		$sql .= "doc_html_view = ".$update_doc_html.",";
+	}	
     	$sql .=	"
             doc_dl_forbidden = ".$doc_dl_forbidden.",
-            doc_html_view = ".$update_doc_html.",
     		doc_modify_date = ".time()."  
     		WHERE doc_id = ".$doc_id;
     	$this->db->query($sql);

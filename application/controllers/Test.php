@@ -133,27 +133,11 @@ var_dump(time());
 		
 	}
 
-	function db($limit, $offset){
-		$this->cii_db = new cii_database('localhost', 'root', '', 'mmdili');
-		$result = $this->cii_db->query("SELECT user_url, doc_id, doc_url, doc_title, substring(doc_content, 1, 250) as doc_desc, doc_page_num FROM m_doc LEFT JOIN m_user ON doc_user_id = user_id WHERE doc_deleted = 0 AND user_deleted = 0 ORDER BY doc_id DESC LIMIT ".$limit." OFFSET ".$offset);
+	function input(){
 		echo "<pre>";
-		var_dump($result->result_array());
+		var_dump($this->input->get('sa'));
 		echo "</pre>";
-		/*
-		$this->load->database('default');
-		$result = $this->db->query('select doc_title from m_doc where doc_deleted = 12 order by doc_id desc limit 1');
-		echo "<pre>";
-		var_dump($this->db);
-		echo "</pre>";
-		echo "<pre>";
-		//$result->num_rows();
-		$result->row_array();
-		var_dump($result);
-		echo "</pre>";*/
-		/*$db = new cii_database('localhost', 'root', '', 'mmdili');
-		echo "<pre>";
-		var_dump($db);
-		echo "</pre>";*/
+		
 	}
 
 }
