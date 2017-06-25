@@ -385,10 +385,10 @@ class Doc extends CI_Controller {
 					foreach ($imgArr[1] as $key => $value) {
 						$file_content = str_replace($value, '', $file_content);
 					}
-					preg_match_all('/.fs2{font-size:(.*?)px;}/i', $file_content, $imgArr);
-					foreach ($imgArr[1] as $key => $value) {
-						$file_content = str_replace($value, '38', $file_content);
-					}
+					// preg_match_all('/.fs2{font-size:(.*?)px;}/i', $file_content, $imgArr);
+					// foreach ($imgArr[1] as $key => $value) {
+					// 	$file_content = str_replace($value, '38', $file_content);
+					// }
 					// preg_match_all('/.ls0{letter-spacing:(.*?)px;}/i', $file_content, $imgArr);
 					// foreach ($imgArr[1] as $key => $value) {
 					// 	$file_content = str_replace($value, '3', $file_content);
