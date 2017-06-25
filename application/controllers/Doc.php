@@ -378,14 +378,14 @@ class Doc extends CI_Controller {
 					foreach ($imgArr[1] as $key => $value) {
 						$file_content = str_replace($value, '38', $file_content);
 					}
-					preg_match_all('/.ls0{letter-spacing:(.*?)px;}/i', $file_content, $imgArr);
-					foreach ($imgArr[1] as $key => $value) {
-						$file_content = str_replace($value, '3', $file_content);
-					}
-					preg_match_all('/.ws0{word-spacing:(.*?)px;}/i', $file_content, $imgArr);
-					foreach ($imgArr[1] as $key => $value) {
-						$file_content = str_replace($value, '3', $file_content);
-					}
+					// preg_match_all('/.ls0{letter-spacing:(.*?)px;}/i', $file_content, $imgArr);
+					// foreach ($imgArr[1] as $key => $value) {
+					// 	$file_content = str_replace($value, '3', $file_content);
+					// }
+					// preg_match_all('/.ws0{word-spacing:(.*?)px;}/i', $file_content, $imgArr);
+					// foreach ($imgArr[1] as $key => $value) {
+					// 	$file_content = str_replace($value, '3', $file_content);
+					// }
 					file_put_contents($view_path.'\page.min.css', $file_content);
 					for($i=1;$i<=$page_num;$i++){
 						$file_content = file_get_contents($view_path.'\\'.sprintf("%03d", $i));
