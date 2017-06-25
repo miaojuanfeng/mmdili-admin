@@ -27,10 +27,17 @@ class Doc extends CI_Controller {
     {
     	parent::__construct();
     	$this->load->helper('url');
-    	$this->load->model('doc_model');
-    	$this->load->library('oss');
-    	$this->load->library('file');
+	//
+    	$this->cii_load = new cii_loader();
+	//
+	$this->doc_model = $this->cii_load->model('doc_model', 'C:\MJF\web\admin\application\models\Doc_model.php');
+    	//
+	$this->oss = $this->cii_load->library('oss', 'C:\MJF\web\admin\application\libraries\Oss.php');
+	//
+    	$this->file = $this->cii_load->library('file', 'C:\MJF\web\admin\application\libraries\File.php');
+	//
     	$this->cii_pagination = new cii_pagination();
+	$this->cii_input = new cii_input();
     }
 
     private function trim_whitespace($str)
@@ -99,7 +106,11 @@ class Doc extends CI_Controller {
 		$cii_pagination['last_link'] = '尾页';
 		$this->cii_pagination->initialize($cii_pagination);
 		//
-		$this->load->view('doc_list_view', $data);
+		//$this->load->view('doc_list_view', $data);
+		$this->cii_load->cii_pagination = new cii_pagination();
+		$this->cii_load->uri = $this->uri;
+		$this->cii_load->cii_pagination->initialize($cii_pagination);
+		$this->cii_load->view('C:\MJF\web\admin\application\views\doc_list_view.php', $data);
     }
 
     private function mb_pathinfo($filepath) {
@@ -125,7 +136,7 @@ class Doc extends CI_Controller {
 		$data['doc']['user_url'] = $detail['user_url'];
 		$data['doc']['doc_ext_name'] = $detail['doc_ext_name'];
 
-		$this->load->view('doc_detail_view', $data);
+		$this->cii_load->view('C:\MJF\web\admin\application\views\doc_detail_view.php', $data);
 	}
 
 	private function clearn_file($path, $file_type){
@@ -162,17 +173,17 @@ class Doc extends CI_Controller {
 	}
 
 	public function update(){
-		$doc_id = $this->input->post('doc_id');
-		$doc_url = $this->input->post('doc_url');
-		$user_url = $this->input->post('user_url');
-		$doc_cate_id = $this->input->post('doc_cate_id');
-		$doc_user_id = $this->input->post('doc_user_id');
-		$doc_dl_forbidden = $this->input->post('doc_dl_forbidden');
-		$update_doc_content = $this->input->post('update_doc_content');
-		$update_doc_view = $this->input->post('update_doc_view');
-		$update_doc_html = $this->input->post('update_doc_html');
+		$doc_id = $this->cii_input->post('doc_id');
+		$doc_url = $this->cii_input->post('doc_url');
+		$user_url = $this->cii_input->post('user_url');
+		$doc_cate_id = $this->cii_input->post('doc_cate_id');
+		$doc_user_id = $this->cii_input->post('doc_user_id');
+		$doc_dl_forbidden = $this->cii_input->post('doc_dl_forbidden');
+		$update_doc_content = $this->cii_input->post('update_doc_content');
+		$update_doc_view = $this->cii_input->post('update_doc_view');
+		$update_doc_html = $this->cii_input->post('update_doc_html');
 		$doc_content = "";
-		$file_path = self::$online_path.$this->input->post('file_path');
+		$file_path = self::$online_path.$this->cii_input->post('file_path');
 
 		if( $doc_id ){
 			if( $update_doc_content || $update_doc_view || $update_doc_html ){
@@ -690,8 +701,8 @@ class Doc extends CI_Controller {
 	}
 
 	public function load(){
-		$user_url = $this->input->post('user_url');
-		$doc_url = $this->input->post('doc_url');
+		$user_url = $this->cii_input->post('user_url');
+		$doc_url = $this->cii_input->post('doc_url');
 
 		if( $user_url && $doc_url ){
 			$views = $this->oss->listView($user_url, $doc_url);

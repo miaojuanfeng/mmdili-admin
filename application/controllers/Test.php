@@ -140,4 +140,10 @@ var_dump(time());
 		
 	}
 
+	function view(){
+		$loader = new cii_loader();
+		$data = array('message'=>'haha');
+		$loader->view("C:\MJF\web\admin\application\\views\\errors\html\\error_404.php", $data);
+	}
+
 }

@@ -4,14 +4,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-class doc_model extends CI_Model{
+//class doc_model extends CI_Model{
+class doc_model{
     //put your code here
     
     function __construct()
     {
-        parent::__construct();
+        //parent::__construct();
 
-        $this->load->database('default');
+        //$this->load->database('default');
 	$this->cii_db = new cii_database('localhost', 'root', '', 'mmdili');
     }
 
@@ -43,7 +44,7 @@ class doc_model extends CI_Model{
             LEFT JOIN m_doc_ext ON m_doc.doc_ext_id = m_doc_ext.doc_ext_id 
             WHERE doc_deleted = 0 
             AND doc_id = ".$doc_id." LIMIT 1";
-    	$query = $this->db->query($sql);
+    	$query = $this->cii_db->query($sql);
     	return $query->row_array();
     }
 
@@ -61,8 +62,8 @@ class doc_model extends CI_Model{
             doc_dl_forbidden = ".$doc_dl_forbidden.",
     		doc_modify_date = ".time()."  
     		WHERE doc_id = ".$doc_id;
-    	$this->db->query($sql);
-    	if( $this->db->affected_rows() ){
+    	$this->cii_db->query($sql);
+    	if( $this->cii_db->affected_rows() ){
     		return true;
     	}
     	return false;
