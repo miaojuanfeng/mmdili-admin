@@ -375,29 +375,17 @@ class Doc extends CI_Controller {
 					if( $file['extension'] != 'pdf' ){
 						unlink(self::$convert_path.$doc_url.".pdf");
 					}
-					$this->clearn_file($view_path, 'woff');
-					$file_content = file_get_contents($view_path.'\page.min.css');
-					preg_match_all('/@font-face{font-family:(.*?)}/i', $file_content, $imgArr);
-					foreach ($imgArr[0] as $key => $value) {
-						$file_content = str_replace($value, '', $file_content);
-					}
-					preg_match_all('/.ff[0-9]*{(.*?)}/i', $file_content, $imgArr);
-					foreach ($imgArr[1] as $key => $value) {
-						$file_content = str_replace($value, '', $file_content);
-					}
-					preg_match_all('/.fs2{font-size:(.*?)px;}/i', $file_content, $imgArr);
-					foreach ($imgArr[1] as $key => $value) {
-						$file_content = str_replace($value, '38', $file_content);
-					}
-					// preg_match_all('/.ls0{letter-spacing:(.*?)px;}/i', $file_content, $imgArr);
-					// foreach ($imgArr[1] as $key => $value) {
-					// 	$file_content = str_replace($value, 'letter-spacing:3px !important;word-spacing: 3px !important;', $file_content);
+					// $this->clearn_file($view_path, 'woff');
+					// $file_content = file_get_contents($view_path.'\page.min.css');
+					// preg_match_all('/@font-face{font-family:(.*?)}/i', $file_content, $imgArr);
+					// foreach ($imgArr[0] as $key => $value) {
+					// 	$file_content = str_replace($value, '', $file_content);
 					// }
-					// preg_match_all('/.ws0{word-spacing:(.*?)px;}/i', $file_content, $imgArr);
+					// preg_match_all('/.ff[0-9]*{(.*?)}/i', $file_content, $imgArr);
 					// foreach ($imgArr[1] as $key => $value) {
-					// 	$file_content = str_replace($value, '3', $file_content);
+					// 	$file_content = str_replace($value, '', $file_content);
 					// }
-					file_put_contents($view_path.'\page.min.css', $file_content);
+					// file_put_contents($view_path.'\page.min.css', $file_content);
 					for($i=1;$i<=$page_num;$i++){
 						$file_content = file_get_contents($view_path.'\\'.sprintf("%03d", $i));
 						//
