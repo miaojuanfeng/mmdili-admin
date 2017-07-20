@@ -498,13 +498,13 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 			}
 		}
 
-		$view_path = self::$view_path.$doc_url;
+		$view_path = self::$view_path.$time;
 
 		$page_num = 0;
 		$page_width = 0;
 		$page_height = 0;
 		$pdf_info = array();
-		$exec = "C:\MJF\SWFTools\pdf2swf.exe \"".self::$convert_path.$doc_url.".pdf\" -I";
+		$exec = "C:\MJF\SWFTools\pdf2swf.exe \"".self::$convert_path.$time.".pdf\" -I";
 		exec($exec, $pdf_info);
 		if( count($pdf_info) ){
 			$page_num = count($pdf_info);
@@ -527,19 +527,19 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 		$cmd .= ' --embed-font 0';
 		$cmd .= ' --bg-format "jpg"';
 		$cmd .= ' --dest-dir "'.$view_path.'"';
-		// $cmd .= ' --page-filename "'.$doc_url.'-%03d.page"';
+		// $cmd .= ' --page-filename "'.$time.'-%03d.page"';
 		// $cmd .= ' --page-filename "%03d"';
 		$cmd .= ' --page-filename "%03d.html"';
-		// $cmd .= ' --css-filename "'.$doc_url.'.css"';
+		// $cmd .= ' --css-filename "'.$time.'.css"';
 		$cmd .= ' --css-filename "page.min.css"';
 		$cmd .= ' --embed-javascript 0';
 		$cmd .= ' --process-outline 0';
 		$cmd .= ' --vdpi 80';
 		$cmd .= ' --hdpi 80';
-		$cmd .= ' "'.self::$convert_path.$doc_url.'.pdf"';
+		$cmd .= ' "'.self::$convert_path.$time.'.pdf"';
 		exec($cmd, $r);
 		if( $file['extension'] != 'pdf' ){
-			unlink(self::$convert_path.$doc_url.".pdf");
+			unlink(self::$convert_path.$time.".pdf");
 		}
 		// $this->clearn_file($view_path, 'woff');
 		// $file_content = file_get_contents($view_path.'\page.min.css');
@@ -559,12 +559,12 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 			$file_content = file_get_contents($view_path.'\\'.sprintf("%03d.html", $i));
 			//
 			// preg_match_all('/<img.+src=\"?(.+\.(jpg|gif|bmp|bnp|png))\"?.+>/i', $file_content, $imgArr);
-			// $file_content = str_replace($imgArr[1][0], 'http://view.mmdili.com/'.$user_url.'/'.$doc_url.'/'.$imgArr[1][0], $file_content);
+			// $file_content = str_replace($imgArr[1][0], 'http://view.mmdili.com/'.$user_url.'/'.$time.'/'.$imgArr[1][0], $file_content);
 			//
 			// preg_match_all('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', $file_content, $imgArr); 
 				preg_match_all('/<\s*img\s+[^>]*?class\s*=\s*(\'|\")(.*?)\\1+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', $file_content, $imgArr); 
 				if( isset($imgArr[2][0]) && isset($imgArr[4][0]) ){
-					$div = '<div class="'.$imgArr[2][0].'" style="background-image:url('.'http://view.mmdili.com/'.$user_url.'/'.$doc_url.'/'.$imgArr[4][0].')"></div>';
+					$div = '<div class="'.$imgArr[2][0].'" style="background-image:url('.'http://view.mmdili.com/'.$user_url.'/'.$time.'/'.$imgArr[4][0].')"></div>';
 					$file_content = str_replace($imgArr[0][0], $div, $file_content);
 				}
 			//
@@ -583,7 +583,7 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 			}
 		}
 		$this->clearn_file($view_path, 'html');
-		$views = $this->oss->listView($user_url, $doc_url);
+		$views = $this->oss->listView($user_url, $time);
 		$objects = array();
 		foreach ($views as $key => $value) {
 			$objects[] = $value->getKey();
@@ -592,7 +592,7 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 			echo "delete html from OSS failed.";
 			return;
 		}
-		if( !$this->oss->uploadDir($user_url.'/'.$doc_url, $view_path)){
+		if( !$this->oss->uploadDir($user_url.'/'.$time, $view_path)){
 			echo "upload html to OSS failed.";
 			return;
 		}
