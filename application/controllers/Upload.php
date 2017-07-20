@@ -504,7 +504,7 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 		$page_width = 0;
 		$page_height = 0;
 		$pdf_info = array();
-		$exec = "C:\MJF\SWFTools\pdf2swf.exe \"".self::$convert_path.$time.".pdf\" -I";
+		$exec = "C:\MJF\SWFTools\pdf2swf.exe \"".self::$convert_path.$file['filename'].".pdf\" -I";
 		exec($exec, $pdf_info);
 		if( count($pdf_info) ){
 			$page_num = count($pdf_info);
@@ -536,10 +536,10 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 		$cmd .= ' --process-outline 0';
 		$cmd .= ' --vdpi 80';
 		$cmd .= ' --hdpi 80';
-		$cmd .= ' "'.self::$convert_path.$time.'.pdf"';
+		$cmd .= ' "'.self::$convert_path.$file['filename'].'.pdf"';
 		exec($cmd, $r);
 		if( $file['extension'] != 'pdf' ){
-			unlink(self::$convert_path.$time.".pdf");
+			unlink(self::$convert_path.$file['filename'].".pdf");
 		}
 		// $this->clearn_file($view_path, 'woff');
 		// $file_content = file_get_contents($view_path.'\page.min.css');
