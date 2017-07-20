@@ -552,9 +552,7 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 		// 	$file_content = str_replace($value, '', $file_content);
 		// }
 		// file_put_contents($view_path.'\page.min.css', $file_content);
-		if($update_doc_content){
-			$doc_content = "";
-		}
+		$doc_content = "";
 		for($i=1;$i<=$page_num;$i++){
 			$file_content = file_get_contents($view_path.'\\'.sprintf("%03d.html", $i));
 			//
@@ -573,13 +571,11 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 				$file_content = str_replace($value, 'javascript:;', $file_content);
 			}
 			file_put_contents($view_path.'\\'.sprintf("%03d.html", $i), $file_content);
-			if($update_doc_content){
-				if($doc_content == ""){
-					$doc_content = $file_content;
-				}else{
-					$doc_content .= '#[page]#'.$file_content;
-				}
-		
+			//
+			if($doc_content == ""){
+				$doc_content = $file_content;
+			}else{
+				$doc_content .= '#[page]#'.$file_content;
 			}
 		}
 		$this->clearn_file($view_path, 'html');
@@ -598,10 +594,8 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 		}
 		$this->file->del_dir_file(self::$view_path);
 		//
-		if( $update_doc_content ){
-			//$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
-			$doc_content = $this->trim_whitespace($doc_content);
-		}
+		//$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
+		$doc_content = $this->trim_whitespace($doc_content);
 		//
 		if( !$this->oss->uploadDir($this->user_url[$doc_user_id].'/'.$time, $view_optimizer_path)){
 			echo "upload swf to OSS failed.";
