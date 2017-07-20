@@ -53,7 +53,7 @@ class doc_model{
     		doc_cate_id = ".$doc_cate_id.",
     		doc_user_id = ".$doc_user_id.",";
     	if( $update_doc_content ){
-    		$sql .= "doc_content = '".$this->db->escape_str($doc_content)."',";
+    		$sql .= "doc_content = '".$this->cii_db->escape_str($doc_content)."',";
     	}
 	if( !empty($update_doc_html) ){
 		$sql .= "doc_html_view = ".$update_doc_html.",";

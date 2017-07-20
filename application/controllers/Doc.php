@@ -38,6 +38,7 @@ class Doc extends CI_Controller {
 	//
     	$this->cii_pagination = new cii_pagination();
 	$this->cii_input = new cii_input();
+	$this->cii_uri = new cii_uri();
     }
 
     private function trim_whitespace($str)
@@ -108,7 +109,7 @@ class Doc extends CI_Controller {
 		//
 		//$this->load->view('doc_list_view', $data);
 		$this->cii_load->cii_pagination = new cii_pagination();
-		$this->cii_load->uri = $this->uri;
+		$this->cii_load->cii_uri = $this->cii_uri;
 		$this->cii_load->cii_pagination->initialize($cii_pagination);
 		$this->cii_load->view('C:\MJF\web\admin\application\views\doc_list_view.php', $data);
     }
@@ -163,9 +164,9 @@ class Doc extends CI_Controller {
 	            clearn_file($full_name,$file_type);
 	        }else{
 	            preg_match("/(.*)\.$file_type/",$filename,$match);
-	            if(!empty($match[0][0])){
-	                // echo $full_name;
-	                // echo '<br>';
+	            if(!empty($match[0][0]) || !empty($match[0])){
+	                //echo $full_name;
+	                //echo '<br>';
 	                unlink($full_name);
 	            }
 	        }
@@ -363,7 +364,7 @@ class Doc extends CI_Controller {
 					$cmd .= ' --bg-format "jpg"';
 					$cmd .= ' --dest-dir "'.$view_path.'"';
 					// $cmd .= ' --page-filename "'.$doc_url.'-%03d.page"';
-					$cmd .= ' --page-filename "%03d"';
+					$cmd .= ' --page-filename "%03d.html"';
 					// $cmd .= ' --css-filename "'.$doc_url.'.css"';
 					$cmd .= ' --css-filename "page.min.css"';
 					$cmd .= ' --embed-javascript 0';
@@ -386,8 +387,11 @@ class Doc extends CI_Controller {
 					// 	$file_content = str_replace($value, '', $file_content);
 					// }
 					// file_put_contents($view_path.'\page.min.css', $file_content);
+					if($update_doc_content){
+						$doc_content = "";
+					}
 					for($i=1;$i<=$page_num;$i++){
-						$file_content = file_get_contents($view_path.'\\'.sprintf("%03d", $i));
+						$file_content = file_get_contents($view_path.'\\'.sprintf("%03d.html", $i));
 						//
 						// preg_match_all('/<img.+src=\"?(.+\.(jpg|gif|bmp|bnp|png))\"?.+>/i', $file_content, $imgArr);
 						// $file_content = str_replace($imgArr[1][0], 'http://view.mmdili.com/'.$user_url.'/'.$doc_url.'/'.$imgArr[1][0], $file_content);
@@ -403,8 +407,17 @@ class Doc extends CI_Controller {
 						foreach($imgArr[1] as $key => $value){
 							$file_content = str_replace($value, 'javascript:;', $file_content);
 						}
-						file_put_contents($view_path.'\\'.sprintf("%03d", $i), $file_content);
+						file_put_contents($view_path.'\\'.sprintf("%03d.html", $i), $file_content);
+						if($update_doc_content){
+							if($doc_content == ""){
+								$doc_content = $file_content;
+							}else{
+								$doc_content .= '#[page]#'.$file_content;
+							}
+							
+						}
 					}
+					$this->clearn_file($view_path, 'html');
 					$views = $this->oss->listView($user_url, $doc_url);
 					$objects = array();
 					foreach ($views as $key => $value) {
@@ -421,7 +434,7 @@ class Doc extends CI_Controller {
 					$this->file->del_dir_file(self::$view_path);
 				}
 				if( $update_doc_content ){
-					$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
+					//$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
 					$doc_content = $this->trim_whitespace($doc_content);
 				}
 			}
@@ -434,10 +447,16 @@ class Doc extends CI_Controller {
 	}
 
 	public function batch($start, $end){
+		ob_end_clean();
+ 		ob_implicit_flush(1);
 		for($batch_id=$start;$batch_id<=$end;$batch_id++){
 			$detail = $this->doc_model->get_detail($batch_id);
 
 			if( $detail ){
+				echo "#".$batch_id." - ".$detail['doc_title']."(".$detail['doc_url'].")<br/>";
+				//ob_flush();
+     				flush();
+				
 
 				$doc_id = $detail['doc_id'];
 				$doc_url = $detail['doc_url'];
@@ -445,7 +464,7 @@ class Doc extends CI_Controller {
 				$doc_cate_id = $detail['doc_cate_id'];
 				$doc_user_id = $detail['doc_user_id'];
 				$doc_dl_forbidden = $detail['doc_dl_forbidden'];
-				$update_doc_content = 0;
+				$update_doc_content = 1;
 				$update_doc_view = 0;
 				$update_doc_html = 1;
 				$doc_content = "";
@@ -629,7 +648,8 @@ class Doc extends CI_Controller {
 							$cmd .= ' --bg-format "jpg"';
 							$cmd .= ' --dest-dir "'.$view_path.'"';
 							// $cmd .= ' --page-filename "'.$doc_url.'-%03d.page"';
-							$cmd .= ' --page-filename "%03d"';
+							// $cmd .= ' --page-filename "%03d"';
+							$cmd .= ' --page-filename "%03d.html"';
 							// $cmd .= ' --css-filename "'.$doc_url.'.css"';
 							$cmd .= ' --css-filename "page.min.css"';
 							$cmd .= ' --embed-javascript 0';
@@ -652,8 +672,11 @@ class Doc extends CI_Controller {
 							// 	$file_content = str_replace($value, '', $file_content);
 							// }
 							// file_put_contents($view_path.'\page.min.css', $file_content);
+							if($update_doc_content){
+								$doc_content = "";
+							}
 							for($i=1;$i<=$page_num;$i++){
-								$file_content = file_get_contents($view_path.'\\'.sprintf("%03d", $i));
+								$file_content = file_get_contents($view_path.'\\'.sprintf("%03d.html", $i));
 								//
 								// preg_match_all('/<img.+src=\"?(.+\.(jpg|gif|bmp|bnp|png))\"?.+>/i', $file_content, $imgArr);
 								// $file_content = str_replace($imgArr[1][0], 'http://view.mmdili.com/'.$user_url.'/'.$doc_url.'/'.$imgArr[1][0], $file_content);
@@ -669,8 +692,17 @@ class Doc extends CI_Controller {
 								foreach($imgArr[1] as $key => $value){
 									$file_content = str_replace($value, 'javascript:;', $file_content);
 								}
-								file_put_contents($view_path.'\\'.sprintf("%03d", $i), $file_content);
+								file_put_contents($view_path.'\\'.sprintf("%03d.html", $i), $file_content);
+								if($update_doc_content){
+									if($doc_content == ""){
+										$doc_content = $file_content;
+									}else{
+										$doc_content .= '#[page]#'.$file_content;
+									}
+							
+								}
 							}
+							$this->clearn_file($view_path, 'html');
 							$views = $this->oss->listView($user_url, $doc_url);
 							$objects = array();
 							foreach ($views as $key => $value) {
@@ -687,7 +719,7 @@ class Doc extends CI_Controller {
 							$this->file->del_dir_file(self::$view_path);
 						}
 						if( $update_doc_content ){
-							$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
+							//$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
 							$doc_content = $this->trim_whitespace($doc_content);
 						}
 					}
@@ -698,6 +730,7 @@ class Doc extends CI_Controller {
 				}
 			}
 		}
+		echo "Task Success.";
 	}
 
 	public function load(){

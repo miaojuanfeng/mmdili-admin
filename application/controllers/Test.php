@@ -140,10 +140,18 @@ var_dump(time());
 		
 	}
 
-	function view(){
-		$loader = new cii_loader();
-		$data = array('message'=>'haha');
-		$loader->view("C:\MJF\web\admin\application\\views\\errors\html\\error_404.php", $data);
+	function uri(){
+		$uri = new cii_uri();
+		var_dump($uri);
+	}
+	function str(){
+		$db = new cii_database('localhost', 'root', '', 'mmdili');
+		var_dump($db->escape_str("select * from mmdili where a = 'asd'"));
+	}
+	function in(){
+		echo "<pre>";
+		var_dump($this->input);
+		echo "</pre>";
 	}
 
 }

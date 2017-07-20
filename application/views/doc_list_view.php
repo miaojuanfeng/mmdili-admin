@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
@@ -27,7 +27,7 @@
 				}
 				?>
 			</div>
-			<?=$this->cii_pagination->create_links($this->uri->segment(3))?>
+			<?=$this->cii_pagination->create_links($this->cii_uri->segment(3))?>
 		</div>
 	</div>
 </body>
