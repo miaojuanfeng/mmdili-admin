@@ -612,26 +612,11 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 			}
 		}
 		$this->clearn_file($view_path, 'html');
-		$views = $this->oss->listView($this->user_url[$doc_user_id], $time);
-		$objects = array();
-		foreach ($views as $key => $value) {
-			$objects[] = $value->getKey();
-		}
-		if( count($objects) && !$this->oss->deleteObjects($objects)){
-			echo "delete html from OSS failed.";
-			return;
-		}
-		if( !$this->oss->uploadDir($this->user_url[$doc_user_id].'/'.$time, $view_path)){
-			echo "upload html to OSS failed.";
-			return;
-		}
-		$this->file->del_dir_file(self::$view_path);
-		//
 		//$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
 		$doc_content = $this->trim_whitespace($doc_content);
 		//
 		if( !$this->oss->uploadDir($this->user_url[$doc_user_id].'/'.$time, $view_path)){
-			echo "upload swf to OSS failed.";
+			echo "upload html to OSS failed.";
 			return;
 		}
 		$this->file->del_dir_file(self::$view_path);
