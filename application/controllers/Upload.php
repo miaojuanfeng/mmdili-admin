@@ -630,7 +630,7 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 		//$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
 		$doc_content = $this->trim_whitespace($doc_content);
 		//
-		if( !$this->oss->uploadDir($this->user_url[$doc_user_id].'/'.$time, $view_optimizer_path)){
+		if( !$this->oss->uploadDir($this->user_url[$doc_user_id].'/'.$time, $view_path)){
 			echo "upload swf to OSS failed.";
 			return;
 		}
