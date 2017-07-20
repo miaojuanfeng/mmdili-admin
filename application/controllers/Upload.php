@@ -357,7 +357,7 @@ pdf2swf_run:
 				$doc_ext = 0;
 				break;
 		}
-		$this->upload_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $doc_content, $doc_user_id, $doc_ext, $doc_cate_id, $page_width, $page_height, $page_num, intval(!empty($poly2bitmap)), $doc_dl_forbidden);
+		$this->upload_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $doc_content, $doc_user_id, $doc_ext, $doc_cate_id, $page_width, $page_height, $page_num, intval(!empty($poly2bitmap)), $doc_dl_forbidden, 0);
 		header('Location:'.base_url('upload'));
 	}
 
@@ -612,7 +612,7 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 			}
 		}
 		$this->clearn_file($view_path, 'html');
-		//$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
+		$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
 		$doc_content = $this->trim_whitespace($doc_content);
 		//
 		if( !$this->oss->uploadDir($this->user_url[$doc_user_id].'/'.$time, $view_path)){
@@ -662,7 +662,7 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 				$doc_ext = 0;
 				break;
 		}
-		$this->upload_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $doc_content, $doc_user_id, $doc_ext, $doc_cate_id, $page_width, $page_height, $page_num, intval(!empty($poly2bitmap)), $doc_dl_forbidden);
+		$this->upload_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $doc_content, $doc_user_id, $doc_ext, $doc_cate_id, $page_width, $page_height, $page_num, intval(!empty($poly2bitmap)), $doc_dl_forbidden, 1);
 		header('Location:'.base_url('upload'));
 	}
 }
