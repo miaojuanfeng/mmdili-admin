@@ -612,7 +612,7 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 			}
 		}
 		$this->clearn_file($view_path, 'html');
-		$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
+		//$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
 		$doc_content = $this->trim_whitespace($doc_content);
 		//
 		if( !$this->oss->uploadDir($this->user_url[$doc_user_id].'/'.$time, $view_path)){
@@ -631,8 +631,8 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 		}
 		rename(self::$convert_path.$file['basename'], $online_path.$file['basename']);
 
-		$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
-		$doc_content = $this->trim_whitespace($doc_content);
+		// $doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
+		// $doc_content = $this->trim_whitespace($doc_content);
 		switch($file['extension']){
 			case 'doc':
 				$doc_ext = 1;
