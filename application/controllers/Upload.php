@@ -557,12 +557,12 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 			$file_content = file_get_contents($view_path.'\\'.sprintf("%03d.html", $i));
 			//
 			// preg_match_all('/<img.+src=\"?(.+\.(jpg|gif|bmp|bnp|png))\"?.+>/i', $file_content, $imgArr);
-			// $file_content = str_replace($imgArr[1][0], 'http://view.mmdili.com/'.$user_url.'/'.$time.'/'.$imgArr[1][0], $file_content);
+			// $file_content = str_replace($imgArr[1][0], 'http://view.mmdili.com/'.$this->user_url[$doc_user_id].'/'.$time.'/'.$imgArr[1][0], $file_content);
 			//
 			// preg_match_all('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', $file_content, $imgArr); 
 				preg_match_all('/<\s*img\s+[^>]*?class\s*=\s*(\'|\")(.*?)\\1+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', $file_content, $imgArr); 
 				if( isset($imgArr[2][0]) && isset($imgArr[4][0]) ){
-					$div = '<div class="'.$imgArr[2][0].'" style="background-image:url('.'http://view.mmdili.com/'.$user_url.'/'.$time.'/'.$imgArr[4][0].')"></div>';
+					$div = '<div class="'.$imgArr[2][0].'" style="background-image:url('.'http://view.mmdili.com/'.$this->user_url[$doc_user_id].'/'.$time.'/'.$imgArr[4][0].')"></div>';
 					$file_content = str_replace($imgArr[0][0], $div, $file_content);
 				}
 			//
@@ -579,7 +579,7 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 			}
 		}
 		$this->clearn_file($view_path, 'html');
-		$views = $this->oss->listView($user_url, $time);
+		$views = $this->oss->listView($this->user_url[$doc_user_id], $time);
 		$objects = array();
 		foreach ($views as $key => $value) {
 			$objects[] = $value->getKey();
@@ -588,7 +588,7 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 			echo "delete html from OSS failed.";
 			return;
 		}
-		if( !$this->oss->uploadDir($user_url.'/'.$time, $view_path)){
+		if( !$this->oss->uploadDir($this->user_url[$doc_user_id].'/'.$time, $view_path)){
 			echo "upload html to OSS failed.";
 			return;
 		}
