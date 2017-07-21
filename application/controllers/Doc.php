@@ -656,6 +656,7 @@ class Doc extends CI_Controller {
 							$cmd .= ' --process-outline 0';
 							$cmd .= ' --vdpi 80';
 							$cmd .= ' --hdpi 80';
+							$cmd .= ' --embed-external-font 0';
 							$cmd .= ' "'.self::$convert_path.$doc_url.'.pdf"';
 							exec($cmd, $r);
 							if( $file['extension'] != 'pdf' ){
