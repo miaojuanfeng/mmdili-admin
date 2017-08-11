@@ -565,6 +565,7 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 		$cmd .= ' --page-filename "%03d.html"';
 		// $cmd .= ' --css-filename "'.$time.'.css"';
 		$cmd .= ' --css-filename "page.min.css"';
+		$cmd .= ' --font-format "ttf"';
 		$cmd .= ' --embed-javascript 0';
 		$cmd .= ' --process-outline 0';
 		$cmd .= ' --vdpi 80';
@@ -611,6 +612,10 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 				$doc_content .= '#[page]#'.$file_content;
 			}
 		}
+		$html = '<html><head><link rel="stylesheet" href="page.min.css"></head><body>'.$doc_content.'</body></html>';
+		file_put_contents($view_path.'\\'.'index.html', $html);
+		$cmd = 'font-spider --no-backup '.$view_path.'\\'.'index.html';
+		exec($cmd, $r);
 		$this->clearn_file($view_path, 'html');
 		//$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
 		$doc_content = $this->trim_whitespace($doc_content);

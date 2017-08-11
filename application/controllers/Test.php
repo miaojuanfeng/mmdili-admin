@@ -148,10 +148,10 @@ var_dump(time());
 		$db = new cii_database('localhost', 'root', '', 'mmdili');
 		var_dump($db->escape_str("select * from mmdili where a = 'asd'"));
 	}
-	function in(){
-		echo "<pre>";
-		var_dump($this->input);
-		echo "</pre>";
+	function font(){
+		exec('font-spider C:\MJF\web\doc\view\1500619408\index.html', $log, $status);
+		var_dump($log);
+		var_dump($status);
 	}
 
 }
