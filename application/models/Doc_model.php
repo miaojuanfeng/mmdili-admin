@@ -24,7 +24,7 @@ class doc_model{
     }
 	
 	public function get_list($limit, $offset){
-    	$query = $this->cii_db->query("SELECT user_url, doc_id, doc_url, doc_title, substring(doc_content, 1, 250) as doc_desc, doc_page_num FROM m_doc LEFT JOIN m_user ON doc_user_id = user_id WHERE doc_deleted = 0 AND user_deleted = 0 ORDER BY doc_id DESC LIMIT ".$limit." OFFSET ".$offset);
+    	$query = $this->cii_db->query("SELECT user_url, doc_id, doc_url, doc_title, doc_content as doc_desc, doc_page_num FROM m_doc LEFT JOIN m_user ON doc_user_id = user_id WHERE doc_deleted = 0 AND user_deleted = 0 ORDER BY doc_id DESC LIMIT ".$limit." OFFSET ".$offset);
     	return $query->result_array();
     }
 
@@ -45,7 +45,11 @@ class doc_model{
             WHERE doc_deleted = 0 
             AND doc_id = ".$doc_id." LIMIT 1";
     	$query = $this->cii_db->query($sql);
-    	return $query->row_array();
+	if($query->num_rows()){
+    		return $query->row_array();
+	}else{
+		return null;
+	}
     }
 
     public function update($doc_id, $doc_cate_id, $doc_user_id, $doc_dl_forbidden, $update_doc_content, $doc_content, $update_doc_html){

@@ -97,6 +97,9 @@ class Doc extends CI_Controller {
 		$offset = ($pn - 1) * $limit;
 		//
 		$data['doc']['doc'] = $this->doc_model->get_list($limit, $offset);
+		foreach($data['doc']['doc'] as $key => $value){
+			$data['doc']['doc'][$key]['doc_desc'] = mb_substr(strip_tags($value['doc_desc']), 0, 250);
+		}
 
 		$cii_pagination['base_url'] = base_url('doc/index/');
 		$cii_pagination['per_page'] = $limit;
