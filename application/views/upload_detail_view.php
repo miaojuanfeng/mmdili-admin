@@ -22,6 +22,9 @@
 								<option value="2">历史</option>
 								<option value="3">政治</option>
 								<option value="4">文综</option>
+								<option value="5">语文</option>
+								<option value="6">数学</option>
+								<option value="7">外语</option>
 							</select>
 						</div>
 						<div class="info-item">
@@ -34,6 +37,7 @@
 							<select name="doc_user_id">
 								<option value="1">M.J.F</option>
 								<option value="2" selected="selected">MCMM</option>
+								<option value="3">学业の回忆</option>
 							</select>
 						</div>
 						<div class="upload-detail-act">

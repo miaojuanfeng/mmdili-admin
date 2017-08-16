@@ -97,6 +97,9 @@ class Doc extends CI_Controller {
 		$offset = ($pn - 1) * $limit;
 		//
 		$data['doc']['doc'] = $this->doc_model->get_list($limit, $offset);
+		foreach($data['doc']['doc'] as $key => $value){
+			$data['doc']['doc'][$key]['doc_desc'] = mb_substr(strip_tags($value['doc_desc']), 0, 250);
+		}
 
 		$cii_pagination['base_url'] = base_url('doc/index/');
 		$cii_pagination['per_page'] = $limit;
@@ -367,6 +370,7 @@ class Doc extends CI_Controller {
 					$cmd .= ' --page-filename "%03d.html"';
 					// $cmd .= ' --css-filename "'.$doc_url.'.css"';
 					$cmd .= ' --css-filename "page.min.css"';
+					$cmd .= ' --font-format "ttf"';
 					$cmd .= ' --embed-javascript 0';
 					$cmd .= ' --process-outline 0';
 					$cmd .= ' --vdpi 80';
@@ -417,6 +421,10 @@ class Doc extends CI_Controller {
 							
 						}
 					}
+					$html = '<html><head><link rel="stylesheet" href="page.min.css"></head><body>'.$doc_content.'</body></html>';
+					file_put_contents($view_path.'\\'.'index.html', $html);
+					$cmd = 'font-spider --no-backup '.$view_path.'\\'.'index.html';
+					exec($cmd, $r);
 					$this->clearn_file($view_path, 'html');
 					$views = $this->oss->listView($user_url, $doc_url);
 					$objects = array();
@@ -651,6 +659,7 @@ class Doc extends CI_Controller {
 							$cmd .= ' --page-filename "%03d.html"';
 							// $cmd .= ' --css-filename "'.$doc_url.'.css"';
 							$cmd .= ' --css-filename "page.min.css"';
+							$cmd .= ' --font-format "ttf"';
 							$cmd .= ' --embed-javascript 0';
 							$cmd .= ' --process-outline 0';
 							$cmd .= ' --vdpi 80';
@@ -702,6 +711,10 @@ class Doc extends CI_Controller {
 							
 								}
 							}
+							$html = '<html><head><link rel="stylesheet" href="page.min.css"></head><body>'.$doc_content.'</body></html>';
+							file_put_contents($view_path.'\\'.'index.html', $html);
+							$cmd = 'font-spider --no-backup '.$view_path.'\\'.'index.html';
+							exec($cmd, $r);
 							$this->clearn_file($view_path, 'html');
 							$views = $this->oss->listView($user_url, $doc_url);
 							$objects = array();
