@@ -669,7 +669,7 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 		}
 		$this->upload_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $doc_content, $doc_user_id, $doc_ext, $doc_cate_id, $page_width, $page_height, $page_num, intval(!empty($poly2bitmap)), $doc_dl_forbidden, 1);
 		//
-		$urls = base_url('view/'.$time.'.html'."\n");
+		$urls = 'http://www.mmdili.com/view/'.$time.'.html'."\n");
 		$api = 'http://data.zz.baidu.com/urls?site=www.mmdili.com&token=ovTjGByH09QlB55m';
 		$ch = curl_init();
 		$options =  array(
