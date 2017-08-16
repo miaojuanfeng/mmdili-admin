@@ -425,7 +425,11 @@ pdf2swf_run:
 			echo 'file already exists!';
 			return;
 		}
+		ob_end_clean();
+ 		ob_implicit_flush(1);
 		rename($file_path, self::$convert_path.$file['basename']);
+		echo "移动文档 - ".$file['basename'];
+ 		flush();
 		if( $file['extension'] == 'doc' || $file['extension'] == 'docx' || $file['extension'] == 'txt' ){
 			try{
 				$word = null;
@@ -530,6 +534,8 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 				return;
 			}
 		}
+		echo "读取文档 - ".$file['basename'];
+ 		flush();
 
 		$view_path = self::$view_path.$time;
 
@@ -549,6 +555,9 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 			echo "get pdf info failed.";
 			return;
 		}
+
+		echo "获取文档信息 - "."Width: ".$page_width." - "."Height: ".$page_height." - "."Pages: ".$page_num;
+ 		flush();
 
 		$cmd  = 'C:\MJF\pdf2htmlEX\pdf2htmlEX.exe';
 		// $cmd .= ' --zoom 1.613';
@@ -575,6 +584,10 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 		if( $file['extension'] != 'pdf' ){
 			unlink(self::$convert_path.$file['filename'].".pdf");
 		}
+
+		echo "转换文档格式为html";
+ 		flush();
+
 		// $this->clearn_file($view_path, 'woff');
 		// $file_content = file_get_contents($view_path.'\page.min.css');
 		// preg_match_all('/@font-face{font-family:(.*?)}/i', $file_content, $imgArr);
@@ -612,10 +625,18 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 				$doc_content .= '#[page]#'.$file_content;
 			}
 		}
+
+		echo "替换文档内容";
+ 		flush();
+
 		$html = '<html><head><link rel="stylesheet" href="page.min.css"></head><body>'.$doc_content.'</body></html>';
 		file_put_contents($view_path.'\\'.'index.html', $html);
 		$cmd = 'font-spider --no-backup '.$view_path.'\\'.'index.html';
 		exec($cmd, $r);
+
+		echo "优化文档存储";
+ 		flush();
+
 		$this->clearn_file($view_path, 'html');
 		//$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
 		$doc_content = $this->trim_whitespace($doc_content);
@@ -635,6 +656,9 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 			return;
 		}
 		rename(self::$convert_path.$file['basename'], $online_path.$file['basename']);
+
+		echo "上传文档";
+ 		flush();
 
 		// $doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
 		// $doc_content = $this->trim_whitespace($doc_content);
@@ -669,6 +693,9 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 		}
 		$this->upload_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $doc_content, $doc_user_id, $doc_ext, $doc_cate_id, $page_width, $page_height, $page_num, intval(!empty($poly2bitmap)), $doc_dl_forbidden, 1);
 		//
+		echo "新增到数据库";
+ 		flush();
+		//
 		$urls = 'http://www.mmdili.com/view/'.$time.'.html'."\n";
 		$api = 'http://data.zz.baidu.com/urls?site=www.mmdili.com&token=ovTjGByH09QlB55m';
 		$ch = curl_init();
@@ -682,6 +709,9 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 		curl_setopt_array($ch, $options);
 		$result = curl_exec($ch);
 		//
-		header('Location:'.base_url('upload'));
+		echo "推送到搜索引擎 - ".$result;
+ 		flush();
+ 		//
+		// header('Location:'.base_url('upload'));
 	}
 }
