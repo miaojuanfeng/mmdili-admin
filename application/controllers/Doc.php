@@ -455,8 +455,7 @@ class Doc extends CI_Controller {
 			if( $detail ){
 				echo "#".$batch_id." - ".$detail['doc_title']."(".$detail['doc_url'].")<br/>";
 				//ob_flush();
-     				flush();
-				
+     			flush();
 
 				$doc_id = $detail['doc_id'];
 				$doc_url = $detail['doc_url'];

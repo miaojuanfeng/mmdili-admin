@@ -663,6 +663,20 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 				break;
 		}
 		$this->upload_model->insert_doc($time, iconv('GB2312', 'UTF-8', $file['filename']), $doc_content, $doc_user_id, $doc_ext, $doc_cate_id, $page_width, $page_height, $page_num, intval(!empty($poly2bitmap)), $doc_dl_forbidden, 1);
+		//
+		$urls = base_url('view/'.$time.'.html'."\n");
+		$api = 'http://data.zz.baidu.com/urls?site=www.mmdili.com&token=ovTjGByH09QlB55m';
+		$ch = curl_init();
+		$options =  array(
+		    CURLOPT_URL => $api,
+		    CURLOPT_POST => true,
+		    CURLOPT_RETURNTRANSFER => true,
+		    CURLOPT_POSTFIELDS => $urls,
+		    CURLOPT_HTTPHEADER => array('Content-Type: text/plain'),
+		);
+		curl_setopt_array($ch, $options);
+		$result = curl_exec($ch);
+		//
 		header('Location:'.base_url('upload'));
 	}
 }
