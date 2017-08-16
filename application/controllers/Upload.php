@@ -710,6 +710,6 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 		curl_setopt_array($ch, $options);
 		$result = curl_exec($ch);
 		//
-		// header('Location:'.base_url('upload'));
+		header('Location:'.base_url('upload'));
 	}
 }
