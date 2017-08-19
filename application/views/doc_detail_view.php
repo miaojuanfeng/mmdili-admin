@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
@@ -25,6 +25,9 @@
 								<option value="2" <?php if($doc['doc_cate_id']==2) echo "selected='selected'"; ?>>历史</option>
 								<option value="3" <?php if($doc['doc_cate_id']==3) echo "selected='selected'"; ?>>政治</option>
 								<option value="4" <?php if($doc['doc_cate_id']==4) echo "selected='selected'"; ?>>文综</option>
+								<option value="4" <?php if($doc['doc_cate_id']==5) echo "selected='selected'"; ?>>语文</option>
+								<option value="4" <?php if($doc['doc_cate_id']==6) echo "selected='selected'"; ?>>数学</option>
+								<option value="4" <?php if($doc['doc_cate_id']==7) echo "selected='selected'"; ?>>外语</option>
 							</select>
 						</div>
 						<div class="info-item">
@@ -38,6 +41,7 @@
 							<select name="doc_user_id" disabled="disabled">
 								<option value="1" <?php if($doc['doc_user_id']==1) echo "selected='selected'"; ?>>M.J.F</option>
 								<option value="2" <?php if($doc['doc_user_id']==2) echo "selected='selected'"; ?>>MCMM</option>
+								<option value="3" <?php if($doc['doc_user_id']==3) echo "selected='selected'"; ?>>学业の回忆</option>
 							</select>
 						</div>
 						<div class="info-item">

@@ -445,6 +445,10 @@ class Doc extends CI_Controller {
 					//$doc_content = iconv('GB2312', 'UTF-8//IGNORE', $doc_content);
 					$doc_content = $this->trim_whitespace($doc_content);
 				}
+				if( !$this->oss->uploadFile(iconv('GB2312', 'UTF-8', $user_url.'/'.strtotime(date('Y', $doc_url).'-01-01 00:00:00').'/'.$file['basename']), iconv('GB2312', 'UTF-8', $file_path)) ){					
+			echo "upload doc to OSS failed.";
+			return;
+		}
 			}
 
 			if( $this->doc_model->update($doc_id, $doc_cate_id, $doc_user_id, $doc_dl_forbidden, $update_doc_content, $doc_content, $update_doc_html) ){
