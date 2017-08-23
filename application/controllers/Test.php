@@ -156,7 +156,7 @@ var_dump(time());
         function phpinfo(){
 		phpinfo();
 	}
-	function simhash(){
+	function simhash($id1, $id2){
 		require 'application/libraries/pscws4/pscws4.class.php';
 
 		$pscws = new PSCWS4('utf8');
@@ -178,6 +178,15 @@ var_dump(time());
 
 		$text1 = $this->input->post('text1');
 		$text2 = $this->input->post('text2');
+
+		if( $id1 && $id2 ){
+			$this->load->model('test_model');
+			$doc1 = $this->test_model->get_detail($id1);
+			$doc2 = $this->test_model->get_detail($id2);
+
+			$text1 = strip_tags($doc1->doc_content);
+			$text2 = strip_tags($doc2->doc_content);
+		}
 
 		if( $text1 ){
 			$pscws->send_text($text1);

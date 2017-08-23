@@ -19,8 +19,8 @@ class doc_model{
     public function get_count(){
         //$query = $this->db->query("SELECT COUNT(doc_id) as rows_total FROM m_doc WHERE doc_deleted = 0");
         //return $query->row_array()['rows_total'];
-	$query = $this->cii_db->query("SELECT doc_id FROM m_doc WHERE doc_deleted = 0");
-	return $query->num_rows();
+    	$query = $this->cii_db->query("SELECT doc_id FROM m_doc WHERE doc_deleted = 0");
+    	return $query->num_rows();
     }
 	
 	public function get_list($limit, $offset){
@@ -45,11 +45,11 @@ class doc_model{
             WHERE doc_deleted = 0 
             AND doc_id = ".$doc_id." LIMIT 1";
     	$query = $this->cii_db->query($sql);
-	if($query->num_rows()){
-    		return $query->row_array();
-	}else{
-		return null;
-	}
+    	if($query->num_rows()){
+        	return $query->row_array();
+    	}else{
+    		return null;
+    	}
     }
 
     public function update($doc_id, $doc_cate_id, $doc_user_id, $doc_dl_forbidden, $update_doc_content, $doc_content, $update_doc_html){
@@ -59,9 +59,9 @@ class doc_model{
     	if( $update_doc_content ){
     		$sql .= "doc_content = '".$this->cii_db->escape_str($doc_content)."',";
     	}
-	if( !empty($update_doc_html) ){
-		$sql .= "doc_html_view = ".$update_doc_html.",";
-	}	
+    	if( !empty($update_doc_html) ){
+    		$sql .= "doc_html_view = ".$update_doc_html.",";
+    	}	
     	$sql .=	"
             doc_dl_forbidden = ".$doc_dl_forbidden.",
     		doc_modify_date = ".time()."  
