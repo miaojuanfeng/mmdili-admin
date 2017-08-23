@@ -6,9 +6,11 @@
 <style>
 .left{
 	float: left;
+	width: 50%;
 }
 .right{
 	float: right;
+	width: 50%;
 }
 .clearfix{
 	float: none;
@@ -19,6 +21,9 @@
 }
 .text2{
 	margin:10px;
+}
+textarea{
+	width: 100%;
 }
 </style>
 <body>
