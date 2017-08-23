@@ -41,6 +41,9 @@ textarea, input{
 textarea.keyword{
 	height: 100px;
 }
+input{
+	height: auto;
+}
 </style>
 <body>
 	<div class="container">
