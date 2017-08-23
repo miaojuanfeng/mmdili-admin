@@ -165,6 +165,15 @@ var_dump(time());
 
 		$s = new simhash();
 
+		$data['text1'] = array();
+		$data['text1']['content'] = '';
+		$data['text1']['kw'] = '';
+		$data['text1']['sign'] = '';
+		$data['text2'] = array();
+		$data['text2']['content'] = '';
+		$data['text2']['kw'] = '';
+		$data['text2']['sign'] = '';
+
 		$text1 = $this->input->post('text1');
 		$text2 = $this->input->post('text2');
 
