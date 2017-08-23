@@ -30,7 +30,7 @@
 	margin: 10px 0;
 	font-weight: bold;
 }
-textarea, input{
+textarea, input, pre{
 	width: calc(100% - 22px);
 	height: 300px;
 	resize: vertical;
@@ -41,7 +41,7 @@ textarea, input{
 	font-size: 14px;
 	outline: none;
 }
-textarea.keyword{
+.keyword{
 	height: 100px;
 }
 input{
