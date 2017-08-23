@@ -27,7 +27,7 @@
 	margin: 10px 0;
 	font-weight: bold;
 }
-textarea{
+textarea, input{
 	width: calc(100% - 22px);
 	height: 300px;
 	resize: none;
