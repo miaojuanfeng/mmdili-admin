@@ -25,6 +25,7 @@
 .label{
 	font-size: 16px;
 	margin: 10px 0;
+	font-weight: bold;
 }
 textarea{
 	width: calc(100% - 22px);
@@ -42,9 +43,10 @@ textarea{
 	<div class="container">
 		<div class="left">
 			<div class="text1">
-				<div class="label">$text1 = "</div>
-				<textarea>aasdasdas</textarea>
-				<div class="label">";</div>
+				<div>
+					<div class="label">Text1</div>
+					<textarea>aasdasdas</textarea>
+				</div>
 			</div>
 		</div>
 		<div class="right">
