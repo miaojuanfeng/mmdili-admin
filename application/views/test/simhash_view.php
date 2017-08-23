@@ -24,10 +24,12 @@
 }
 textarea{
 	width: calc(100% - 22px);
-	height: 500px;
+	height: 300px;
 	resize: none;
 	border: 1px solid #eee;
 	padding: 10px;
+	box-shadow: 0 2px 15px 0px #ccc;
+	border-radius: 5px;
 }
 </style>
 <body>
