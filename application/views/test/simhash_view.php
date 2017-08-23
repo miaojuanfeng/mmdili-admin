@@ -22,6 +22,9 @@
 .text2{
 	margin:10px;
 }
+label{
+	font-size: 16px;
+}
 textarea{
 	width: calc(100% - 22px);
 	height: 300px;
@@ -30,13 +33,17 @@ textarea{
 	padding: 10px;
 	box-shadow: 0 2px 15px 0px #ccc;
 	border-radius: 5px;
+	font-size: 13px;
 }
+
 </style>
 <body>
 	<div class="container">
 		<div class="left">
 			<div class="text1">
+				<label>$text1 = '</label>
 				<textarea>aasdasdas</textarea>
+				<label>';</label>
 			</div>
 		</div>
 		<div class="right">
