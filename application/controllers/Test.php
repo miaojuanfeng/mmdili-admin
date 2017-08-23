@@ -156,7 +156,7 @@ var_dump(time());
         function phpinfo(){
 		phpinfo();
 	}
-	function simhash($id1, $id2){
+	function simhash($id1 = 0, $id2 = 0){
 		require 'application/libraries/pscws4/pscws4.class.php';
 
 		$pscws = new PSCWS4('utf8');
