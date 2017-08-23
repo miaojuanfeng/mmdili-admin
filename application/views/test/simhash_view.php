@@ -58,23 +58,25 @@ input{
 	margin: 20px 0;
 	box-shadow: 0 2px 15px 0px #ccc;
 	border-radius: 5px;
+	width: 250px;
 }
 </style>
 <body>
 	<div class="container">
+		<form method="post" action="http://admin.mmdili.com/test/simhash">
 		<div class="left">
 			<div class="text1">
 				<div>
 					<div class="label">Text1</div>
-					<textarea>aasdasdas</textarea>
+					<textarea name="text1"><?=$text1['content']?></textarea>
 				</div>
 				<div>
 					<div class="label">Keyword1</div>
-					<textarea class="keyword" readonly="true">aasdasdas</textarea>
+					<textarea class="keyword" readonly="true"><?=$text1['kw']?></textarea>
 				</div>
 				<div>
 					<div class="label">Fingerprint1</div>
-					<input readonly="true" value="asdas">
+					<input readonly="true" value="<?=$text1['sign']?>">
 				</div>
 			</div>
 		</div>
@@ -82,15 +84,15 @@ input{
 			<div class="text2">
 				<div>
 					<div class="label">Text2</div>
-					<textarea>aasdasdas</textarea>
+					<textarea name="text2"><?=$text2['content']?></textarea>
 				</div>
 				<div>
 					<div class="label">Keyword2</div>
-					<textarea class="keyword" readonly="true">aasdasdas</textarea>
+					<textarea class="keyword" readonly="true"><?=$text2['kw']?></textarea>
 				</div>
 				<div>
 					<div class="label">Fingerprint2</div>
-					<input readonly="true" value="asdas">
+					<input readonly="true" value="<?=$text2['sign']?>">
 				</div>
 			</div>
 		</div>
@@ -98,16 +100,17 @@ input{
 		<div class="result">
 			<div>
 				<div class="label">Result</div>
-				<input readonly="true" value="asdas">
+				<input readonly="true" value="<?=$compare?>">
 			</div>
 			<div>
 				<div class="label">Hamming</div>
-				<input readonly="true" value="asdas">
+				<input readonly="true" value="<?=$hamming?>">
 			</div>
 			<div style="text-align:center;">
 				<input class="button" type="submit" value="Submit"/>
 			</div>
 		</div>
+		</form>
 	</div>
 </body>
 </html>
