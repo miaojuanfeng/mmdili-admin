@@ -42,7 +42,7 @@ textarea, input, pre{
 	outline: none;
 }
 .keyword{
-	height: 100px;
+	height: 200px;
 	overflow: scroll;
 }
 input{
