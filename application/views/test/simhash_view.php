@@ -35,7 +35,8 @@ textarea{
 	padding: 10px;
 	box-shadow: 0 2px 15px 0px #ccc;
 	border-radius: 5px;
-	font-size: 13px;
+	font-size: 14px;
+	outline: none;
 }
 
 </style>
