@@ -22,6 +22,9 @@
 .text2{
 	margin:10px;
 }
+.result{
+	margin:10px;
+}
 .label{
 	font-size: 16px;
 	margin: 10px 0;
