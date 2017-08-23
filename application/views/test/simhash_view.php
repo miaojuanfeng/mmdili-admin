@@ -115,7 +115,7 @@ h4{
 		<div class="clearfix"></div>
 		<div class="result">
 			<div>
-				<div class="label">Result</div>
+				<div class="label">Compare</div>
 				<input readonly="true" value="<?=decbin($compare)?>">
 			</div>
 			<div>
