@@ -51,6 +51,11 @@ button{
 	background: blue;
 	color: #fff;
 	padding: 10px 20px;
+	outline: none;
+	border: none;
+	text-align: center;
+	font-size: 22px;
+	margin: 10px auto;
 }
 </style>
 <body>
@@ -98,7 +103,7 @@ button{
 				<input readonly="true" value="asdas">
 			</div>
 			<div>
-				<button value="Submit">
+				<button>Submit</button>
 			</div>
 		</div>
 	</div>
