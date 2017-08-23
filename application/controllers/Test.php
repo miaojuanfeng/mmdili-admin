@@ -193,6 +193,8 @@ var_dump(time());
 		var_dump(decbin($sign1));
 		var_dump(decbin($sign2));
 		echo $s->hamming($s->compare($sign1, $sign2));$s->hamming($s->compare($sign1, $sign2));
+		
+		$this->load->view('text/simhash_view');
 	}
 
 }
