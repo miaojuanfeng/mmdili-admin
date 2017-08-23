@@ -67,6 +67,8 @@ input{
 }
 </style>
 <body>
+	<h2>Simhash PHP Extension Demo</h2>
+	<h4>compare the similarity between Texts.</h4>
 	<div class="container">
 		<form method="post" action="http://admin.mmdili.com/test/simhash">
 		<div class="left">
