@@ -43,6 +43,7 @@ textarea, input, pre{
 }
 .keyword{
 	height: 100px;
+	overflow: scroll;
 }
 input{
 	height: auto;
