@@ -38,7 +38,9 @@ textarea{
 	font-size: 14px;
 	outline: none;
 }
-
+textarea.keyword{
+	height: 100px;
+}
 </style>
 <body>
 	<div class="container">
@@ -50,7 +52,7 @@ textarea{
 				</div>
 				<div>
 					<div class="label">Keyword1</div>
-					<textarea readonly="true">aasdasdas</textarea>
+					<textarea class="keyword" readonly="true">aasdasdas</textarea>
 				</div>
 			</div>
 		</div>
@@ -62,7 +64,7 @@ textarea{
 				</div>
 				<div>
 					<div class="label">Keyword2</div>
-					<textarea readonly="true">aasdasdas</textarea>
+					<textarea class="keyword" readonly="true">aasdasdas</textarea>
 				</div>
 			</div>
 		</div>
