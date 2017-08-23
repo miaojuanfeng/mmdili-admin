@@ -23,7 +23,8 @@
 	margin:10px;
 }
 textarea{
-	width: 100%;
+	width: calc(100% - 22px);
+	padding: 10px;
 }
 </style>
 <body>
