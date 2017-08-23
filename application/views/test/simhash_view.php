@@ -54,6 +54,10 @@ textarea.keyword{
 					<div class="label">Keyword1</div>
 					<textarea class="keyword" readonly="true">aasdasdas</textarea>
 				</div>
+				<div>
+					<div class="label">Fingerprint1</div>
+					<input readonly="true" value="asdas">
+				</div>
 			</div>
 		</div>
 		<div class="right">
@@ -65,6 +69,10 @@ textarea.keyword{
 				<div>
 					<div class="label">Keyword2</div>
 					<textarea class="keyword" readonly="true">aasdasdas</textarea>
+				</div>
+				<div>
+					<div class="label">Fingerprint2</div>
+					<input readonly="true" value="asdas">
 				</div>
 			</div>
 		</div>
