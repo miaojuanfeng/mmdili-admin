@@ -77,7 +77,7 @@ input{
 				</div>
 				<div>
 					<div class="label">Fingerprint1</div>
-					<input readonly="true" value="<?=$text1['sign']?>">
+					<input readonly="true" value="<?=$text1['sign'].' '.var_dump(decbin($text1['sign']))?>">
 				</div>
 			</div>
 		</div>
@@ -93,7 +93,7 @@ input{
 				</div>
 				<div>
 					<div class="label">Fingerprint2</div>
-					<input readonly="true" value="<?=$text2['sign']?>">
+					<input readonly="true" value="<?=$text2['sign'].' '.var_dump(decbin($text2['sign']))?>">
 				</div>
 			</div>
 		</div>
@@ -101,11 +101,11 @@ input{
 		<div class="result">
 			<div>
 				<div class="label">Result</div>
-				<input readonly="true" value="<?=$compare?>">
+				<input readonly="true" value="<?=$compare.' '.var_dump(decbin($compare))?>">
 			</div>
 			<div>
 				<div class="label">Hamming</div>
-				<input readonly="true" value="<?=$hamming?>">
+				<input readonly="true" value="<?=$hamming.' '.var_dump(decbin($hamming))?>">
 			</div>
 			<div style="text-align:center;">
 				<input class="button" type="submit" value="Submit"/>
