@@ -68,6 +68,9 @@ input{
 h2, h4{
 	text-align: center;
 }
+h2{
+	margin-bottom: 5px;
+}
 </style>
 <body>
 	<h2>Simhash PHP Extension Demo</h2>
