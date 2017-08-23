@@ -173,6 +173,8 @@ var_dump(time());
 		$data['text2']['content'] = '';
 		$data['text2']['kw'] = '';
 		$data['text2']['sign'] = '';
+		$data['compare'] = '';
+		$data['hamming'] = '';
 
 		$text1 = $this->input->post('text1');
 		$text2 = $this->input->post('text2');
