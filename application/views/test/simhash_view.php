@@ -60,6 +60,10 @@ input{
 	box-shadow: 0 2px 15px 0px #ccc;
 	border-radius: 5px;
 	width: 250px;
+	cursor: pointer;
+}
+.button:hover{
+	background: #337ce7;
 }
 </style>
 <body>
