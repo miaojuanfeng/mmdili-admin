@@ -71,6 +71,9 @@ h2, h4{
 h2{
 	margin-bottom: 5px;
 }
+h4{
+	margin-top: 0px;
+}
 </style>
 <body>
 	<h2>Simhash PHP Extension Demo</h2>
