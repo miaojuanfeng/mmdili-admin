@@ -72,7 +72,7 @@ input{
 				</div>
 				<div>
 					<div class="label">Keyword1</div>
-					<textarea class="keyword" readonly="true"><?=$text1['kw']?></textarea>
+					<pre class="keyword" readonly="true"><?=var_dump($text1['kw'])?></pre>
 				</div>
 				<div>
 					<div class="label">Fingerprint1</div>
@@ -88,7 +88,7 @@ input{
 				</div>
 				<div>
 					<div class="label">Keyword2</div>
-					<textarea class="keyword" readonly="true"><?=$text2['kw']?></textarea>
+					<pre class="keyword" readonly="true"><?=var_dump($text2['kw'])?></pre>
 				</div>
 				<div>
 					<div class="label">Fingerprint2</div>
