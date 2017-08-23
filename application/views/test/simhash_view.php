@@ -80,7 +80,16 @@ input{
 			</div>
 		</div>
 		<div class="clearfix"></div>
-		<div class="result"></div>
+		<div class="result">
+			<div>
+				<div class="label">Result</div>
+				<input readonly="true" value="asdas">
+			</div>
+			<div>
+				<div class="label">Hamming</div>
+				<input readonly="true" value="asdas">
+			</div>
+		</div>
 	</div>
 </body>
 </html>
