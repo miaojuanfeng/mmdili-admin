@@ -187,14 +187,14 @@ var_dump(time());
 		$sign1 = $s->sign($kw1);
 		$sign2 = $s->sign($kw2);
 
-		echo "<pre>";
-		var_dump($kw1);
-		var_dump($kw2);
-		var_dump(decbin($sign1));
-		var_dump(decbin($sign2));
-		echo $s->hamming($s->compare($sign1, $sign2));$s->hamming($s->compare($sign1, $sign2));
+		// echo "<pre>";
+		// var_dump($kw1);
+		// var_dump($kw2);
+		// var_dump(decbin($sign1));
+		// var_dump(decbin($sign2));
+		// echo $s->hamming($s->compare($sign1, $sign2));$s->hamming($s->compare($sign1, $sign2));
 		
-		$this->load->view('text/simhash_view');
+		$this->load->view('test/simhash_view');
 	}
 
 }
