@@ -33,7 +33,7 @@
 textarea, input{
 	width: calc(100% - 22px);
 	height: 300px;
-	resize: none;
+	resize: vertical;
 	border: 1px solid #eee;
 	padding: 10px;
 	box-shadow: 0 2px 15px 0px #ccc;
@@ -46,6 +46,11 @@ textarea.keyword{
 }
 input{
 	height: auto;
+}
+button{
+	background: blue;
+	color: #fff;
+	padding: 10px 20px;
 }
 </style>
 <body>
@@ -91,6 +96,9 @@ input{
 			<div>
 				<div class="label">Hamming</div>
 				<input readonly="true" value="asdas">
+			</div>
+			<div>
+				<button value="Submit">
 			</div>
 		</div>
 	</div>
