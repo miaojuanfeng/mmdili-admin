@@ -24,6 +24,9 @@
 }
 textarea{
 	width: calc(100% - 22px);
+	height: 500px;
+	resize: none;
+	border: 1px solid #eee;
 	padding: 10px;
 }
 </style>
