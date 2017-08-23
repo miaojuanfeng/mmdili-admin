@@ -47,7 +47,7 @@ textarea.keyword{
 input{
 	height: auto;
 }
-button{
+.button{
 	background: #337ab7;
 	color: #fff;
 	padding: 10px 40px;
@@ -105,7 +105,7 @@ button{
 				<input readonly="true" value="asdas">
 			</div>
 			<div style="text-align:center;">
-				<button>Submit</button>
+				<input class="button" type="submit" value="Submit"/>
 			</div>
 		</div>
 	</div>
