@@ -48,11 +48,22 @@ textarea{
 					<div class="label">Text1</div>
 					<textarea>aasdasdas</textarea>
 				</div>
+				<div>
+					<div class="label">Keyword1</div>
+					<textarea readonly="true">aasdasdas</textarea>
+				</div>
 			</div>
 		</div>
 		<div class="right">
 			<div class="text2">
-				<textarea>aasdasdas</textarea>
+				<div>
+					<div class="label">Text2</div>
+					<textarea>aasdasdas</textarea>
+				</div>
+				<div>
+					<div class="label">Keyword2</div>
+					<textarea readonly="true">aasdasdas</textarea>
+				</div>
 			</div>
 		</div>
 		<div class="clearfix"></div>
