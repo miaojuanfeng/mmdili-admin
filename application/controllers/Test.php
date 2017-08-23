@@ -184,8 +184,8 @@ var_dump(time());
 			$doc1 = $this->test_model->get_detail($id1);
 			$doc2 = $this->test_model->get_detail($id2);
 
-			$text1 = strip_tags($doc1->doc_content);
-			$text2 = strip_tags($doc2->doc_content);
+			$text1 = strip_tags($doc1['doc_content']);
+			$text2 = strip_tags($doc2['doc_content']);
 		}
 
 		if( $text1 ){
