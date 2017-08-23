@@ -48,14 +48,16 @@ input{
 	height: auto;
 }
 button{
-	background: blue;
+	background: #337ab7;
 	color: #fff;
-	padding: 10px 20px;
+	padding: 10px 40px;
 	outline: none;
 	border: none;
 	text-align: center;
-	font-size: 22px;
-	margin: 10px auto;
+	font-size: 18px;
+	margin: 20px 0;
+	box-shadow: 0 2px 15px 0px #ccc;
+	border-radius: 5px;
 }
 </style>
 <body>
@@ -102,7 +104,7 @@ button{
 				<div class="label">Hamming</div>
 				<input readonly="true" value="asdas">
 			</div>
-			<div>
+			<div style="text-align:center;">
 				<button>Submit</button>
 			</div>
 		</div>
