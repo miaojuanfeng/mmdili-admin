@@ -65,6 +65,9 @@ input{
 .button:hover{
 	background: #337ce7;
 }
+h2, h4{
+	text-align: center;
+}
 </style>
 <body>
 	<h2>Simhash PHP Extension Demo</h2>
