@@ -237,8 +237,14 @@ var_dump(time());
 
 		$simhash = new simhash();
 
-		$doc = $this->db->query("SELECT doc_id, doc_url, doc_title, doc_content FROM m_doc WHERE doc_deleted = 0 ORDER BY doc_id ASC")->result_array();
-		foreach ($doc as $key => $value) {
+		$doc_total = $this->db->query("SELECT count(doc_id) as doc_total FROM m_doc")->result_array()[0]["doc_total"];
+		for ($i=1;$i<=$doc_total;$i++) {
+			$value = $this->db->query("SELECT doc_id, doc_url, doc_title, doc_content, doc_deleted FROM m_doc WHERE doc_id = ".$i)->result_array()[0];
+			if( $value["doc_deleted"] ){
+				echo "Deleted #".$doc_id." - ".$doc_title."(".$doc_url.")<br/>";
+     			flush();
+				continue;
+			}
 			$doc_id = $value["doc_id"];
 			$doc_url = $value["doc_url"];
 			$doc_title = $value["doc_title"];
