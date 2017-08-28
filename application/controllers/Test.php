@@ -235,7 +235,7 @@ var_dump(time());
 
 		$simhash = new simhash();
 
-		$doc = $this->db->query("SELECT doc_id, doc_content FROM m_doc ORDER BY id ASC LIMIT 1")->result_array();
+		$doc = $this->db->query("SELECT doc_id, doc_content FROM m_doc ORDER BY doc_id ASC LIMIT 1")->result_array();
 		foreach ($doc as $key => $value) {
 			$doc_id = $value["doc_id"];
 			$doc_content = strip_tags($value["doc_content"]);
