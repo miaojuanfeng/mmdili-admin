@@ -249,7 +249,7 @@ var_dump(time());
 			echo "<pre>";
 			var_dump($kw);
 			$doc_simhash = $simhash->sign($kw);
-			var_dump($doc_simhash);
+			var_dump(decbin($doc_simhash));
 			$this->db->query("UPDATE m_doc set doc_simhash = '".$doc_simhash."' WHERE doc_id = ".$doc_id);
 		}
 	}
