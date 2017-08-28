@@ -240,6 +240,7 @@ var_dump(time());
 		$doc = $this->db->query("SELECT doc_id, doc_url, doc_title, doc_content FROM m_doc WHERE doc_deleted = 0 ORDER BY doc_id ASC")->result_array();
 		foreach ($doc as $key => $value) {
 			$doc_id = $value["doc_id"];
+			$doc_url = $value["doc_url"];
 			$doc_title = $value["doc_title"];
 			echo "#".$doc_id." - ".$doc_title."(".$doc_url.")<br/>";
      		flush();
