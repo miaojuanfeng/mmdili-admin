@@ -224,4 +224,29 @@ var_dump(time());
 		$this->load->view('test/simhash_view', $data);
 	}
 
+	public function dohash(){
+		require 'application/libraries/pscws4/pscws4.class.php';
+
+		$pscws = new PSCWS4('utf8');
+		$pscws->set_dict('application/libraries/pscws4/etc/dict.utf8.xdb');
+		$pscws->set_rule('application/libraries/pscws4/etc/rules.utf8.ini');
+
+		$simhash = new simhash();
+
+		$doc = $this->db->query("SELECT doc_id, doc_content FROM m_doc ORDER BY id ASC LIMIT 1")->result_array();
+		foreach ($doc as $key => $value) {
+			$doc_id = $value["doc_id"];
+			$doc_content = strip_tags($value["doc_content"]);
+			$pscws->send_text($doc_content);
+			$kw = array();
+			foreach ($pscws->get_tops(100) as $key => $value) {
+				if( !is_numeric($value['word']) ){
+					$kw[$value['word']] = $value['weight'];
+				}
+			}
+			$doc_simhash = $simhash->sign($kw);
+			$this->db->query("UPDATE m_doc set doc_simhash = '".$doc_simhash."' WHERE doc_id = ".$doc_id);
+		}
+	}
+
 }
