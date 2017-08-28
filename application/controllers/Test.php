@@ -225,6 +225,8 @@ var_dump(time());
 	}
 
 	public function dohash(){
+		$this->load->database('default');
+
 		require 'application/libraries/pscws4/pscws4.class.php';
 
 		$pscws = new PSCWS4('utf8');
