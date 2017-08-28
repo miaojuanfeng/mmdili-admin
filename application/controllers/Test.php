@@ -225,6 +225,8 @@ var_dump(time());
 	}
 
 	public function dohash(){
+		ob_end_clean();
+ 		ob_implicit_flush(1);
 		$this->load->database('default');
 
 		require 'application/libraries/pscws4/pscws4.class.php';
@@ -235,9 +237,12 @@ var_dump(time());
 
 		$simhash = new simhash();
 
-		$doc = $this->db->query("SELECT doc_id, doc_content FROM m_doc ORDER BY doc_id ASC LIMIT 1")->result_array();
+		$doc = $this->db->query("SELECT doc_id, doc_url, doc_title, doc_content FROM m_doc WHERE doc_deleted = 0 ORDER BY doc_id ASC")->result_array();
 		foreach ($doc as $key => $value) {
 			$doc_id = $value["doc_id"];
+			$doc_title = $value["doc_title"];
+			echo "#".$doc_id." - ".$doc_title."(".$doc_url.")<br/>";
+     		flush();
 			$doc_content = strip_tags($value["doc_content"]);
 			$pscws->send_text($doc_content);
 			$kw = array();
@@ -246,10 +251,6 @@ var_dump(time());
 					$kw[$value['word']] = $value['weight'];
 				}
 			}
-			echo "<pre>";
-			var_dump($kw);
-			$doc_simhash = $simhash->sign($kw);
-			var_dump(decbin($doc_simhash));
 			$this->db->query("UPDATE m_doc set doc_simhash = '".$doc_simhash."' WHERE doc_id = ".$doc_id);
 		}
 	}
