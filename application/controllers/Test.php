@@ -258,6 +258,7 @@ var_dump(time());
 					$kw[$value['word']] = $value['weight'];
 				}
 			}
+			$doc_simhash = $simhash->sign($kw);
 			$this->db->query("UPDATE m_doc set doc_simhash = '".$doc_simhash."' WHERE doc_id = ".$doc_id);
 		}
 	}
