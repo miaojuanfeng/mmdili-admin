@@ -225,6 +225,7 @@ var_dump(time());
 	}
 
 	public function dohash(){
+		ini_set('max_execution_time', '0');
 		ob_end_clean();
  		ob_implicit_flush(1);
 		$this->load->database('default');
