@@ -38,6 +38,7 @@
 								<option value="1">M.J.F</option>
 								<option value="2" selected="selected">MCMM</option>
 								<option value="3">学业の回忆</option>
+								<option value="4">梁文凯</option>
 							</select>
 						</div>
 						<div class="upload-detail-act">

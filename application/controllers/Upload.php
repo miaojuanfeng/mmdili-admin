@@ -93,7 +93,7 @@ class Upload extends CI_Controller {
 			mkdir(self::$online_path);
 		}
 
-		$this->user_url = array(1 => 1490176666, 2 => 1490168888, 3 => 1500573888);
+		$this->user_url = array(1 => 1490176666, 2 => 1490168888, 3 => 1500573888, 4 => 1595573888);
 
 		self::$exists_files = $this->file->file_list('C:\MJF\web\upload\data');
     }
