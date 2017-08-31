@@ -297,6 +297,7 @@ var_dump(time());
 			$result[$hamming][] = "#(".$hamming.")".$doc_id." - ".$doc_title."(".$doc_url.")";
 		}
 		echo "<pre>";
+		ksort($result);
 		var_dump($result);
 	}
 
