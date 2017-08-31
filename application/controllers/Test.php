@@ -294,7 +294,7 @@ var_dump(time());
 			$doc_title = $value["doc_title"];
 			$doc_simhash = $value["doc_simhash"];
 			$hamming = $simhash->hamming($simhash->compare($sign, $doc_simhash));
-			$result[$hamming][] = "#(".$hamming.")".$doc_id." - ".$doc_title."(".$doc_url.")<br/>";
+			$result[$hamming][] = "#(".$hamming.")".$doc_id." - ".$doc_title."(".$doc_url.")";
 		}
 		echo "<pre>";
 		var_dump($result);
