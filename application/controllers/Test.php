@@ -278,6 +278,8 @@ var_dump(time());
 
 		$simhash = new simhash();
 
+		$result = array();
+
 		$sign = $this->db->query("SELECT doc_simhash FROM m_doc WHERE doc_id = ".$id)->result_array()[0]["doc_simhash"];
 		$doc_total = $this->db->query("SELECT count(doc_id) as doc_total FROM m_doc")->result_array()[0]["doc_total"];
 		for ($i=1;$i<=$doc_total;$i++) {
@@ -292,9 +294,10 @@ var_dump(time());
 			$doc_title = $value["doc_title"];
 			$doc_simhash = $value["doc_simhash"];
 			$hamming = $simhash->hamming($simhash->compare($sign, $doc_simhash));
-			echo "#(".$hamming.")".$doc_id." - ".$doc_title."(".$doc_url.")<br/>";
-     		flush();
+			$result[$hamming][] = "#(".$hamming.")".$doc_id." - ".$doc_title."(".$doc_url.")<br/>";
 		}
+		echo "<pre>";
+		var_dump($result);
 	}
 
 }
