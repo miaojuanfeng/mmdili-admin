@@ -264,4 +264,37 @@ var_dump(time());
 		}
 	}
 
+	public function compare($id){
+		ini_set('max_execution_time', '0');
+		ob_end_clean();
+ 		ob_implicit_flush(1);
+		$this->load->database('default');
+
+		require 'application/libraries/pscws4/pscws4.class.php';
+
+		$pscws = new PSCWS4('utf8');
+		$pscws->set_dict('application/libraries/pscws4/etc/dict.utf8.xdb');
+		$pscws->set_rule('application/libraries/pscws4/etc/rules.utf8.ini');
+
+		$simhash = new simhash();
+
+		$sign = $this->db->query("SELECT doc_simhash FROM m_doc WHERE doc_id = ".$id)->result_array()[0]["doc_simhash"];
+		$doc_total = $this->db->query("SELECT count(doc_id) as doc_total FROM m_doc")->result_array()[0]["doc_total"];
+		for ($i=1;$i<=$doc_total;$i++) {
+			$value = $this->db->query("SELECT doc_id, doc_url, doc_title, doc_simhash, doc_deleted FROM m_doc WHERE doc_id = ".$i)->result_array()[0];
+			if( $value["doc_deleted"] ){
+				echo "Deleted #".$doc_id." - ".$doc_title."(".$doc_url.")<br/>";
+     			flush();
+				continue;
+			}
+			$doc_id = $value["doc_id"];
+			$doc_url = $value["doc_url"];
+			$doc_title = $value["doc_title"];
+			$doc_simhash = $value["doc_simhash"];
+			$hamming = $simhash->hamming($simhash->compare($sign, $doc_simhash));
+			echo "#(".$hamming.")".$doc_id." - ".$doc_title."(".$doc_url.")<br/>";
+     		flush();
+		}
+	}
+
 }
