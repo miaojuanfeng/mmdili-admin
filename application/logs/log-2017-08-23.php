@@ -28,3 +28,54 @@ ERROR - 2017-08-23 10:11:41 --> 404 Page Not Found: Apple-touch-icon-precomposed
 ERROR - 2017-08-23 10:11:42 --> 404 Page Not Found: Apple-touch-iconpng/index
 ERROR - 2017-08-23 10:11:42 --> 404 Page Not Found: Faviconico/index
 ERROR - 2017-08-23 11:02:01 --> 404 Page Not Found: Faviconico/index
+ERROR - 2017-08-23 11:49:01 --> 404 Page Not Found: Apple-touch-icon-120x120-precomposedpng/index
+ERROR - 2017-08-23 11:49:01 --> 404 Page Not Found: Apple-touch-icon-120x120png/index
+ERROR - 2017-08-23 11:49:01 --> 404 Page Not Found: Apple-touch-icon-precomposedpng/index
+ERROR - 2017-08-23 11:49:01 --> 404 Page Not Found: Apple-touch-iconpng/index
+ERROR - 2017-08-23 11:49:01 --> 404 Page Not Found: Faviconico/index
+ERROR - 2017-08-23 11:49:01 --> 404 Page Not Found: Apple-touch-icon-120x120-precomposedpng/index
+ERROR - 2017-08-23 11:49:01 --> 404 Page Not Found: Apple-touch-icon-120x120png/index
+ERROR - 2017-08-23 11:49:01 --> 404 Page Not Found: Apple-touch-icon-precomposedpng/index
+ERROR - 2017-08-23 11:49:02 --> 404 Page Not Found: Apple-touch-iconpng/index
+ERROR - 2017-08-23 11:49:02 --> 404 Page Not Found: Faviconico/index
+ERROR - 2017-08-23 12:17:05 --> Severity: Warning --> Cannot modify header information - headers already sent by (output started at C:\MJF\web\admin\application\controllers\Test.php:192) C:\MJF\web\admin\system\core\Common.php 578
+ERROR - 2017-08-23 14:46:31 --> Severity: Notice --> Undefined variable: data C:\MJF\web\admin\application\controllers\Test.php 204
+ERROR - 2017-08-23 14:46:31 --> Severity: Notice --> Undefined variable: text1 C:\MJF\web\admin\application\views\test\simhash_view.php 71
+ERROR - 2017-08-23 14:46:31 --> Severity: Notice --> Undefined variable: text1 C:\MJF\web\admin\application\views\test\simhash_view.php 75
+ERROR - 2017-08-23 14:46:31 --> Severity: Notice --> Undefined variable: text1 C:\MJF\web\admin\application\views\test\simhash_view.php 79
+ERROR - 2017-08-23 14:46:31 --> Severity: Notice --> Undefined variable: text2 C:\MJF\web\admin\application\views\test\simhash_view.php 87
+ERROR - 2017-08-23 14:46:31 --> Severity: Notice --> Undefined variable: text2 C:\MJF\web\admin\application\views\test\simhash_view.php 91
+ERROR - 2017-08-23 14:46:31 --> Severity: Notice --> Undefined variable: text2 C:\MJF\web\admin\application\views\test\simhash_view.php 95
+ERROR - 2017-08-23 14:46:31 --> Severity: Notice --> Undefined variable: compare C:\MJF\web\admin\application\views\test\simhash_view.php 103
+ERROR - 2017-08-23 14:46:31 --> Severity: Notice --> Undefined variable: hamming C:\MJF\web\admin\application\views\test\simhash_view.php 107
+ERROR - 2017-08-23 14:48:44 --> Severity: Notice --> Array to string conversion C:\MJF\web\admin\application\views\test\simhash_view.php 75
+ERROR - 2017-08-23 14:48:44 --> Severity: Notice --> Array to string conversion C:\MJF\web\admin\application\views\test\simhash_view.php 91
+ERROR - 2017-08-23 15:34:04 --> Severity: Warning --> Missing argument 1 for Test::simhash() C:\MJF\web\admin\application\controllers\Test.php 159
+ERROR - 2017-08-23 15:34:04 --> Severity: Warning --> Missing argument 2 for Test::simhash() C:\MJF\web\admin\application\controllers\Test.php 159
+ERROR - 2017-08-23 15:34:04 --> Severity: Notice --> Undefined variable: id1 C:\MJF\web\admin\application\controllers\Test.php 182
+ERROR - 2017-08-23 15:34:46 --> Severity: Notice --> Trying to get property of non-object C:\MJF\web\admin\application\controllers\Test.php 187
+ERROR - 2017-08-23 15:34:46 --> Severity: Notice --> Trying to get property of non-object C:\MJF\web\admin\application\controllers\Test.php 188
+ERROR - 2017-08-23 16:05:16 --> 404 Page Not Found: Test/index
+ERROR - 2017-08-23 16:05:19 --> 404 Page Not Found: /index
+ERROR - 2017-08-23 16:05:21 --> 404 Page Not Found: /index
+ERROR - 2017-08-23 18:51:00 --> 404 Page Not Found: Apple-touch-icon-120x120-precomposedpng/index
+ERROR - 2017-08-23 18:51:00 --> 404 Page Not Found: Apple-touch-icon-120x120png/index
+ERROR - 2017-08-23 18:51:00 --> 404 Page Not Found: Apple-touch-icon-precomposedpng/index
+ERROR - 2017-08-23 18:51:00 --> 404 Page Not Found: Apple-touch-iconpng/index
+ERROR - 2017-08-23 18:51:00 --> 404 Page Not Found: Faviconico/index
+ERROR - 2017-08-23 18:51:01 --> 404 Page Not Found: Apple-touch-icon-120x120-precomposedpng/index
+ERROR - 2017-08-23 18:51:01 --> 404 Page Not Found: Apple-touch-icon-120x120png/index
+ERROR - 2017-08-23 18:51:01 --> 404 Page Not Found: Apple-touch-icon-precomposedpng/index
+ERROR - 2017-08-23 18:51:01 --> 404 Page Not Found: Apple-touch-iconpng/index
+ERROR - 2017-08-23 18:51:01 --> 404 Page Not Found: Faviconico/index
+ERROR - 2017-08-23 19:35:54 --> 404 Page Not Found: Apple-touch-icon-120x120-precomposedpng/index
+ERROR - 2017-08-23 19:35:54 --> 404 Page Not Found: Apple-touch-icon-120x120png/index
+ERROR - 2017-08-23 19:35:54 --> 404 Page Not Found: Apple-touch-icon-precomposedpng/index
+ERROR - 2017-08-23 19:35:54 --> 404 Page Not Found: Apple-touch-iconpng/index
+ERROR - 2017-08-23 19:35:54 --> 404 Page Not Found: Faviconico/index
+ERROR - 2017-08-23 19:35:55 --> 404 Page Not Found: Apple-touch-icon-120x120-precomposedpng/index
+ERROR - 2017-08-23 19:35:55 --> 404 Page Not Found: Apple-touch-icon-120x120png/index
+ERROR - 2017-08-23 19:35:55 --> 404 Page Not Found: Apple-touch-icon-precomposedpng/index
+ERROR - 2017-08-23 19:35:55 --> 404 Page Not Found: Apple-touch-iconpng/index
+ERROR - 2017-08-23 19:35:55 --> 404 Page Not Found: Faviconico/index
+ERROR - 2017-08-23 21:17:05 --> 404 Page Not Found: Faviconico/index
