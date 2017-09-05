@@ -1,0 +1,49 @@
+body {
+    padding: 0;
+    margin: 0;
+    min-height: 100%;
+    font-family: 'Open Sans','Segoe UI';
+    font-size: 13px;
+    color: #444;
+}
+
+a{
+    text-decoration:none;
+}
+
+.clearfix{
+    float:none;
+    clear:both;
+}
+
+@font-face {
+	font-family: 'Glyphicons Halflings';
+	src: url('../../assets/lib/fonts/glyphicons-halflings-regular.eot');
+	src: url('../../assets/lib/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../../assets/lib/fonts/glyphicons-halflings-regular.woff') format('woff'), url('../../assets/lib/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../../assets/lib/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+.main-container {
+    background-color: #fff;
+    padding: 0 0 0 219px;
+}
+
+.list{
+    .item{
+        border: 1px solid #eee;
+        margin: 0 0 10px 0;
+
+        a{
+            display: block;
+            padding: 10px 0 10px 10px;
+
+            &:hover{
+                background-color: #eee;
+                cursor: point;
+            }
+        }
+    }
+}
+
+.info-item{
+    margin: 15px 0;
+}
