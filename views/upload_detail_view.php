@@ -10,7 +10,7 @@
 	<div class="main-container">
 		<?php require_once "header_view.php" ?>
 		<div class="content">
-			<form action="<?=base_url('upload/exec_html')?>" method="post" class="list">
+			<form action="<?=cii_base_url('upload/exec_html')?>" method="post" class="list">
 				<input type="hidden" name="file_index" value="<?=$file_index?>" />
 				<div class="item upload">
 					<div class="upload-detail-file ">

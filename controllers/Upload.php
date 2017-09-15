@@ -1,7 +1,7 @@
 ﻿<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Upload extends CI_Controller {
+class Upload{
 
 	/**
 	 * Index Page for this controller.
@@ -77,9 +77,8 @@ class Upload extends CI_Controller {
 
 	function __construct()
     {
-    	parent::__construct();
-    	$this->load->helper('url');
     	$this->load->model('upload_model');
+	$this->load->internal('input');
     	$this->load->library('file');
 		$this->load->library('oss');
 
@@ -710,6 +709,6 @@ foreach($ppt->ActivePresentation->Slides as $k1 => $v1){
 		curl_setopt_array($ch, $options);
 		$result = curl_exec($ch);
 		//
-		echo '<script>window.location.href="'.base_url('upload').'"</script>';
+		echo '<script>window.location.href="'.cii_base_url('upload').'"</script>';
 	}
 }

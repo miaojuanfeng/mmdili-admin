@@ -1,2 +1,2 @@
 <?php
-var_dump(cii_run('config.php'));
+cii_run('config.php');

@@ -26,8 +26,10 @@ class Doc{
 	function __construct()
     {
 	$this->load->model('doc_model');
+	$this->load->internal('input');
 	$this->load->library('oss');
     	$this->load->library('file');
+	$this->load->internal('pagination');
     }
 
     private function trim_whitespace($str)

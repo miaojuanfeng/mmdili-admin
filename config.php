@@ -8,8 +8,8 @@ $config['helpers_path'] = 'helpers';
 $config['logs_path'] = 'logs';
 $config['libraries_path'] = 'libraries';
 
-$config['default_controller'] = 'test';
-$config['default_method'] = 'phpinfo';
+$config['default_controller'] = 'home';
+$config['default_method'] = 'index';
 
 $db['hostname'] = 'localhost';
 $db['username'] = 'root';
@@ -25,8 +25,8 @@ $db['database'] = 'mmdili';*/
 	$config['libraries_path'] = 'libraries';
 	$config['helpers_path'] = 'helpers';
 	$config['logs_path'] = 'logs';
-	$config['default_controller'] = 'test';
-	$config['default_method'] = 'phpinfo';
+	$config['default_controller'] = 'home';
+	$config['default_method'] = 'index';
 	$db['hostname'] = 'localhost';
 	$db['username'] = 'root';
 	$db['password'] = '';

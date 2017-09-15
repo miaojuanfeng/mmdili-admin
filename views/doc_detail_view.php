@@ -10,7 +10,7 @@
 	<div class="main-container">
 		<?php require_once "header_view.php" ?>
 		<div class="content">
-			<form action="<?=base_url('doc/update')?>" method="post" class="list">
+			<form action="<?=cii_base_url('doc/update')?>" method="post" class="list">
 				<input type="hidden" name="doc_id" value="<?=$doc['doc_id']?>" />
 				<input type="hidden" name="doc_url" value="<?=$doc['doc_url']?>" />
 				<input type="hidden" name="user_url" value="<?=$doc['user_url']?>" />

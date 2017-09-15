@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
@@ -15,7 +15,7 @@
 				foreach($file as $k => $v){
 				?>
 				<div class="item upload">
-					<a class="upload-file" href="<?=base_url('upload/detail/'.$k)?>">
+					<a class="upload-file" href="<?=cii_base_url('upload/detail/'.$k)?>">
 						<div class="file-name"><?=$v['file_name']?></div>
 						<div class="file-dir"><?=$v['file_dir']?></div>
 					</a>

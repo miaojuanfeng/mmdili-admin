@@ -4,12 +4,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-class upload_model extends CI_Model{
+class upload_model{
     //put your code here
     
     function __construct()
     {
-        parent::__construct();
 
         $this->load->database('default');
     }
@@ -40,7 +39,7 @@ class upload_model extends CI_Model{
 		) VALUES(
 			".$doc_url.",
 			'".$doc_title."',
-			'".$this->db->escape_str($doc_content)."',
+			'".mysqli_real_escape_string($this->db->conn_id, $doc_content)."',
 			".$doc_user_id.",
 			".$doc_ext.",
 			".$doc_cate_id.",

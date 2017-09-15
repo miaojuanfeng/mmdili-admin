@@ -5,9 +5,6 @@ class Test{
 
 	function __construct()
     	{
-echo "<pre>";
-var_dump($this);
-die();
 	$this->load->library('file');
 	$this->load->library('oss');
 	}
@@ -159,11 +156,11 @@ var_dump(time());
 		phpinfo();
 	}
 	function simhash($id1 = 0, $id2 = 0){
-		require 'application/libraries/pscws4/pscws4.class.php';
+		require 'libraries/pscws4/pscws4.class.php';
 
 		$pscws = new PSCWS4('utf8');
-		$pscws->set_dict('application/libraries/pscws4/etc/dict.utf8.xdb');
-		$pscws->set_rule('application/libraries/pscws4/etc/rules.utf8.ini');
+		$pscws->set_dict('libraries/pscws4/etc/dict.utf8.xdb');
+		$pscws->set_rule('libraries/pscws4/etc/rules.utf8.ini');
 
 		$s = new simhash();
 
