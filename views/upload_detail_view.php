@@ -25,6 +25,8 @@
 								<option value="5">语文</option>
 								<option value="6">数学</option>
 								<option value="7">外语</option>
+								<option value="8">计算机</option>
+								<option value="9">申论精品文章</option>
 							</select>
 						</div>
 						<div class="info-item">
@@ -40,6 +42,7 @@
 								<option value="3">学业の回忆</option>
 								<option value="4">梁文凯</option>
 								<option value="5">校园往事</option>
+								<option value="6">陈济天</option>
 							</select>
 						</div>
 						<div class="upload-detail-act">

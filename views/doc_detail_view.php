@@ -28,6 +28,8 @@
 								<option value="5" <?php if($doc['doc_cate_id']==5) echo "selected='selected'"; ?>>语文</option>
 								<option value="6" <?php if($doc['doc_cate_id']==6) echo "selected='selected'"; ?>>数学</option>
 								<option value="7" <?php if($doc['doc_cate_id']==7) echo "selected='selected'"; ?>>外语</option>
+								<option value="8" <?php if($doc['doc_cate_id']==8) echo "selected='selected'"; ?>>计算机</option>
+								<option value="9" <?php if($doc['doc_cate_id']==9) echo "selected='selected'"; ?>>申论精品文章</option>
 							</select>
 						</div>
 						<div class="info-item">
@@ -44,6 +46,7 @@
 								<option value="3" <?php if($doc['doc_user_id']==3) echo "selected='selected'"; ?>>学业の回忆</option>
 								<option value="4" <?php if($doc['doc_user_id']==4) echo "selected='selected'"; ?>>梁文凯</option>
 								<option value="5" <?php if($doc['doc_user_id']==5) echo "selected='selected'"; ?>>校园往事</option>
+								<option value="6" <?php if($doc['doc_user_id']==6) echo "selected='selected'"; ?>>陈济天</option>
 							</select>
 						</div>
 						<div class="info-item">

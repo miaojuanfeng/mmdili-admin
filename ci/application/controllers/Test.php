@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Test extends CI_Controller {
@@ -191,10 +191,8 @@ var_dump(time());
 		if( $text1 ){
 			$pscws->send_text($text1);
 			$kw1 = array();
-			foreach ($pscws->get_tops(100) as $key => $value) {
-				if( !is_numeric($value['word']) ){
-					$kw1[$value['word']] = $value['weight'];
-				}
+			foreach ($pscws->get_tops(10000) as $key => $value) {
+				$kw1[$value['word']] = $value['weight'];
 			}
 			$sign1 = $s->sign($kw1);
 			$data['text1']['content'] = $text1;
@@ -205,10 +203,8 @@ var_dump(time());
 		if( $text2 ){
 			$pscws->send_text($text2);
 			$kw2 = array();
-			foreach ($pscws->get_tops(100) as $key => $value) {
-				if( !is_numeric($value['word']) ){
-					$kw2[$value['word']] = $value['weight'];
-				}
+			foreach ($pscws->get_tops(10000) as $key => $value) {
+				$kw2[$value['word']] = $value['weight'];
 			}
 			$sign2 = $s->sign($kw2);
 			$data['text2']['content'] = $text2;

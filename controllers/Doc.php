@@ -82,7 +82,7 @@ class Doc{
 		 * 转到404
 		*/
 		if( (!empty($pn) && !is_numeric($pn)) || ($pn > intval($pn)) || ($pn < 1) || ($page && $pn > $page) ){
-			redirect(base_url('doc'));
+			redirect(cii_base_url('doc'));
 		}
 		// 计算偏移量
 		$offset = ($pn - 1) * $limit;
@@ -439,10 +439,10 @@ class Doc{
 			}
 
 			if( $this->doc_model->update($doc_id, $doc_cate_id, $doc_user_id, $doc_dl_forbidden, $update_doc_content, $doc_content, $update_doc_html) ){
-				redirect(base_url('doc/detail/'.$doc_id));
+				cii_redirect(cii_base_url('doc/detail/'.$doc_id));
 			}
 		}
-		redirect(base_url('doc'));
+		cii_redirect(cii_base_url('doc'));
 	}
 
 	public function batch($start, $end){
@@ -729,7 +729,7 @@ class Doc{
 					}
 
 					if( $this->doc_model->update($doc_id, $doc_cate_id, $doc_user_id, $doc_dl_forbidden, $update_doc_content, $doc_content, $update_doc_html) ){
-						// redirect(base_url('doc/detail/'.$doc_id));
+						// redirect(cii_base_url('doc/detail/'.$doc_id));
 					}
 				}
 			}
